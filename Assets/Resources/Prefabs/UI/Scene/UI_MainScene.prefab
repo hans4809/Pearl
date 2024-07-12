@@ -259,8 +259,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB20C\uB7EC\uC11C \uD50C\uB808\uC774 !"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 609eda7dd2698524cbda9c320db81c9f, type: 2}
-  m_sharedMaterial: {fileID: -2974002544995809937, guid: 609eda7dd2698524cbda9c320db81c9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: adbf0bfcc2547ab49848e9d1f0ccbad6, type: 2}
+  m_sharedMaterial: {fileID: 976466903552096877, guid: adbf0bfcc2547ab49848e9d1f0ccbad6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -381,8 +381,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC8C\uC784 \uC2A4\uD0C0\uD2B8"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 609eda7dd2698524cbda9c320db81c9f, type: 2}
-  m_sharedMaterial: {fileID: -2974002544995809937, guid: 609eda7dd2698524cbda9c320db81c9f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: adbf0bfcc2547ab49848e9d1f0ccbad6, type: 2}
+  m_sharedMaterial: {fileID: 976466903552096877, guid: adbf0bfcc2547ab49848e9d1f0ccbad6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

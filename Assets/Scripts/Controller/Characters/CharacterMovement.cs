@@ -73,7 +73,6 @@ public class CharacterMovement : MonoBehaviour
 
     void MoveAndRotate()
     {
-        //QuarterViewMoveAndRotate();
         if (DirVec2.magnitude > 0)
         {
             gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
@@ -89,24 +88,4 @@ public class CharacterMovement : MonoBehaviour
             Rb2D.velocity = Vector2.zero;
         }
     }
-
-    //void QuarterViewMoveAndRotate()
-    //{
-    //    if (DirVec3.magnitude > 0)
-    //    {
-    //        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
-
-    //        Rb.velocity = DirVec3 * MoveSpeed;
-    //        Debug.Log($"{DirVec3.z}");
-
-    //        if (DirVec3.z >= 0) SR.flipX = false;
-    //        else SR.flipX = true;
-    //    }
-    //    else
-    //    {
-    //        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
-    //        Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
-    //    }
-
-    //}
 }
