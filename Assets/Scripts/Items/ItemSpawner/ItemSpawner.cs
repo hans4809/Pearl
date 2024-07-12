@@ -30,8 +30,8 @@ public class ItemSpawner : MonoBehaviour
     */
     public float baseX1;
     public float baseX2;
-    public float baseZ1;
-    public float baseZ2;
+    public float baseY1;
+    public float baseY2;
 
 
     private void Start()
@@ -86,7 +86,7 @@ public class ItemSpawner : MonoBehaviour
 
     // 내비메시 위의 랜덤한 위치를 반환하는 메서드
     // center를 중심으로 distance 반경 안에서 랜덤한 위치를 찾는다
-    public Vector3 GetRandomPointOutRange(Vector3 center, float distance) //max distance *1.5f
+    public Vector2 GetRandomPointOutRange(Vector2 center, float distance) //max distance *1.5f
     {
         // center를 중심으로 반지름이 maxDistance인 구 안에서의 랜덤한 위치 하나를 저장
         // Random.insideUnitSphere는 반지름이 1인 구 안에서의 랜덤한 한 점을 반환하는 프로퍼티
@@ -96,15 +96,15 @@ public class ItemSpawner : MonoBehaviour
             float randomDistance = Random.Range(distance, distance * 1.5f);
 
             float x = center.x + Mathf.Cos(randomAngle) * distance;
-            float z = center.z + Mathf.Sin(randomAngle) * distance;
-            Vector3 randomVectorPos = new Vector3(x, 0f, z);
+            float y = center.y + Mathf.Sin(randomAngle) * distance;
+            Vector3 randomVectorPos = new Vector3(x, y);
         } while (IsInsideBase(randomVectorPos));
-        Vector3 vectorPos = randomVectorPos;
+        Vector2 vectorPos = randomVectorPos;
         // 찾은 점 반환
         return vectorPos;
     }
 
-    public Vector3 GetRandomPointInRange(Vector3 center, float distance) // min distance 1f
+    public Vector2 GetRandomPointInRange(Vector2 center, float distance) // min distance 1f
     {
         // center를 중심으로 반지름이 maxDistance인 구 안에서의 랜덤한 위치 하나를 저장
         // Random.insideUnitSphere는 반지름이 1인 구 안에서의 랜덤한 한 점을 반환하는 프로퍼티
@@ -114,17 +114,25 @@ public class ItemSpawner : MonoBehaviour
             float randomDistance = Random.Range(1f, distance);
 
             float x = center.x + Mathf.Cos(randomAngle) * distance;
-            float z = center.z + Mathf.Sin(randomAngle) * distance;
-            randomVectorPos = new Vector3(x, 0f, z);
+            float y = center.y + Mathf.Sin(randomAngle) * distance;
+            randomVectorPos = new Vector3(x, y);
 
             // randomVectorPos = Random.insideUnitSphere * distance + center;
 
         } while (IsInsideBase(randomVectorPos));
-        Vector3 vectorPos = randomVectorPos;
+        Vector2 vectorPos = randomVectorPos;
         // 찾은 점 반환
         return vectorPos;
     }
 
+    public Vector2 GetRandomPointInBox()
+    {
+        float x = Random.Range(baseX1, baseX2);
+        float y = Random.Range(baseY1, baseY2);
+
+        Vector2 vectorPos = new Vector2(x, y);
+        return vectorPos;
+    }
     public GameObject SelectRandomItem(GameObject[] itemlist)
     {
         // Time
@@ -135,7 +143,7 @@ public class ItemSpawner : MonoBehaviour
 
     public bool IsInsideBase(Vector3 itemVector)
     {
-        if ((itemVector.x < baseX2 && itemVector.x < baseX1) && (itemVector.z < baseZ2 && itemVector.z < baseZ1))
+        if ((itemVector.x < baseX2 && itemVector.x < baseX1) && (itemVector.y < baseY2 && itemVector.y < baseY1))
             return true;
         else
             return false;
