@@ -119,6 +119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeTime: 0.5
+  _maxStartTimerFontSize: 250
+  _minStartTimerFontSize: 200
+  _maxGameTimerFontSize: 0
+  _minGameTimerFontSize: 0
+  _timeLimitTimerColor: {r: 1, g: 0, b: 0, a: 1}
+  _timeLimitEffectTime: 1
   _startTimerText: {fileID: 3134336366747737921}
   _gameTimerText: {fileID: 7483262881864732900}
   _player1_ItemText: {fileID: 1394299387788326200}

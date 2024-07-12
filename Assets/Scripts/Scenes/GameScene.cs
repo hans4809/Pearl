@@ -5,6 +5,8 @@ using UnityEngine.UIElements.Experimental;
 
 public class GameScene : BaseScene
 {
+    [SerializeField] float _timelimit = 10f;
+    public float TimeLimit { get => _timelimit; private set => _timelimit = value; }
     [SerializeField] float _startTimer = 3;
     public float StartTimer 
     { 
@@ -36,6 +38,8 @@ public class GameScene : BaseScene
             {
                 _gameTimer = value;
                 (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
+                if (value == TimeLimit)
+                    StartCoroutine((SceneUI as UI_GameScene).SizeUpText((SceneUI as UI_GameScene).GameTimerText));
             }
             else
             {
@@ -76,7 +80,7 @@ public class GameScene : BaseScene
     IEnumerator GameStartTimer()
     {
         //Time.timeScale = 0;
-        StartTimer = 3f;
+        //StartTimer = 3f;
         while (StartTimer > 0f)
         {
             yield return new WaitForSecondsRealtime(1f);

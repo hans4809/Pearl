@@ -5,14 +5,33 @@ using TMPro;
 
 public class UI_GameScene : UI_Scene
 {
+    #region TimerVariable
+    [Header("TimerVariable")]
     [SerializeField] float _fadeTime = 0.5f;
     public float FadeTime { get => _fadeTime; private set => _fadeTime = value; }
 
-    [SerializeField] float _maxFontSize = 250f;
-    public float MaxFontSize { get => _maxFontSize; private set => _maxFontSize = value; }
+    [SerializeField] float _maxStartTimerFontSize = 250f;
+    public float MaxStartTimerFontSize { get => _maxStartTimerFontSize; private set => _maxStartTimerFontSize = value; }
 
-    [SerializeField] float _minFontSize = 200f;
-    public float MinFontSize { get => _minFontSize; private set => _minFontSize = value; }
+    [SerializeField] float _minStartTimerFontSize = 200f;
+    public float MinStartTimerFontSize { get => _minStartTimerFontSize; private set => _minStartTimerFontSize = value; }
+
+    [SerializeField] float _maxGameTimerFontSize;
+    public float MaxGameTimerFontSize { get => _maxGameTimerFontSize; private set => _maxGameTimerFontSize  = value; }
+
+    [SerializeField] float _minGameTimerFontSize;
+    public float MinGameTimerFontSize { get => _minGameTimerFontSize; private set => _minGameTimerFontSize = value; }
+    #endregion
+
+    #region TimeLimitVariable
+    [Header("TimeLimitVariable")]
+    [SerializeField] Color _timeLimitTimerColor;
+    public Color TimeLimitTimerColor { get => _timeLimitTimerColor; private set => _timeLimitTimerColor = value; }
+    [SerializeField] float _timeLimitEffectTime = 1f;
+    public float TimeLimitEffectTime {  get => _timeLimitEffectTime; private set => _timeLimitEffectTime = value;}
+    [SerializeField] float _textRotation = 10f;
+    public float TextRotation { get => _textRotation; private set => _textRotation = value; }
+    #endregion
 
     [SerializeField] TMP_Text _startTimerText;
     public TMP_Text StartTimerText { get => _startTimerText; set => _startTimerText = value; }
@@ -40,22 +59,22 @@ public class UI_GameScene : UI_Scene
     public IEnumerator FadeInText(TMP_Text text)
     {
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-        text.fontSize = MinFontSize;
+        text.fontSize = MinStartTimerFontSize;
 
         float elapsedTime = 0f;
-        while (text.color.a < 1.0f && text.fontSize <= MaxFontSize)
+        while (text.color.a < 1.0f || text.fontSize <= MaxStartTimerFontSize)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / FadeTime);
             text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
 
-            float fontSize = Mathf.Lerp(MinFontSize, MaxFontSize, alpha);
+            float fontSize = Mathf.Lerp(MinStartTimerFontSize, MaxStartTimerFontSize, alpha);
             text.fontSize = fontSize;
             yield return null;
         }
 
         text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
-        text.fontSize = MaxFontSize;
+        text.fontSize = MaxStartTimerFontSize;
 
         StartCoroutine(FadeOutText(text));
     }
@@ -76,6 +95,25 @@ public class UI_GameScene : UI_Scene
 
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
+
+    public IEnumerator SizeUpText(TMP_Text text)
+    {
+        float elapsedTime = 0f;
+        text.fontSize = MinGameTimerFontSize;
+        text.color = TimeLimitTimerColor;
+        text.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
+        while(text.fontSize < MaxGameTimerFontSize)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
+            float fontSize = Mathf.Lerp(MinStartTimerFontSize, MaxStartTimerFontSize, alpha);
+            float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
+            text.fontSize = fontSize;
+            yield return null;
+        }
+        text.fontSize = MaxStartTimerFontSize;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
