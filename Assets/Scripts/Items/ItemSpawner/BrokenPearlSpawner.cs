@@ -32,7 +32,7 @@ public class BrokenPearlSpawner : ItemSpawner
     protected override void Spawn()
     {
         //if ()
-        Vector3 spawnPosition =
+        Vector2 spawnPosition =
             GetRandomPointInRange(playerTransform.position, maxDistance);
 
         // 바닥에서 0.5만큼 위로 올리기
@@ -43,7 +43,7 @@ public class BrokenPearlSpawner : ItemSpawner
 
 
 
-        GameObject hourGlass = Instantiate(item, spawnPosition, Quaternion.identity);
+        GameObject brokenSpawner = Instantiate(item, spawnPosition, Quaternion.identity);
 
     }
 }

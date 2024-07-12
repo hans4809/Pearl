@@ -30,8 +30,8 @@ public class ItemSpawner : MonoBehaviour
     */
     public float baseX1;
     public float baseX2;
-    public float baseZ1;
-    public float baseZ2;
+    public float baseY1;
+    public float baseY2;
 
 
     private void Start()
@@ -125,6 +125,14 @@ public class ItemSpawner : MonoBehaviour
         return vectorPos;
     }
 
+    public Vector2 GetRandomPointInBox()
+    {
+        float x = Random.Range(baseX1, baseX2);
+        float y = Random.Range(baseY1, baseY2);
+
+        Vector2 vectorPos = new Vector2(x, y);
+        return vectorPos;
+    }
     public GameObject SelectRandomItem(GameObject[] itemlist)
     {
         // Time
@@ -135,7 +143,7 @@ public class ItemSpawner : MonoBehaviour
 
     public bool IsInsideBase(Vector3 itemVector)
     {
-        if ((itemVector.x < baseX2 && itemVector.x < baseX1) && (itemVector.z < baseZ2 && itemVector.z < baseZ1))
+        if ((itemVector.x < baseX2 && itemVector.x < baseX1) && (itemVector.y < baseY2 && itemVector.y < baseY1))
             return true;
         else
             return false;
