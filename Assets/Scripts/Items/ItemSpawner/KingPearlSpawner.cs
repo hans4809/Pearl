@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class KingPearlSpawner : ItemSpawner
 {
-    public GameObject[] kingPearlSpawnPoints;
+    public Transform[] kingPearlSpawnPoints;
     public float startSpawnKingPearlTime;
-    private Vector3[] spawnPositions;
+    //private Vector2[] spawnPositions;
     public GameObject item; // 생성할 아이템들
-
+    
     private void Update()
     {
         // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-        if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+        if (Time.time >= lastSpawnTime + timeBetSpawn && Managers.Item.KingPear == 0 /*&& playerTransform != null*/)
         {
             // 마지막 생성 시간 갱신
             lastSpawnTime = Time.time;
@@ -23,27 +23,36 @@ public class KingPearlSpawner : ItemSpawner
             timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
             // 아이템 생성 실행
             Spawn();
+            Managers.Item.KingPear = kingPearlSpawnPoints.Length;
         }
     }
 
     protected override void Spawn()
     {
+        /*
         spawnPositions = null;
         for (int i = 0; i < kingPearlSpawnPoints.Length; i++)
         {
             spawnPositions[i] = kingPearlSpawnPoints[i].transform.position;
         }
+        */
 
         // 바닥에서 0.5만큼 위로 올리기
         // spawnPosition += Vector3.up * 0.5f;
 
         // 아이템 중 하나를 무작위로 골라 랜덤 위치에 생성
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
-        GameObject selectedItem = item;
-
+        
+        /*
         for (int i = 0; i < kingPearlSpawnPoints.Length; i++)
         {
-            GameObject kingPearl = Instantiate(selectedItem, spawnPositions[i], Quaternion.identity);
+            Debug.Log(kingPearlSpawnPoints[i]);
+            GameObject kingPearl = Instantiate(selectedItem, kingPearlSpawnPoints[i].position, Quaternion.identity);
+        }*/
+        foreach (Transform spawnPoint in kingPearlSpawnPoints)
+        {
+            Instantiate(item, spawnPoint.position, spawnPoint.rotation);
         }
+
     }
 }

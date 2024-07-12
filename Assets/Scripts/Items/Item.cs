@@ -28,6 +28,7 @@ public class Item : MonoBehaviour, IFieldObject
                 break;
             case ItemEnum.KING_PEARL:
                 Managers.Score.player1Score += kingPearlAmount;
+                Managers.Item.KingPear -= 1;
                 break;
             case ItemEnum.BUG:
                 Managers.Score.player1Score += bugAmount;

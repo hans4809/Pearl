@@ -6,7 +6,7 @@ public class BrokenPearlSpawner : ItemSpawner
 {
     public float startSpawnBrokenPearlTime;
     public float maxDistance = 5f; // 플레이어 위치로부터 아이템이 배치될 최대 반경
-    public GameObject item; // 생성할 아이템들
+    public GameObject item; // 생성할 아이템
 
     private void Update()
     {
@@ -14,14 +14,18 @@ public class BrokenPearlSpawner : ItemSpawner
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-        if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+        var gameScene = Managers.Scene.CurrentScene as GameScene;
+        if (gameScene != null && (60f - gameScene.GameTimer) > startSpawnBrokenPearlTime)
         {
-            // 마지막 생성 시간 갱신
-            lastSpawnTime = Time.time;
-            // 생성 주기를 랜덤으로 변경
-            timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
-            // 아이템 생성 실행
-            Spawn();
+            if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+            {
+                // 마지막 생성 시간 갱신
+                lastSpawnTime = Time.time;
+                // 생성 주기를 랜덤으로 변경
+                timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
+                // 아이템 생성 실행
+                Spawn();
+            }
         }
     }
 
@@ -36,10 +40,10 @@ public class BrokenPearlSpawner : ItemSpawner
 
         // 아이템 중 하나를 무작위로 골라 랜덤 위치에 생성
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
-        GameObject selectedItem = item;
 
 
-        GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
+
+        GameObject hourGlass = Instantiate(item, spawnPosition, Quaternion.identity);
 
     }
 }

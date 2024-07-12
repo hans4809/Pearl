@@ -14,21 +14,26 @@ public class HourGlassSpawner : ItemSpawner
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-        if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+        var gameScene = Managers.Scene.CurrentScene as GameScene;
+        if (gameScene != null && (60f - gameScene.GameTimer) > startSpawnHourGlassTime)
         {
-            // 마지막 생성 시간 갱신
-            lastSpawnTime = Time.time;
-            // 생성 주기를 랜덤으로 변경
-            timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
-            // 아이템 생성 실행
-            Spawn();
+            if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+            {
+                // 마지막 생성 시간 갱신
+                lastSpawnTime = Time.time;
+                // 생성 주기를 랜덤으로 변경
+                timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
+                // 아이템 생성 실행
+                Spawn();
+            }
         }
     }
 
     protected override void Spawn()
     {
         //if ()
-        Vector3 spawnPosition =
+        
+        Vector2 spawnPosition =
             GetRandomPointOutRange(playerTransform.position, minDistance);
 
         // 바닥에서 0.5만큼 위로 올리기
@@ -36,10 +41,9 @@ public class HourGlassSpawner : ItemSpawner
 
         // 아이템 중 하나를 무작위로 골라 랜덤 위치에 생성
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
-        GameObject selectedItem = item;
 
 
-        GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
+        GameObject hourGlass = Instantiate(item, spawnPosition, Quaternion.identity);
 
     }
 }
