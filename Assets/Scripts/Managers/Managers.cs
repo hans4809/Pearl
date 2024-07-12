@@ -17,6 +17,7 @@ public class Managers : MonoBehaviour
     GameManagerEx _game = new GameManagerEx();
     ScoreManager _score = new ScoreManager();
     TimeManager _time = new TimeManager();
+    ItemManager _item = new ItemManager();
 
     public static GameManagerEx Game { get { return Instance._game; } }
     public static UI_Manager UI { get { return Instance._ui; } }
@@ -27,6 +28,7 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ScoreManager Score { get { return Instance._score; } }
     public static TimeManager Time { get { return Instance._time; } }
+    public static ItemManager Item { get { return Instance._item; } }
     void Start()
     {
         Init();
@@ -58,5 +60,6 @@ public class Managers : MonoBehaviour
         UI.Clear();
         Pool.Clear();
         Score.Clear();
+        Item.Clear();
     }
 }
