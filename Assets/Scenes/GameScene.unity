@@ -247,6 +247,7 @@ MonoBehaviour:
   _timelimit: 10
   _startTimer: 3
   _gameTimer: 60
+  _endTimer: 3
 --- !u!4 &1687383400
 Transform:
   m_ObjectHideFlags: 0

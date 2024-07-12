@@ -34,9 +34,19 @@ public class UI_GameScene : UI_Scene
     [SerializeField] float _cameraRotateAngle;
     public float CameraRotateAngle { get => _cameraRotateAngle; private set => _cameraRotateAngle = value; }
     #endregion
+    [Header("EndTimerVariable")]
 
+    #region EndTimerVariable
+    [SerializeField] Color _endTimerColor;
+    public Color EndTimerColor { get => _endTimerColor; private set => _endTimerColor = value; }
+    #endregion
+
+    [Header("Text Variable")]
     [SerializeField] TMP_Text _startTimerText;
     public TMP_Text StartTimerText { get => _startTimerText; set => _startTimerText = value; }
+
+    [SerializeField] TMP_Text _endTimerText;
+    public TMP_Text EndTimerText { get => _endTimerText; set => _endTimerText = value; }
 
     [SerializeField] TMP_Text _gameTimerText;
     public TMP_Text GameTimerText { get => _gameTimerText; set => _gameTimerText = value; }
@@ -47,49 +57,41 @@ public class UI_GameScene : UI_Scene
     [SerializeField] TMP_Text _player2_ItemText;
     public TMP_Text Player2_ItemText { get => _player2_ItemText; set => _player2_ItemText = value; }
 
-
-
-    public void FadeIn(TMP_Text text)
-    {
-        if(text != null)
-        {
-            StartCoroutine(FadeInText(text));
-        }
-    }
-
-    public IEnumerator FadeInText(TMP_Text text)
+    public IEnumerator StartTimerEffect_FadeIn(TMP_Text text, float opacity = 1)
     {
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
         text.fontSize = MinStartTimerFontSize;
 
         float elapsedTime = 0f;
-        while (text.color.a < 1.0f || text.fontSize <= MaxStartTimerFontSize)
+        while (text.color.a < opacity || text.fontSize <= MaxStartTimerFontSize)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / FadeTime);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+            float a =  Mathf.Lerp(0, opacity, alpha);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, a);
 
             float fontSize = Mathf.Lerp(MinStartTimerFontSize, MaxStartTimerFontSize, alpha);
             text.fontSize = fontSize;
             yield return null;
         }
 
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
+        text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
         text.fontSize = MaxStartTimerFontSize;
 
-        StartCoroutine(FadeOutText(text));
+        StartCoroutine(StartTimerEffect_FadeOut(text, opacity));
     }
 
-    public IEnumerator FadeOutText(TMP_Text text)
+    public IEnumerator StartTimerEffect_FadeOut(TMP_Text text, float opacity = 1)
     {
         float elapsedTime = 0f;
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+        text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
 
         while (text.color.a > 0.0f)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(1.0f - (elapsedTime / FadeTime));
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+            float a = Mathf.Lerp(0, opacity, alpha);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, a);
 
             yield return null;
         }
@@ -97,7 +99,7 @@ public class UI_GameScene : UI_Scene
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
 
-    public IEnumerator SizeUpText(TMP_Text text)
+    public IEnumerator TimeLimitEffectFirst(TMP_Text text)
     {
         float elapsedTime = 0f;
         text.fontSize = MinGameTimerFontSize;
@@ -119,7 +121,7 @@ public class UI_GameScene : UI_Scene
         mainCamera.transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
-    public IEnumerator RotateText(TMP_Text text)
+    public IEnumerator TimeLimitEffectIteration(TMP_Text text)
     {
         float elapsedTime = 0f;
         text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
