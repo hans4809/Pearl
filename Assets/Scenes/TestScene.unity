@@ -122,6 +122,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &59527179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59527181}
+  - component: {fileID: 59527180}
+  m_Layer: 0
+  m_Name: '@'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &59527180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59527179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46056fd749deb114789f54dd14a66e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneUI: {fileID: 0}
+  _startTimer: 3
+  _gameTimer: 60
+--- !u!4 &59527181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59527179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &112034509
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,8 +470,8 @@ MonoBehaviour:
   lastSpawnTime: 0
   baseX1: 0
   baseX2: 0
-  baseZ1: 0
-  baseZ2: 0
+  baseY1: 0
+  baseY2: 0
   kingPearlSpawnPoints:
   - {fileID: 189564484}
   - {fileID: 1345611842}
@@ -440,7 +487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2135721071}
-  - component: {fileID: 2135721070}
+  - component: {fileID: 2135721072}
   m_Layer: 0
   m_Name: GlassTestSpawn
   m_TagString: Untagged
@@ -448,30 +495,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2135721070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135721069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e0e9fa140a43b428f90b11664df23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 112034510}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
-  timeBetSpawn: 0
-  lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseZ1: 0
-  baseZ2: 0
-  startSpawnHourGlassTime: 0
-  minDistance: 2
-  item: {fileID: 6918533532261646871, guid: 5e9e151f076737c4bb68762fd55597e7, type: 3}
 --- !u!4 &2135721071
 Transform:
   m_ObjectHideFlags: 0
@@ -487,6 +510,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2135721072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135721069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2571b1dde4695a42bf97fa1b69db918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 112034510}
+  timeBetSpawnMax: 7
+  timeBetSpawnMin: 2
+  timeBetSpawn: 0
+  lastSpawnTime: 0
+  baseX1: 0
+  baseX2: 0
+  baseY1: 0
+  baseY2: 0
+  startSpawnBrokenPearlTime: 0
+  maxDistance: 5
+  item: {fileID: 6918533532261646871, guid: 5e9e151f076737c4bb68762fd55597e7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -496,3 +543,4 @@ SceneRoots:
   - {fileID: 1767402945}
   - {fileID: 2135721071}
   - {fileID: 112034510}
+  - {fileID: 59527181}
