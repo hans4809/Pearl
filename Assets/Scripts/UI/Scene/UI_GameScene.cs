@@ -31,6 +31,8 @@ public class UI_GameScene : UI_Scene
     public float TimeLimitEffectTime {  get => _timeLimitEffectTime; private set => _timeLimitEffectTime = value;}
     [SerializeField] float _textRotation = 10f;
     public float TextRotation { get => _textRotation; private set => _textRotation = value; }
+    [SerializeField] float _cameraRotateAngle;
+    public float CameraRotateAngle { get => _cameraRotateAngle; private set => _cameraRotateAngle = value; }
     #endregion
 
     [SerializeField] TMP_Text _startTimerText;
@@ -45,8 +47,7 @@ public class UI_GameScene : UI_Scene
     [SerializeField] TMP_Text _player2_ItemText;
     public TMP_Text Player2_ItemText { get => _player2_ItemText; set => _player2_ItemText = value; }
 
-    [SerializeField] float _cameraRotateAngle;
-    public float CameraRotateAngle { get => _cameraRotateAngle; private set => _cameraRotateAngle = value; }
+
 
     public void FadeIn(TMP_Text text)
     {
@@ -101,17 +102,35 @@ public class UI_GameScene : UI_Scene
         float elapsedTime = 0f;
         text.fontSize = MinGameTimerFontSize;
         text.color = TimeLimitTimerColor;
-        text.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
+        var mainCamera = Camera.main;
+        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
         while(text.fontSize < MaxGameTimerFontSize)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
-            float fontSize = Mathf.Lerp(MinStartTimerFontSize, MaxStartTimerFontSize, alpha);
-            float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
+            float fontSize = Mathf.Lerp(MinGameTimerFontSize, MaxGameTimerFontSize, alpha);
+            float cameraRotation = Mathf.Lerp(-CameraRotateAngle, CameraRotateAngle, alpha);
+            mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation));
             text.fontSize = fontSize;
+
             yield return null;
         }
-        text.fontSize = MaxStartTimerFontSize;
+        text.fontSize = MinGameTimerFontSize;
+        mainCamera.transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    public IEnumerator RotateText(TMP_Text text)
+    {
+        float elapsedTime = 0f;
+        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
+        while(text.rectTransform.rotation.z < TextRotation)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
+            float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
+            text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
+            yield return null;
+        }
     }
 
     // Start is called before the first frame update

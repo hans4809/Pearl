@@ -38,8 +38,13 @@ public class GameScene : BaseScene
             {
                 _gameTimer = value;
                 (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
-                if (value == TimeLimit)
-                    StartCoroutine((SceneUI as UI_GameScene).SizeUpText((SceneUI as UI_GameScene).GameTimerText));
+                if (value <= TimeLimit)
+                {
+                    if(value == TimeLimit)
+                        StartCoroutine((SceneUI as UI_GameScene).SizeUpText((SceneUI as UI_GameScene).GameTimerText));
+                    StartCoroutine((SceneUI as UI_GameScene).RotateText((SceneUI as UI_GameScene).GameTimerText));
+                }
+                    
             }
             else
             {

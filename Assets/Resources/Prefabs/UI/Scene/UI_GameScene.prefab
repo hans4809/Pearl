@@ -121,15 +121,16 @@ MonoBehaviour:
   _fadeTime: 0.5
   _maxStartTimerFontSize: 250
   _minStartTimerFontSize: 200
-  _maxGameTimerFontSize: 0
-  _minGameTimerFontSize: 0
+  _maxGameTimerFontSize: 50
+  _minGameTimerFontSize: 40
   _timeLimitTimerColor: {r: 1, g: 0, b: 0, a: 1}
   _timeLimitEffectTime: 1
+  _textRotation: 10
+  _cameraRotateAngle: 10
   _startTimerText: {fileID: 3134336366747737921}
   _gameTimerText: {fileID: 7483262881864732900}
   _player1_ItemText: {fileID: 1394299387788326200}
   _player2_ItemText: {fileID: 3544430785618020757}
-  _cameraRotateAngle: 0
 --- !u!1 &250350669724594247
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,8 +627,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

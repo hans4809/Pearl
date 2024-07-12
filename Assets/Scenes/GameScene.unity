@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneUI: {fileID: 0}
+  _timelimit: 10
   _startTimer: 3
   _gameTimer: 60
 --- !u!4 &1687383400
