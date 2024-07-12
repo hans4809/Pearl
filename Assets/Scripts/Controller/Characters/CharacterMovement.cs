@@ -29,20 +29,6 @@ public class CharacterMovement : MonoBehaviour
         }  
     }
 
-#region 3D
-    [SerializeField] private Rigidbody _rb;
-    public Rigidbody Rb { get => _rb; private set => _rb = value; }
-
-    [SerializeField] private Vector3 _dirVec3;
-    public Vector3 DirVec3 { get => _dirVec3; private set => _dirVec3 = value; }
-
-    [SerializeField] private Vector3 _lookVec3;
-    public Vector3 LookVec3 { get => _lookVec3; private set => _lookVec3 = value; }
-
-    [SerializeField] private Camera _followCamera;
-    public Camera FollowCamera { get => _followCamera; private set => _followCamera = value; }
-#endregion
-
 #region 2D
     [SerializeField] private Rigidbody2D _rb2D;
     public Rigidbody2D Rb2D { get => _rb2D; private set => _rb2D = value; }
@@ -53,9 +39,6 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Rb == null)
-            Rb = GetComponent<Rigidbody>();
-
         if (Rb2D == null)
             Rb2D = GetComponent<Rigidbody2D>();
 
@@ -78,43 +61,52 @@ public class CharacterMovement : MonoBehaviour
         float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
         MoveInput = new Vector2(horizontalInput, verticalInput);
 
-        DirVec3 = new Vector3(-verticalInput, 0, horizontalInput).normalized;
+        DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
+
+        if(DirVec2.magnitude <= 0)
+        {
+            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
+            Rb2D.velocity = Vector2.zero;
+        }
+
     }
 
     void MoveAndRotate()
     {
-        QuarterViewMoveAndRotate();
-    }
-
-    void QuarterViewMoveAndRotate()
-    {
-        if (DirVec3.magnitude > 0)
+        //QuarterViewMoveAndRotate();
+        if (DirVec2.magnitude > 0)
         {
             gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
 
-            Rb.velocity = DirVec3 * MoveSpeed;
-            Debug.Log($"{DirVec3.z}");
+            Rb2D.velocity = DirVec2 * MoveSpeed;
 
-            if (DirVec3.z >= 0) SR.flipX = false;
-            else SR.flipX = true;
+            if(Rb2D.velocity.x > 0) SR.flipX = true;
+            else SR.flipX = false;
         }
         else
         {
             gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
-            Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
+            Rb2D.velocity = Vector2.zero;
         }
-
     }
 
-    void ShoulderViewMoveAndRotate()
-    {
-        var targetSpeed = MoveSpeed * MoveInput.magnitude;
-        var moveDirection = Vector3.Normalize(transform.forward * MoveInput.y + transform.right * MoveInput.x);
+    //void QuarterViewMoveAndRotate()
+    //{
+    //    if (DirVec3.magnitude > 0)
+    //    {
+    //        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
 
-        Rb.velocity = new Vector3(moveDirection.x * targetSpeed, Rb.velocity.y, moveDirection.z * targetSpeed);
+    //        Rb.velocity = DirVec3 * MoveSpeed;
+    //        Debug.Log($"{DirVec3.z}");
 
-        var targetRotation = FollowCamera.transform.eulerAngles.y;
+    //        if (DirVec3.z >= 0) SR.flipX = false;
+    //        else SR.flipX = true;
+    //    }
+    //    else
+    //    {
+    //        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
+    //        Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
+    //    }
 
-        transform.eulerAngles = Vector3.up * targetRotation;
-    }
+    //}
 }
