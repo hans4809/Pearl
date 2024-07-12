@@ -15,6 +15,7 @@ public class GameScene : BaseScene
             {
                 _startTimer = value;
                 (SceneUI as UI_GameScene).StartTimerText.text = $"{_startTimer}";
+                StartCoroutine((SceneUI as UI_GameScene).FadeInText((SceneUI as UI_GameScene).StartTimerText));
             }
             else
             {
@@ -74,7 +75,7 @@ public class GameScene : BaseScene
 
     IEnumerator GameStartTimer()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         StartTimer = 3f;
         while (StartTimer > 0f)
         {

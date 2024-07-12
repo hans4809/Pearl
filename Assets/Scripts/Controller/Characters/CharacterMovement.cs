@@ -79,8 +79,16 @@ public class CharacterMovement : MonoBehaviour
 
             Rb2D.velocity = DirVec2 * MoveSpeed;
 
-            if(Rb2D.velocity.x > 0) SR.flipX = true;
-            else SR.flipX = false;
+            if (Rb2D.velocity.x > 0)
+            {
+                SR.flipX = true;
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            else
+            {
+                SR.flipX = false;
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
         }
         else
         {

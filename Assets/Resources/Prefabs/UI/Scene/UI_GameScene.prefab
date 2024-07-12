@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29e6aaf516949a488352afe6f8a011c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fadeTime: 0.5
   _startTimerText: {fileID: 3134336366747737921}
   _gameTimerText: {fileID: 7483262881864732900}
   _player1_ItemText: {fileID: 1394299387788326200}
