@@ -74,7 +74,7 @@ public class GameScene : BaseScene
             {
                 _endTimer = 0;
                 (SceneUI as UI_GameScene).EndTimerText.gameObject.SetActive(false);
-                Managers.Game.GameEnd();
+                StartCoroutine(Ending());
             }
         }
     }
@@ -138,5 +138,14 @@ public class GameScene : BaseScene
             yield return new WaitForSeconds(1f);
             EndTimer -= 1;
         }
+    }
+
+    IEnumerator Ending()
+    {
+        if(!(SceneUI as UI_GameScene).GameEndingText.gameObject.activeInHierarchy)
+            (SceneUI as UI_GameScene).GameEndingText.gameObject.SetActive(true);
+        Coroutine cor = StartCoroutine((SceneUI as UI_GameScene).TimeEndEffect((SceneUI as UI_GameScene).GameEndingText));
+        yield return cor;
+        Managers.Game.GameEnd();
     }
 }

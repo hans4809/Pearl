@@ -40,6 +40,15 @@ public class UI_GameScene : UI_Scene
     [SerializeField] Color _endTimerColor;
     public Color EndTimerColor { get => _endTimerColor; private set => _endTimerColor = value; }
     #endregion
+    [Header("EndGameVariable")]
+    [SerializeField] float _maxEndTextFontSize = 250f;
+    public float MaxEndTextFontSize { get => _maxEndTextFontSize; private set => _maxEndTextFontSize = value; }
+
+    [SerializeField] float _minEndTextFontSize = 200f;
+    public float MinEndTextFontSize { get => _minEndTextFontSize; private set => _minEndTextFontSize = value; }
+
+    [SerializeField] float _endEffectTime = 1;
+    public float EndEffectTime { get => _endEffectTime; private set => _endEffectTime = value; }
 
     [Header("Text Variable")]
     [SerializeField] TMP_Text _startTimerText;
@@ -56,6 +65,9 @@ public class UI_GameScene : UI_Scene
 
     [SerializeField] TMP_Text _player2_ItemText;
     public TMP_Text Player2_ItemText { get => _player2_ItemText; set => _player2_ItemText = value; }
+
+    [SerializeField] TMP_Text _gameEndingText;
+    public TMP_Text GameEndingText { get => _gameEndingText;  set => _gameEndingText = value; }
 
     public IEnumerator StartTimerEffect_FadeIn(TMP_Text text, float opacity = 1)
     {
@@ -133,6 +145,22 @@ public class UI_GameScene : UI_Scene
             text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
             yield return null;
         }
+    }
+
+    public IEnumerator TimeEndEffect(TMP_Text text)
+    {
+        float elapsedTime = 0f;
+        text.fontSize = MinEndTextFontSize;
+        while(text.fontSize < MaxEndTextFontSize)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / EndEffectTime);
+            float fontSize = Mathf.Lerp(MinEndTextFontSize, MaxEndTextFontSize, alpha);
+            text.fontSize = fontSize;
+            yield return null;
+        }
+
+        text.fontSize = MaxEndTextFontSize;
     }
 
     // Start is called before the first frame update
