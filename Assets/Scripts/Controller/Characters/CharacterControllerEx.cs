@@ -45,14 +45,6 @@ public class CharacterControllerEx : PlayableController
     protected override void UpdateAirborne()
     {
         base.UpdateAirborne();
-        if (!gameObject.GetComponent<SpriteRenderer>().flipX)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * AirbornePower, ForceMode2D.Force);
-        }
-        else
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce((-transform.right) * AirbornePower, ForceMode2D.Force);
-        }
     }
 
     protected override void Died()

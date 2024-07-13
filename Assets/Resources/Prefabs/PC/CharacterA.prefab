@@ -171,6 +171,11 @@ MonoBehaviour:
   _playerIndex: 1
   _rb2D: {fileID: 0}
   _dirVec2: {x: 0, y: 0}
+  _parabolicInitialVelocity: {x: 0, y: 0}
+  _parabolicStartPosition: {x: 0, y: 0}
+  _parabolicElapsedTime: 0
+  _parabolicGravity: 0
+  _maxHeightDisplacement: {x: 0, y: 0}
 --- !u!114 &3451447192778789945
 MonoBehaviour:
   m_ObjectHideFlags: 0

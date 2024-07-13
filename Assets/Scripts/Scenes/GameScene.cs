@@ -5,10 +5,13 @@ using UnityEngine.UIElements.Experimental;
 
 public class GameScene : BaseScene
 {
-    [SerializeField] int _timelimit = 10;
-    public int TimeLimit { get => _timelimit; private set => _timelimit = value; }
+    [SerializeField] int _timeLimit = 10;
+    public int TimeLimit { get => _timeLimit; private set => _timeLimit = value; }
 
     [SerializeField] int _startTimer = 3;
+
+    [SerializeField] Coroutine _gameEndTimerCoroutine;
+    public Coroutine GameEndTimerCoroutine { get => _gameEndTimerCoroutine; private set => _gameEndTimerCoroutine = value; }
     public int StartTimer 
     { 
         get => _startTimer;
@@ -46,7 +49,16 @@ public class GameScene : BaseScene
                     StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectIteration((SceneUI as UI_GameScene).GameTimerText));
 
                     if (_gameTimer == 3)
-                        StartCoroutine(GameEndTimer());
+                    {
+                        if (GameEndTimerCoroutine != null)
+                        {
+                            StopCoroutine(GameEndTimerCoroutine);
+                            GameEndTimerCoroutine = null;
+                        }
+
+                        GameEndTimerCoroutine = StartCoroutine(GameEndTimer());
+                    }
+
                 }
             }
             else

@@ -39,11 +39,14 @@ public abstract class BaseController : MonoBehaviour
                     anim.SetBool("isWalk", false);
                     anim.SetBool("isAirborne", false);
                     anim.SetBool("isDamaged", true);
+                    gameObject.GetComponent<CharacterMovement>().OnDamaged();
                     break;
                 case Define.State.Airborne:
                     anim.SetBool("isWalk", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", true);
+                    gameObject.GetComponent<CharacterMovement>().JumpForce();
+                    //gameObject.GetComponent<CharacterMovement>().ParabolicAirborne();
                     break;
             }
         }
