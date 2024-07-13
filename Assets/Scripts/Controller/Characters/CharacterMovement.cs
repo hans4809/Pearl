@@ -77,6 +77,9 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
+
         if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle
            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
@@ -91,7 +94,10 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle 
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
+
+        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle 
             || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
             ParabolicElapsedTime = 0f;

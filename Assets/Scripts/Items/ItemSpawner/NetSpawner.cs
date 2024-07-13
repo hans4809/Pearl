@@ -10,6 +10,8 @@ public class NetSpawner : ItemSpawner
     public int gapBetPlayerScore = 10;
     private void Update()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
         if (Mathf.Abs(Managers.Score.player1Score - Managers.Score.player2Score) > gapBetPlayerScore)
         {
             if (!Managers.Item.netHasBeenSpawned)
@@ -41,7 +43,8 @@ public class NetSpawner : ItemSpawner
 
 
 
-        GameObject net = Instantiate(item, spawnPosition, Quaternion.identity);
+        //GameObject net = Instantiate(item, spawnPosition, Quaternion.identity);
+        GameObject net = Managers.Resource.Instantiate("Item/Net/net", spawnPosition, Quaternion.identity);
 
         Managers.Item.netHasBeenSpawned = true;
         var gameScene = Managers.Scene.CurrentScene as GameScene;

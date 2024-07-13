@@ -15,6 +15,8 @@ public class GameScene : BaseScene
 
     [SerializeField] Transform[] _spawnTransforms;
     public Transform[] SpawnTransfroms { get => _spawnTransforms; private set => _spawnTransforms = value; }
+
+    [SerializeField] CameraControllerEx _cameraController;
     public int StartTimer 
     { 
         get => _startTimer;
@@ -98,12 +100,15 @@ public class GameScene : BaseScene
     public override void Clear()
     {
         StopAllCoroutines();
+        Destroy(SceneUI.gameObject);
     }
+
     protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.GameScene;
         SceneUI = Managers.UI.ShowSceneUI<UI_GameScene>();
+        StartCoroutine(_cameraController.CameraZoomIn(StartTimer));
     }
 
     private void Awake()

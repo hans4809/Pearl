@@ -10,6 +10,8 @@ public class HourGlassSpawner : ItemSpawner
 
     private void Update()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
         // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
@@ -43,10 +45,18 @@ public class HourGlassSpawner : ItemSpawner
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
         GameObject selectedItem;
         int choice = Random.Range(0, 2);
-        if (choice == 0) selectedItem = items[0];
-        else selectedItem = items[1];
+        if (choice == 0)
+        {
+            selectedItem = items[0];
+            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassMinus", spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            selectedItem = items[1];
+            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassPlus", spawnPosition, Quaternion.identity);
+        }
 
-        GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
+        //GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
 
     }
 }

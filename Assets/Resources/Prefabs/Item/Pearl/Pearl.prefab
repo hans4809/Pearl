@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3090815309618578518}
   - component: {fileID: 7897335813557401473}
   - component: {fileID: 1415926495685853875}
+  - component: {fileID: 8905204819544118115}
   m_Layer: 0
   m_Name: Pearl
   m_TagString: Item
@@ -151,3 +152,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.55, y: 2.59}
   m_EdgeRadius: 0
+--- !u!114 &8905204819544118115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155846853467999355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678183368c8674449a32c109b33b6f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsUsing: 0

@@ -8,6 +8,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
+public enum EGameState
+{
+    Start,
+    Playing,
+    End,
+}
 public class GameManagerEx
 {
     [SerializeField] GameObject[] _players = new GameObject[2];
@@ -16,6 +22,56 @@ public class GameManagerEx
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
     HashSet<GameObject> _items = new HashSet<GameObject>();
     public Action<int> OnSpawnEvent;
+    EGameState _gameState = EGameState.End;
+    public EGameState GameState { get => _gameState; set => _gameState = value; }
+
+    private int _player1Score;
+    public int Player1Score 
+    { 
+        get => _player1Score; 
+        set 
+        {
+            _player1Score = value;
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (gameScene != null)
+                (gameScene.SceneUI as UI_GameScene).Player1_ItemText.text = $"{_player1Score}";
+            if(_player1Score >= _player2Score)
+                BestPlayerIndex = 1;
+        } 
+    }
+
+    private int _player2Score;
+    public int Player2Score 
+    { 
+        get => _player2Score; 
+        set 
+        { 
+            _player2Score = value;
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (gameScene != null)
+                (gameScene.SceneUI as UI_GameScene).Player2_ItemText.text = $"{_player2Score}";
+            if (_player2Score >= _player1Score)
+                BestPlayerIndex = 2;
+        }
+    }
+
+    private int _bestPlayerIndex;
+    public int BestPlayerIndex 
+    { 
+        get => _bestPlayerIndex; 
+        set 
+        {
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (_bestPlayerIndex != value && 1 <= value && value <= 2)
+            {
+                if (gameScene != null)
+                    (gameScene.SceneUI as UI_GameScene).UpdatePlayerScore(_bestPlayerIndex -1, value -1);
+                _bestPlayerIndex = value;
+            }
+        }
+    }
+
+
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);
@@ -84,11 +140,24 @@ public class GameManagerEx
 
     public void GameEnd()
     {
-        Managers.UI.ShowSceneUI<UI_GameOverScene>();
+        GameState = EGameState.End;
+        var gameScene = Managers.Scene.CurrentScene;
+        gameScene.Clear();
+
+        Sprite winnerSprite = Managers.Resource.Load<Sprite>($"Sprites/UI/Player{BestPlayerIndex}Winner");
+        gameScene.SceneUI = Managers.UI.ShowSceneUI<UI_GameOverScene>();
+
+        if (winnerSprite != null)
+        {
+            if(gameScene.SceneUI is  UI_GameOverScene)
+                (gameScene.SceneUI as UI_GameOverScene).WinnerIMG.sprite = winnerSprite;
+        }
+            
     }
 
     public void GameStart()
     {
+        GameState = EGameState.Start;
         if (Managers.Scene.CurrentScene is GameScene)
         {
             for (int i = 0; i < 2; i++)
@@ -96,6 +165,8 @@ public class GameManagerEx
                 Spawn(Define.WorldObject.Player, $"PC/Character{i + 1}");
                 Players[i].transform.position = (Managers.Scene.CurrentScene as GameScene).SpawnTransfroms[i].position;
             }
+            Managers.Sound.Play("BGM/BGM", Define.Sound.BGM);
+            GameState = EGameState.Playing;
         }
     }
 }

@@ -14,6 +14,8 @@ public class KingPearlSpawner : ItemSpawner
     
     private void Update()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
         // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
@@ -62,6 +64,7 @@ public class KingPearlSpawner : ItemSpawner
             foreach (Transform spawnPoint in kingPearlSpawnPoints1)
             {
                 Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+                Managers.Resource.Instantiate("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
             }
             Managers.Item.KingPearl = kingPearlSpawnPoints1.Length;
         }
@@ -70,6 +73,7 @@ public class KingPearlSpawner : ItemSpawner
             foreach (Transform spawnPoint in kingPearlSpawnPoints2)
             {
                 Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+                Managers.Resource.Instantiate("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
             }
             Managers.Item.KingPearl = kingPearlSpawnPoints2.Length;
         }

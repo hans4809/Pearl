@@ -27,6 +27,13 @@ public class ResourceManager
         }
         return Resources.Load<T>(path);
     }
+    public GameObject Instantiate(string path, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        GameObject go = Instantiate(path, parent);
+        go.transform.localPosition = position;
+        go.transform.localRotation = rotation;
+        return go;
+    }
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject original = Load<GameObject>($"Prefabs/{path}");

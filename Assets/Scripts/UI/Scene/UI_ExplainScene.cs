@@ -11,13 +11,14 @@ public class UI_ExplainScene : UI_Scene
     public override void Init()
     {
         base.Init();
-        if (StartButton = null)
+        if (StartButton == null)
             StartButton = GetComponentInChildren<Button>();
         StartButton.gameObject.AddUIEvent(OnClickStartButton);
     }
 
     public void OnClickStartButton(PointerEventData eventData)
     {
+        Managers.Sound.Play("Sounds/SFX/UI_Button");
         Managers.Scene.LoadScene(Define.Scene.GameScene);
     }
     // Start is called before the first frame update
