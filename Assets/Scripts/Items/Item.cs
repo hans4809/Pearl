@@ -20,6 +20,9 @@ public class Item : MonoBehaviour, IFieldObject
 
     public void UseItemPlayer1()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
+
         var gameScene = Managers.Scene.CurrentScene as GameScene;
         switch (itemType)
         {
@@ -72,6 +75,9 @@ public class Item : MonoBehaviour, IFieldObject
 
     public void UseItemPlayer2() // 분명 더 좋은 방법이 있는데......포인터 못 써서 이렇게 따로 만든다...
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
+
         var gameScene = Managers.Scene.CurrentScene as GameScene;
         switch (itemType)
         {
@@ -124,6 +130,9 @@ public class Item : MonoBehaviour, IFieldObject
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
+
         if (other.CompareTag("Player1"))
         {
             UseItemPlayer1();

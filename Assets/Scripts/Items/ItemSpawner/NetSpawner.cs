@@ -10,6 +10,8 @@ public class NetSpawner : ItemSpawner
     public int gapBetPlayerScore = 10;
     private void Update()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
         if (Mathf.Abs(Managers.Score.player1Score - Managers.Score.player2Score) > gapBetPlayerScore)
         {
             if (!Managers.Item.netHasBeenSpawned)

@@ -16,6 +16,8 @@ public class PearlSpawner : ItemSpawner
 
     private void Update()
     {
+        if (Managers.Game.GameState != EGameState.Playing)
+            return;
 
         if (Time.time >= lastSpawnTime + timeBetSpawn)
         {
@@ -26,11 +28,8 @@ public class PearlSpawner : ItemSpawner
             // 아이템 생성 실행
             Spawn();
         }
-
-
-
-
     }
+
     protected override void Spawn()
     {
         var gameScene = Managers.Scene.CurrentScene as GameScene;

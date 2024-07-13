@@ -100,7 +100,9 @@ public class GameScene : BaseScene
     public override void Clear()
     {
         StopAllCoroutines();
+        Destroy(SceneUI.gameObject);
     }
+
     protected override void Init()
     {
         base.Init();
