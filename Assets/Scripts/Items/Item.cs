@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour, IFieldObject
+public class Item : MonoBehaviour
 {
-    public Vector2 itemLocation;
+    //public Vector2 itemLocation;
     public ItemEnum itemType;
 
     public int pearlAmount = 1;
     public int kingPearlAmount = 10;
-    public int bugAmount = -1;
-    public int netAmount = 1;
-    public int timerPlusAmount = 1;
-    public int timerMinusAmount = -1;
+    public int bugAmount = -5;
+    public int netAmount = 5;
+    public int timerPlusAmount = 10;
+    public int timerMinusAmount = -10;
 
-
+    public float delayTimeToCheckInBox = 0.1f;
 
     public void UseItemPlayer1()
     {
@@ -140,55 +140,6 @@ public class Item : MonoBehaviour, IFieldObject
             UseItemPlayer2();
         }
     }
-    /*
-    private void Awake()
-    {
 
-        itemLocation = gameObject.transform.position;
-
-        Collider2D[] colliders = Physics2D.OverlapPointAll(itemLocation);
-
-        bool overlap = false;
-
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.CompareTag("Item") || collider.CompareTag("Player1") || collider.CompareTag("Player2") || !collider.CompareTag("Base"))
-            {
-                overlap = true;
-                break;
-            }
-        }
-
-        if (overlap)    Destroy(gameObject);
-        
-    }
-    */
     
-    
-    private void Awake()
-    {
-        //itemLocation = ;
-        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3|| gameObject.transform.position.y > 3 || gameObject.transform.position.y < - 3)
-        {
-            Managers.Resource.Destroy(gameObject);
-        }
-    }
-
-    private void OnEnable()
-    {
-        //itemLocation = gameObject.transform.position;
-        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3 || gameObject.transform.position.y > 3 || gameObject.transform.position.y < -3)
-        {
-            Managers.Resource.Destroy(gameObject);
-        }
-    }
-    private void Start()
-    {
-        //itemLocation = gameObject.transform.position;
-        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3 || gameObject.transform.position.y > 3 || gameObject.transform.position.y < -3)
-        {
-            Managers.Resource.Destroy(gameObject);
-        }
-    }
-
 }

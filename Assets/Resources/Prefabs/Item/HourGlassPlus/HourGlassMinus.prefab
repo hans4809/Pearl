@@ -103,10 +103,11 @@ MonoBehaviour:
   itemType: 5
   pearlAmount: 1
   kingPearlAmount: 10
-  bugAmount: -1
-  netAmount: 1
-  timerPlusAmount: 1
-  timerMinusAmount: -1
+  bugAmount: -5
+  netAmount: 5
+  timerPlusAmount: 10
+  timerMinusAmount: -10
+  delayTimeToCheckInBox: 0.1
 --- !u!61 &1268977545569214317
 BoxCollider2D:
   m_ObjectHideFlags: 0

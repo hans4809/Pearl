@@ -69,8 +69,8 @@ public class KingPearlSpawner : ItemSpawner
         {
             foreach (Transform spawnPoint in kingPearlSpawnPoints1)
             {
-                Instantiate(item, spawnPoint.position, spawnPoint.rotation);
-                Managers.Resource.Instantiate("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
+                //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+                Managers.Resource.InstantiateItem("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
             }
             Managers.Item.KingPearl = kingPearlSpawnPoints1.Length;
         }
@@ -78,8 +78,8 @@ public class KingPearlSpawner : ItemSpawner
         {
             foreach (Transform spawnPoint in kingPearlSpawnPoints2)
             {
-                Instantiate(item, spawnPoint.position, spawnPoint.rotation);
-                Managers.Resource.Instantiate("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
+                //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+                Managers.Resource.InstantiateItem("Item/KingPearl/KingPearl", spawnPoint.position, spawnPoint.rotation);
             }
             Managers.Item.KingPearl = kingPearlSpawnPoints2.Length;
         }
