@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5395371956873279279}
   m_Layer: 0
   m_Name: Character1
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   _parabolicElapsedTime: 0
   _parabolicGravity: 0
   _maxHeightDisplacement: {x: 0, y: 0}
+  _stunTimer: 0
 --- !u!114 &3451447192778789945
 MonoBehaviour:
   m_ObjectHideFlags: 0
