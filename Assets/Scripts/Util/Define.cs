@@ -17,7 +17,6 @@ public class Define
     {
         Idle,
         Walk,
-        Falling,
         Damaged,
         Airborne,
     }
