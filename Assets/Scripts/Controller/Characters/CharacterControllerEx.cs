@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CharacterControllerEx : PlayableController
 {
+    [SerializeField] private int _score;
+    public int Score { get => _score; set => _score = value; }
     // Start is called before the first frame update
     void Start()
     {

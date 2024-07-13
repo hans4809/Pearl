@@ -5,10 +5,11 @@ using UnityEngine.UIElements.Experimental;
 
 public class GameScene : BaseScene
 {
-    [SerializeField] float _timelimit = 10f;
-    public float TimeLimit { get => _timelimit; private set => _timelimit = value; }
-    [SerializeField] float _startTimer = 3;
-    public float StartTimer 
+    [SerializeField] int _timelimit = 10;
+    public int TimeLimit { get => _timelimit; private set => _timelimit = value; }
+
+    [SerializeField] int _startTimer = 3;
+    public int StartTimer 
     { 
         get => _startTimer;
         set
@@ -17,7 +18,7 @@ public class GameScene : BaseScene
             {
                 _startTimer = value;
                 (SceneUI as UI_GameScene).StartTimerText.text = $"{_startTimer}";
-                StartCoroutine((SceneUI as UI_GameScene).FadeInText((SceneUI as UI_GameScene).StartTimerText));
+                StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).StartTimerText));
             }
             else
             {
@@ -28,8 +29,8 @@ public class GameScene : BaseScene
         }
     }
 
-    [SerializeField] float _gameTimer = 60;
-    public float GameTimer 
+    [SerializeField] int _gameTimer = 60;
+    public int GameTimer 
     {
         get => _gameTimer;
         set
@@ -38,18 +39,42 @@ public class GameScene : BaseScene
             {
                 _gameTimer = value;
                 (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
-                if (value <= TimeLimit)
+                if (_gameTimer <= TimeLimit)
                 {
-                    if(value == TimeLimit)
-                        StartCoroutine((SceneUI as UI_GameScene).SizeUpText((SceneUI as UI_GameScene).GameTimerText));
-                    StartCoroutine((SceneUI as UI_GameScene).RotateText((SceneUI as UI_GameScene).GameTimerText));
+                    if(_gameTimer == TimeLimit)
+                        StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectFirst((SceneUI as UI_GameScene).GameTimerText));
+                    StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectIteration((SceneUI as UI_GameScene).GameTimerText));
+
+                    if (_gameTimer == 3)
+                        StartCoroutine(GameEndTimer());
                 }
-                    
             }
             else
             {
                 _gameTimer = 0;
-                Managers.Game.GameEnd();
+            }
+        }
+    }
+
+    [SerializeField] int _endTimer = 3;
+    public int EndTimer
+    {
+        get => _endTimer;
+        set
+        {
+            if (value > 0)
+            {
+                _endTimer = value;
+                if(!(SceneUI as UI_GameScene).EndTimerText.gameObject.activeInHierarchy)
+                    (SceneUI as UI_GameScene).EndTimerText.gameObject.SetActive(true);
+                (SceneUI as UI_GameScene).EndTimerText.text = $"{_endTimer}";
+                StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).EndTimerText, (SceneUI as UI_GameScene).EndTimerColor.a));
+            }
+            else
+            {
+                _endTimer = 0;
+                (SceneUI as UI_GameScene).EndTimerText.gameObject.SetActive(false);
+                StartCoroutine(Ending());
             }
         }
     }
@@ -85,11 +110,11 @@ public class GameScene : BaseScene
     IEnumerator GameStartTimer()
     {
         //Time.timeScale = 0;
-        //StartTimer = 3f;
-        while (StartTimer > 0f)
+        StartTimer = 3;
+        while (StartTimer > 0)
         {
-            yield return new WaitForSecondsRealtime(1f);
-            StartTimer -= 1f;
+            yield return new WaitForSeconds(1f);
+            StartTimer -= 1;
         }
         StartCoroutine(GamePlayTimer());
     }
@@ -97,11 +122,30 @@ public class GameScene : BaseScene
     IEnumerator GamePlayTimer()
     {
         Time.timeScale = 1;
-        GameTimer = 60f;
-        while (GameTimer > 0f)
+        GameTimer = 60;
+        while (GameTimer > 0)
         {
-            yield return new WaitForSecondsRealtime(1f);
-            GameTimer -= 1f;
+            yield return new WaitForSeconds(1f);
+            GameTimer -= 1;
         }
+    }
+
+    IEnumerator GameEndTimer()
+    {
+        EndTimer = 3;
+        while(EndTimer > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            EndTimer -= 1;
+        }
+    }
+
+    IEnumerator Ending()
+    {
+        if(!(SceneUI as UI_GameScene).GameEndingText.gameObject.activeInHierarchy)
+            (SceneUI as UI_GameScene).GameEndingText.gameObject.SetActive(true);
+        Coroutine cor = StartCoroutine((SceneUI as UI_GameScene).TimeEndEffect((SceneUI as UI_GameScene).GameEndingText));
+        yield return cor;
+        Managers.Game.GameEnd();
     }
 }
