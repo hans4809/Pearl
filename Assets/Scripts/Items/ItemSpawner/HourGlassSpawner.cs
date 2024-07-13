@@ -12,6 +12,9 @@ public class HourGlassSpawner : ItemSpawner
     {
         if (Managers.Game.GameState != EGameState.Playing)
             return;
+
+        if (playerTransform == null)
+            playerTransform = Managers.Game.Players[RecommendedPlayerIndex].transform;
         // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)

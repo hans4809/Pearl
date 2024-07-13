@@ -28,10 +28,10 @@ public class ItemSpawner : MonoBehaviour
     public Vector3 baseVertex3;
     public Vector3 baseVertex4;
     */
-    public float baseX1 = -8;
-    public float baseX2 = 8;
-    public float baseY1 = -5;
-    public float baseY2 = 5;
+    public float baseX1 = -6.7f;
+    public float baseX2 = 6.7f;
+    public float baseY1 = -3.8f;
+    public float baseY2 = 3.8f;
 
     [SerializeField] private int _recommendedPlayerIndex = 0;
     public int RecommendedPlayerIndex { get => _recommendedPlayerIndex; set => _recommendedPlayerIndex = value; }
