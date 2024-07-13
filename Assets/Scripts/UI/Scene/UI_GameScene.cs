@@ -232,41 +232,7 @@ public class UI_GameScene : UI_Scene
         }
         mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, toRotation));
     }
-    //public IEnumerator TimeLimitEffectFirst(TMP_Text text)
-    //{
-    //    float elapsedTime = 0f;
-    //    text.fontSize = MinGameTimerFontSize;
-    //    text.color = TimeLimitTimerColor;
-    //    var mainCamera = Camera.main;
-    //    mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
-    //    while(text.fontSize < MaxGameTimerFontSize)
-    //    {
-    //        elapsedTime += Time.deltaTime;
-    //        float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
-    //        float fontSize = Mathf.Lerp(MinGameTimerFontSize, MaxGameTimerFontSize, alpha);
-    //        float cameraRotation = Mathf.Lerp(-CameraRotateAngle, CameraRotateAngle, alpha);
-    //        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation));
-    //        text.fontSize = fontSize;
-
-    //        yield return null;
-    //    }
-    //    text.fontSize = MinGameTimerFontSize;
-    //    mainCamera.transform.rotation = Quaternion.Euler(Vector3.zero);
-    //}
-
-    //public IEnumerator TimeLimitEffectIteration(TMP_Text text)
-    //{
-    //    float elapsedTime = 0f;
-    //    text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
-    //    while(text.rectTransform.rotation.z < TextRotation)
-    //    {
-    //        elapsedTime += Time.deltaTime;
-    //        float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
-    //        float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
-    //        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
-    //        yield return null;
-    //    }
-    //}
+    
     public IEnumerator TimeLimitEffectIteration(TMP_Text text)
     {
         // 첫 번째 코루틴: -TextRotation에서 TextRotation으로 회전
@@ -275,7 +241,7 @@ public class UI_GameScene : UI_Scene
         // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
         yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime/2));
 
-        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        text.transform.parent.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
     private IEnumerator RotateText(TMP_Text text, float from, float to, float duration)
@@ -286,10 +252,10 @@ public class UI_GameScene : UI_Scene
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / duration);
             float textRotation = Mathf.Lerp(from, to, alpha);
-            text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
+            text.transform.parent.transform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
             yield return null;
         }
-        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, to));
+        text.transform.parent.transform.rotation = Quaternion.Euler(new Vector3(0, 0, to));
     }
 
     public IEnumerator TimeEndEffect(TMP_Text text)

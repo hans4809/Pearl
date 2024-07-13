@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneUI: {fileID: 0}
-  _timeLimit: 55
+  _timeLimit: 10
   _startTimer: 3
   _spawnTransforms:
   - {fileID: 986521054}
