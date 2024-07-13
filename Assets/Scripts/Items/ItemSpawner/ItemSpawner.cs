@@ -33,6 +33,8 @@ public class ItemSpawner : MonoBehaviour
     public float baseY1 = -5;
     public float baseY2 = 5;
 
+    [SerializeField] private int _recommendedPlayerIndex = 0;
+    public int RecommendedPlayerIndex { get => _recommendedPlayerIndex; set => _recommendedPlayerIndex = value; }
 
     private void Start()
     {
@@ -41,24 +43,11 @@ public class ItemSpawner : MonoBehaviour
         lastSpawnTime = 0;
     }
 
-
-    // 주기적으로 아이템 생성 처리 실행
-    /*
     private void Update()
     {
-        // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
-        // && 플레이어 캐릭터가 존재함
-        if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
-        {
-            // 마지막 생성 시간 갱신
-            lastSpawnTime = Time.time;
-            // 생성 주기를 랜덤으로 변경
-            timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
-            // 아이템 생성 실행
-            Spawn();
-        }
+        
     }
-    */
+   
 
     // 실제 아이템 생성 처리
     
