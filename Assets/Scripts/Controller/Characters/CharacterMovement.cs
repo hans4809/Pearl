@@ -56,6 +56,10 @@ public class CharacterMovement : MonoBehaviour
     public float ParabolicGravity { get => _parabolicGravity; private set => _parabolicGravity = value; }
     [SerializeField] Vector2 _maxHeightDisplacement;
     public Vector2 MaxHeightDisplacement { get => _maxHeightDisplacement; private set => _maxHeightDisplacement = value; }
+    [Header("StunVariable")]
+    [SerializeField] float _stunTimer;
+    public float StunTimer { get => _stunTimer; private set => _stunTimer = value; }
+
     [SerializeField] Coroutine _returnToIdleCoroutine;
     public Coroutine ReturnToIdleCoroutine { get => _returnToIdleCoroutine; private set => _returnToIdleCoroutine = value; }
     // Start is called before the first frame update
@@ -185,5 +189,16 @@ public class CharacterMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         ReturnToIdle();
+    }
+
+    public void OnDamaged()
+    {
+        if (ReturnToIdleCoroutine != null)
+        {
+            StopCoroutine(ReturnToIdleCoroutine);
+            ReturnToIdleCoroutine = null;
+        }
+        Rb2D.velocity = Vector3.zero;
+        ReturnToIdleCoroutine = StartCoroutine(RetrunToIdleCor(StunTimer));
     }
 }
