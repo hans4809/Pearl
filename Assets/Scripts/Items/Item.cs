@@ -90,7 +90,7 @@ public class Item : MonoBehaviour, IFieldObject
 
         if (overlap)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
