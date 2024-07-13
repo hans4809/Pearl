@@ -170,11 +170,27 @@ public class Item : MonoBehaviour, IFieldObject
     private void Awake()
     {
         itemLocation = gameObject.transform.position;
-        if (itemLocation.x > 9.5 || itemLocation.x < -9.5|| itemLocation.y > 5.5 || itemLocation.y < - 5.5)
+        if (itemLocation.x > 6.3 || itemLocation.x < -6.3|| itemLocation.y > 3 || itemLocation.y < - 3)
         {
             Managers.Resource.Destroy(gameObject);
         }
     }
-    
-    
+
+    private void OnEnable()
+    {
+        itemLocation = gameObject.transform.position;
+        if (itemLocation.x > 6.3 || itemLocation.x < -6.3 || itemLocation.y > 3 || itemLocation.y < -3)
+        {
+            Managers.Resource.Destroy(gameObject);
+        }
+    }
+    private void Start()
+    {
+        itemLocation = gameObject.transform.position;
+        if (itemLocation.x > 6.3 || itemLocation.x < -6.3 || itemLocation.y > 3 || itemLocation.y < -3)
+        {
+            Managers.Resource.Destroy(gameObject);
+        }
+    }
+
 }
