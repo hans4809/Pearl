@@ -35,7 +35,7 @@ public class Item : MonoBehaviour, IFieldObject
             case ItemEnum.NET:
                 Managers.Score.player1Score += netAmount;
                 Managers.Score.player2Score -= netAmount;
-                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
+                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
                 break;
             case ItemEnum.TIME_PLUS:
                 Managers.Time.counter += timerPlusAmount;
@@ -44,7 +44,7 @@ public class Item : MonoBehaviour, IFieldObject
                 Managers.Time.counter += timerMinusAmount;
                 break;
             case ItemEnum.BOMB:
-                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
+                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
                 break;
 
         }
@@ -70,7 +70,7 @@ public class Item : MonoBehaviour, IFieldObject
             case ItemEnum.NET:
                 Managers.Score.player2Score += netAmount;
                 Managers.Score.player1Score -= netAmount;
-                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
+                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
                 break;
             case ItemEnum.TIME_PLUS:
                 Managers.Time.counter += timerPlusAmount;
@@ -79,7 +79,7 @@ public class Item : MonoBehaviour, IFieldObject
                 Managers.Time.counter += timerMinusAmount;
                 break;
             case ItemEnum.BOMB:
-                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
+                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
                 break;
 
         }
