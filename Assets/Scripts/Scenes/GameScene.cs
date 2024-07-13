@@ -12,6 +12,9 @@ public class GameScene : BaseScene
 
     [SerializeField] Coroutine _gameEndTimerCoroutine;
     public Coroutine GameEndTimerCoroutine { get => _gameEndTimerCoroutine; private set => _gameEndTimerCoroutine = value; }
+
+    [SerializeField] Transform[] _spawnTransforms;
+    public Transform[] SpawnTransfroms { get => _spawnTransforms; private set => _spawnTransforms = value; }
     public int StartTimer 
     { 
         get => _startTimer;
@@ -27,6 +30,7 @@ public class GameScene : BaseScene
             {
                 _startTimer = 0;
                 (SceneUI as UI_GameScene).StartTimerText.gameObject.SetActive(false);
+                Managers.Game.GameStart();
             }
 
         }
