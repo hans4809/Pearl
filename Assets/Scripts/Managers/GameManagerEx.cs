@@ -26,8 +26,6 @@ public class GameManagerEx
                     OnSpawnEvent.Invoke(1);
                 break;
             case Define.WorldObject.Player:
-                //if (_players[])
-                //_player = go;
                 break;
         }
 
