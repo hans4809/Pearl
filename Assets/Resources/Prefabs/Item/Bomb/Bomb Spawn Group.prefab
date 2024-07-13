@@ -89,7 +89,7 @@ MonoBehaviour:
   startSpawnBombTime: 0
   maxDistance: 5
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
-  distanceFromCenterBomb: 1
+  distanceFromCenterBomb: 0.5
 --- !u!1 &6425147870063129672
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,4 +146,4 @@ MonoBehaviour:
   startSpawnBombTime: 0
   maxDistance: 5
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
-  distanceFromCenterBomb: 1
+  distanceFromCenterBomb: 0.5
