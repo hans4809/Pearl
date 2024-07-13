@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class KingPearlSpawner : ItemSpawner
@@ -15,7 +16,7 @@ public class KingPearlSpawner : ItemSpawner
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-        if (Time.time >= lastSpawnTime + timeBetSpawn && Managers.Item.KingPear == 0 /*&& playerTransform != null*/)
+        if (Time.time >= lastSpawnTime + timeBetSpawn && Managers.Item.KingPearl == 0 /*&& playerTransform != null*/)
         {
             // 마지막 생성 시간 갱신
             lastSpawnTime = Time.time;
@@ -23,7 +24,7 @@ public class KingPearlSpawner : ItemSpawner
             timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
             // 아이템 생성 실행
             Spawn();
-            Managers.Item.KingPear = kingPearlSpawnPoints.Length;
+            Managers.Item.KingPearl = kingPearlSpawnPoints.Length;
         }
     }
 

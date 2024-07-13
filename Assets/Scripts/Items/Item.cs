@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class Item : MonoBehaviour, IFieldObject
 {
-    public Vector3 itemLocation;
+    public Vector2 itemLocation;
     public ItemEnum itemType;
 
     public int pearlAmount = 1;
@@ -28,7 +29,7 @@ public class Item : MonoBehaviour, IFieldObject
                 break;
             case ItemEnum.KING_PEARL:
                 Managers.Score.player1Score += kingPearlAmount;
-                Managers.Item.KingPear -= 1;
+                Managers.Item.KingPearl -= 1;
                 break;
             case ItemEnum.BUG:
                 Managers.Score.player1Score += bugAmount;
@@ -42,6 +43,9 @@ public class Item : MonoBehaviour, IFieldObject
                 break;
             case ItemEnum.TIME_MINUS:
                 Managers.Time.counter += timerMinusAmount;
+                break;
+            case ItemEnum.BOMB:
+
                 break;
 
 
@@ -70,6 +74,24 @@ public class Item : MonoBehaviour, IFieldObject
     private void Awake()
     {
         itemLocation = gameObject.transform.position;
+
+        Collider2D[] colliders = Physics2D.OverlapPointAll(itemLocation);
+
+        bool overlap = false;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Item") || collider.CompareTag("PLayer1") || collider.CompareTag("PLayer2") || !collider.CompareTag("Base"))
+            {
+                overlap = true;
+                break;
+            }
+        }
+
+        if (overlap)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

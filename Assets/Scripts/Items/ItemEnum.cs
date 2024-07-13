@@ -9,5 +9,6 @@ public enum ItemEnum
     TIME_PLUS = 4,
     TIME_MINUS = 5,
     BROKEN_PEARL = 6,
+    BOMB = 7,
     // 추가 예정
 }
