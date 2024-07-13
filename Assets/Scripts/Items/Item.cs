@@ -20,8 +20,6 @@ public class Item : MonoBehaviour, IFieldObject
 
     public void UseItemPlayer1()
     {
-        itemType = gameObject.GetComponent<Item>().itemType;
-
         switch(itemType)
         {
             case ItemEnum.PEARL:
@@ -50,14 +48,12 @@ public class Item : MonoBehaviour, IFieldObject
 
         }
         Destroy(gameObject);
-        Debug.Log("Player1:"+Managers.Score.player1Score);
+        Debug.Log("Player1:   "+Managers.Score.player1Score);
 
     }
 
     public void UseItemPlayer2() // 분명 더 좋은 방법이 있는데......포인터 못 써서 이렇게 따로 만든다...
     {
-        itemType = gameObject.GetComponent<Item>().itemType;
-
         switch (itemType)
         {
             case ItemEnum.PEARL:
@@ -86,7 +82,7 @@ public class Item : MonoBehaviour, IFieldObject
 
         }
         Destroy(gameObject);
-        Debug.Log("Player2" + Managers.Score.player2Score);
+        Debug.Log("Player2:   " + Managers.Score.player2Score);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -100,9 +96,10 @@ public class Item : MonoBehaviour, IFieldObject
             UseItemPlayer2();
         }
     }
-
+    /*
     private void Awake()
     {
+
         itemLocation = gameObject.transform.position;
 
         Collider2D[] colliders = Physics2D.OverlapPointAll(itemLocation);
@@ -111,17 +108,15 @@ public class Item : MonoBehaviour, IFieldObject
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Item") || collider.CompareTag("Player1") || collider.CompareTag("Player2") /*|| !collider.CompareTag("Base")*/)
+            if (collider.CompareTag("Item") || collider.CompareTag("Player1") || collider.CompareTag("Player2") || !collider.CompareTag("Base"))
             {
                 overlap = true;
                 break;
             }
         }
 
-        if (overlap)
-        {
-            //Destroy(gameObject);
-        }
+        if (overlap)    Destroy(gameObject);
+        
     }
-
+    */
 }
