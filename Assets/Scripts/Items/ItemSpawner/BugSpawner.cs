@@ -18,7 +18,7 @@ public class BugSpawner : ItemSpawner
         var gameScene = Managers.Scene.CurrentScene as GameScene;
         if (gameScene != null && (60f - gameScene.GameTimer) > startSpawnBugTime)
         {
-            if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+            if (Time.time >= lastSpawnTime + timeBetSpawn/*&& playerTransform != null*/)
             {
                 // 마지막 생성 시간 갱신
                 lastSpawnTime = Time.time;
@@ -45,6 +45,7 @@ public class BugSpawner : ItemSpawner
 
 
         GameObject bug = Instantiate(item, spawnPosition, Quaternion.identity);
+        Debug.Log("바ㅓㄹ레벌레");
 
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1771861734246885793}
-  - component: {fileID: 456860893491959738}
+  - component: {fileID: 5389916746260606677}
   m_Layer: 0
   m_Name: Bug Spawner_Player1
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4613185089639312969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &456860893491959738
+--- !u!114 &5389916746260606677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,10 +49,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnBugTime: 0
   item: {fileID: 9184261549228378454, guid: 11b5a9c6990f57e4ab7d047ae409d7d2, type: 3}
 --- !u!1 &5419169451171168385
@@ -104,10 +104,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnBugTime: 0
   item: {fileID: 9184261549228378454, guid: 11b5a9c6990f57e4ab7d047ae409d7d2, type: 3}
 --- !u!1 &5624471065622358362

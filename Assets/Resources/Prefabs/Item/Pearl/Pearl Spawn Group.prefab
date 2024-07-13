@@ -80,14 +80,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 2
+  timeBetSpawnMin: 1
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   initialPearlSpawnPoints:
   - {fileID: 3191263179396672741}
   - {fileID: 2141605514864265800}
@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 3985459218981359755}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6459983, y: -0.19435966, z: 0.03702706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

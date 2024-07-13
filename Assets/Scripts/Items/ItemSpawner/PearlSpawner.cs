@@ -61,7 +61,7 @@ public class PearlSpawner : ItemSpawner
             Vector2 center = GetRandomPointInBox();
             if (randomChoice == 0)
             {
-                Vector2 pos1 = new Vector2(center.x - 1 * gap, center.y);
+                Vector2 pos1 = new Vector2(center.x, center.y);
                 Vector2 pos2 = new Vector2(center.x + 1 * gap, center.y);
                 Vector2 pos3 = new Vector2(center.x + 2 * gap, center.y);
                 Vector2 pos4 = new Vector2(center.x + 3 * gap, center.y);
@@ -73,7 +73,7 @@ public class PearlSpawner : ItemSpawner
             }
             else
             {
-                Vector2 pos1 = new Vector2(center.x, center.y - 1 * gap);
+                Vector2 pos1 = new Vector2(center.x, center.y);
                 Vector2 pos2 = new Vector2(center.x, center.y + 1 * gap);
                 Vector2 pos3 = new Vector2(center.x, center.y + 2 * gap);
                 Vector2 pos4 = new Vector2(center.x, center.y + 3 * gap);
@@ -88,14 +88,14 @@ public class PearlSpawner : ItemSpawner
         if (gameScene != null && gameScene.GameTimer < 39)
         {
             Vector2 center = GetRandomPointInBox();
-            Vector2 pos1 = new Vector2(center.x - 1 * gap, center.y - 1 * gap);
-            Vector2 pos2 = new Vector2(center.x + 1 * gap, center.y - 1 * gap);
-            Vector2 pos3 = new Vector2(center.x + 2 * gap, center.y - 1 * gap);
-            Vector2 pos4 = new Vector2(center.x + 3 * gap, center.y - 1 * gap);
-            Vector2 pos5 = new Vector2(center.x - 1 * gap, center.y - 1 * gap);
-            Vector2 pos6 = new Vector2(center.x + 1 * gap, center.y - 1 * gap);
-            Vector2 pos7 = new Vector2(center.x + 2 * gap, center.y - 1 * gap);
-            Vector2 pos8 = new Vector2(center.x + 3 * gap, center.y - 1 * gap);
+            Vector2 pos1 = new Vector2(center.x, center.y);
+            Vector2 pos2 = new Vector2(center.x + 1 * gap, center.y);
+            Vector2 pos3 = new Vector2(center.x + 2 * gap, center.y);
+            Vector2 pos4 = new Vector2(center.x + 3 * gap, center.y);
+            Vector2 pos5 = new Vector2(center.x, center.y +1 * gap);
+            Vector2 pos6 = new Vector2(center.x + 1 * gap, center.y + 1 * gap);
+            Vector2 pos7 = new Vector2(center.x + 2 * gap, center.y + 1 * gap);
+            Vector2 pos8 = new Vector2(center.x + 3 * gap, center.y + 1 * gap);
 
             GameObject pearl1 = Instantiate(item, pos1, Quaternion.identity);
             GameObject pearl2 = Instantiate(item, pos2, Quaternion.identity);
