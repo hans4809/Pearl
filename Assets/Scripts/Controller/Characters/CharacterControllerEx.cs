@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CharacterControllerEx : PlayableController
 {
     [SerializeField] private int _score;
     public int Score { get => _score; set => _score = value; }
+    [SerializeField] private float _airbornePower;
+    public float AirbornePower { get => _airbornePower; private set => _airbornePower = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,14 @@ public class CharacterControllerEx : PlayableController
     protected override void UpdateAirborne()
     {
         base.UpdateAirborne();
+        if (!gameObject.GetComponent<SpriteRenderer>().flipX)
+        {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * AirbornePower, ForceMode2D.Force);
+        }
+        else
+        {
+            gameObject.GetComponent<Rigidbody2D>().AddForce((-transform.right) * AirbornePower, ForceMode2D.Force);
+        }
     }
 
     protected override void Died()
@@ -57,9 +69,6 @@ public class CharacterControllerEx : PlayableController
                 break;
             case Define.State.Walk:
                 UpdateWalk();
-                break;
-            case Define.State.Falling:
-                UpdateFalling();
                 break;
             case Define.State.Damaged:
                 Damaged();

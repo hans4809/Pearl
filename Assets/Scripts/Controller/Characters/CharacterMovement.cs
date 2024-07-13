@@ -38,13 +38,18 @@ public class CharacterMovement : MonoBehaviour
         }  
     }
 
-#region 2D
+
     [SerializeField] private Rigidbody2D _rb2D;
     public Rigidbody2D Rb2D { get => _rb2D; private set => _rb2D = value; }
 
     [SerializeField] private Vector2 _dirVec2;
     public Vector2 DirVec2 { get => _dirVec2; private set => _dirVec2 = value; }
-    #endregion
+
+    [Header("ParabolicVariable")]
+    [SerializeField] private Vector2 _initialVelocity;
+    public Vector2 InitialVelocity { get => _initialVelocity; private set => _initialVelocity = value; }
+    [SerializeField] private Vector2 _parabolicStartPosition;
+    public Vector2 ParabolicStartPosition { get => _parabolicStartPosition; private set => _parabolicStartPosition = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -66,48 +71,60 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
-        float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
-        MoveInput = new Vector2(horizontalInput, verticalInput);
-
-        DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
-
-        if(DirVec2.magnitude <= 0)
+        if(gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle 
+            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
-            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
-            Rb2D.velocity = Vector2.zero;
-        }
+            float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
+            float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
+            MoveInput = new Vector2(horizontalInput, verticalInput);
 
+            DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
+
+            if (DirVec2.magnitude <= 0)
+            {
+                ReturnToIdle();
+            }
+        }
     }
 
     void MoveAndRotate()
     {
-        if (DirVec2.magnitude > 0)
+        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle
+            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
-            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
-
-            Rb2D.velocity = DirVec2 * MoveSpeed;
-
-            if (Rb2D.velocity.x > 0)
+            if (DirVec2.magnitude > 0)
             {
-                SR.flipX = true;
-                //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
+
+                Rb2D.velocity = DirVec2 * MoveSpeed;
+                //Rb2D.MovePosition(Rb2D.position + DirVec2 * MoveSpeed * Time.fixedDeltaTime);
+
+                if (DirVec2.x > 0)
+                {
+                    SR.flipX = true;
+                    //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
+                else
+                {
+                    SR.flipX = false;
+                    //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
             }
             else
             {
-                SR.flipX = false;
-                //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                ReturnToIdle();
             }
-        }
-        else
-        {
-            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
-            Rb2D.velocity = Vector2.zero;
         }
     }
 
     public void PlayWalkSound()
     {
         Managers.Sound.Play("SFX/Grass_Walk");
+    }
+
+    public void ReturnToIdle()
+    {
+        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
+        Rb2D.velocity = Vector2.zero;
     }
 }

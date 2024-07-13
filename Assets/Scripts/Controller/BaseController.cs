@@ -27,31 +27,21 @@ public abstract class BaseController : MonoBehaviour
             {
                 case Define.State.Idle:
                     anim.SetBool("isWalk", false);
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", false);
                     break;
                 case Define.State.Walk:
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", false);
                     anim.SetBool("isWalk", true);
                     break;
-                case Define.State.Falling:
-                    anim.SetBool("isWalk", false);
-                    anim.SetBool("isDamaged", false);
-                    anim.SetBool("isAirborne", false);
-                    anim.SetBool("isFalling", true);
-                    break;
                 case Define.State.Damaged:
                     anim.SetBool("isWalk", false);
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isAirborne", false);
                     anim.SetBool("isDamaged", true);
                     break;
                 case Define.State.Airborne:
                     anim.SetBool("isWalk", false);
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", true);
                     break;
