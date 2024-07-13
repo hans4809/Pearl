@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UI_GameScene : UI_Scene
 {
@@ -17,7 +18,7 @@ public class UI_GameScene : UI_Scene
     public float MinStartTimerFontSize { get => _minStartTimerFontSize; private set => _minStartTimerFontSize = value; }
 
     [SerializeField] float _maxGameTimerFontSize;
-    public float MaxGameTimerFontSize { get => _maxGameTimerFontSize; private set => _maxGameTimerFontSize  = value; }
+    public float MaxGameTimerFontSize { get => _maxGameTimerFontSize; private set => _maxGameTimerFontSize = value; }
 
     [SerializeField] float _minGameTimerFontSize;
     public float MinGameTimerFontSize { get => _minGameTimerFontSize; private set => _minGameTimerFontSize = value; }
@@ -28,7 +29,7 @@ public class UI_GameScene : UI_Scene
     [SerializeField] Color _timeLimitTimerColor;
     public Color TimeLimitTimerColor { get => _timeLimitTimerColor; private set => _timeLimitTimerColor = value; }
     [SerializeField] float _timeLimitEffectTime = 1f;
-    public float TimeLimitEffectTime {  get => _timeLimitEffectTime; private set => _timeLimitEffectTime = value;}
+    public float TimeLimitEffectTime { get => _timeLimitEffectTime; private set => _timeLimitEffectTime = value; }
     [SerializeField] float _textRotation = 10f;
     public float TextRotation { get => _textRotation; private set => _textRotation = value; }
     [SerializeField] float _cameraRotateAngle;
@@ -49,6 +50,21 @@ public class UI_GameScene : UI_Scene
 
     [SerializeField] float _endEffectTime = 1;
     public float EndEffectTime { get => _endEffectTime; private set => _endEffectTime = value; }
+    [Header("PlayerScoreVariable")]
+    [SerializeField] Image _player1ScoreIMG;
+    public Image Player1ScoreIMG { get => _player1ScoreIMG; private set => _player1ScoreIMG = value; }
+
+    [SerializeField] Image _player2ScoreIMG;
+    public Image Player2ScoreIMG { get => _player2ScoreIMG; private set => _player2ScoreIMG = value; }
+
+    [SerializeField] float _changedScale;
+    public float ChangedScale { get => _changedScale; private set => _changedScale = value; }
+
+    [SerializeField] float _changedRotation;
+    public float ChangedRotation { get => _changedRotation; private set => _changedRotation = value; }
+
+    [SerializeField] float _changeEffectTime = 1;
+    public float ChangeEffectTime { get => _changeEffectTime; private set => _changeEffectTime = value; }
 
     [Header("Text Variable")]
     [SerializeField] TMP_Text _startTimerText;
@@ -163,15 +179,41 @@ public class UI_GameScene : UI_Scene
         text.fontSize = MaxEndTextFontSize;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdatePlayerScore()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator OnChangedBestPlayer(Image originBestPlayerIMG, Image changedBestPlayerIMG)
     {
-        
+        float elapsedTime = 0f;
+        changedBestPlayerIMG.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
+        while(changedBestPlayerIMG.transform.localScale.x < ChangedScale && changedBestPlayerIMG.transform.rotation.z < ChangedRotation)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime/ChangeEffectTime);
+            float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
+            float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
+            changedBestPlayerIMG.transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
+            changedBestPlayerIMG.transform.localScale = new Vector3(targetScale, targetScale, changedBestPlayerIMG.transform.localScale.z);
+            yield return null;
+        }
+
+        changedBestPlayerIMG.transform.localScale = Vector3.one;
+        changedBestPlayerIMG.transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Test());
+    }
+
+    IEnumerator Test()
+    {
+        while(true)
+        {
+            yield return StartCoroutine(OnChangedBestPlayer(Player2ScoreIMG, Player1ScoreIMG));
+            yield return new WaitForSecondsRealtime(5f); // 반복 실행 전에 대기
+        }
     }
 }

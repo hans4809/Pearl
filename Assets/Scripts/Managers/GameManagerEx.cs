@@ -9,8 +9,8 @@ using UnityEngine;
 
 public class GameManagerEx
 {
-    GameObject _player;
-    public GameObject GetPlayer() { return _player; }
+    GameObject[] _players;
+    public GameObject[] GetPlayers() { return _players; }
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
     HashSet<GameObject> _items = new HashSet<GameObject>();
     public Action<int> OnSpawnEvent;
@@ -26,7 +26,8 @@ public class GameManagerEx
                     OnSpawnEvent.Invoke(1);
                 break;
             case Define.WorldObject.Player:
-                _player = go;
+                //if (_players[])
+                //_player = go;
                 break;
         }
 
@@ -63,8 +64,8 @@ public class GameManagerEx
                 break;
             case Define.WorldObject.Player:
                 {
-                    if (_player == go)
-                        _player = null;
+                    //if (_player == go)
+                    //    _player = null;
                 }
                 break;
             case Define.WorldObject.Item:
