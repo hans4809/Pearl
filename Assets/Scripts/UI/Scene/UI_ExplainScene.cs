@@ -18,6 +18,7 @@ public class UI_ExplainScene : UI_Scene
 
     public void OnClickStartButton(PointerEventData eventData)
     {
+        Managers.Sound.Play("Sounds/SFX/UI_Button");
         Managers.Scene.LoadScene(Define.Scene.GameScene);
     }
     // Start is called before the first frame update
