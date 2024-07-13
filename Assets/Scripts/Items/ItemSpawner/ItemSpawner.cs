@@ -127,6 +127,16 @@ public class ItemSpawner : MonoBehaviour
         Vector2 vectorPos = new Vector2(x, y);
         return vectorPos;
     }
+
+    public Vector2 GetRandomPointInBoxForPearl()
+    {
+
+        float x = Random.Range(-3.5f, 3.5f);
+        float y = Random.Range(-1.5f, 1.5f);
+
+        Vector2 vectorPos = new Vector2(x, y);
+        return vectorPos;
+    }
     public GameObject SelectRandomItem(GameObject[] itemlist)
     {
         // Time

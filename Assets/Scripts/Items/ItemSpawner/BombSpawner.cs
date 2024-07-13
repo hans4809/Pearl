@@ -73,7 +73,7 @@ public class BombSpawner : ItemSpawner
             );
 
             //GameObject bomb = Instantiate(item, newPoint, Quaternion.identity);
-            GameObject bomb = Managers.Resource.Instantiate("Item/Bomb/Bomb", newPoint, Quaternion.identity);
+            GameObject bomb = Managers.Resource.InstantiateItem("Item/Bomb/Bomb", newPoint, Quaternion.identity);
             // 여기에 왼/오 날라오는 기능
             
         }

@@ -53,7 +53,7 @@ public class NetSpawner : ItemSpawner
 
 
         //GameObject net = Instantiate(item, spawnPosition, Quaternion.identity);
-        GameObject net = Managers.Resource.Instantiate("Item/Net/net", spawnPosition, Quaternion.identity);
+        Managers.Resource.InstantiateItem("Item/Net/net", spawnPosition, Quaternion.identity);
 
         Managers.Item.netHasBeenSpawned = true;
         Managers.Item.netSpawnedTime = 60f - Scene.GameTimer;

@@ -7,6 +7,7 @@ public class HourGlassSpawner : ItemSpawner
     public float startSpawnHourGlassTime;
     public float minDistance = 2f; // 플레이어 위치로부터 아이템이 배치될 최소 반경
     public GameObject[] items; // 생성할 아이템들
+    public float lastTimeSpawn = 7f;
     private void Start()
     {
         Init();
@@ -28,7 +29,7 @@ public class HourGlassSpawner : ItemSpawner
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
 
-        if (Scene != null && (60f - Scene.GameTimer) > startSpawnHourGlassTime)
+        if (Scene != null && (60f - Scene.GameTimer) > startSpawnHourGlassTime && Scene.GameTimer > lastTimeSpawn)
         {
             if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
             {
@@ -59,12 +60,12 @@ public class HourGlassSpawner : ItemSpawner
         if (choice == 0)
         {
             selectedItem = items[0];
-            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassMinus", spawnPosition, Quaternion.identity);
+            Managers.Resource.InstantiateItem("Item/HourGlassPlus/HourGlassMinus", spawnPosition, Quaternion.identity);
         }
         else
         {
             selectedItem = items[1];
-            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassPlus", spawnPosition, Quaternion.identity);
+            Managers.Resource.InstantiateItem("Item/HourGlassPlus/HourGlassPlus", spawnPosition, Quaternion.identity);
         }
 
         //GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);

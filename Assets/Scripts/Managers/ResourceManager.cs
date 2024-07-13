@@ -34,6 +34,16 @@ public class ResourceManager
         go.transform.localRotation = rotation;
         return go;
     }
+    public GameObject InstantiateItem(string path, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        if (position.x > 6.3f || position.x < -6.3 || position.y > 3f || position.y < -3f)
+            return null;
+
+        GameObject go = Instantiate(path, parent);
+        go.transform.localPosition = position;
+        go.transform.localRotation = rotation;
+        return go;
+    }
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject original = Load<GameObject>($"Prefabs/{path}");

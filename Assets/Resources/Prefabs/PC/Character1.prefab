@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0b4b917b4c2f444bc95daf7b393947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 10
+  _moveSpeed: 5
   _rotationSpeed: 0
   _anim: {fileID: 0}
   _moveInput: {x: 0, y: 0}

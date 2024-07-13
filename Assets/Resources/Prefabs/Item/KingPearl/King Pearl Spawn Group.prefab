@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 2024731508916814381}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.33, y: 1.83, z: 0}
+  m_LocalPosition: {x: -5.31, y: 1.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,6 +494,7 @@ MonoBehaviour:
   baseY1: -3.8
   baseY2: 3.8
   _recommendedPlayerIndex: 0
+  _scene: {fileID: 0}
   kingPearlSpawnPoints1:
   - {fileID: 6618324594086512952}
   - {fileID: 5000082620925511419}
