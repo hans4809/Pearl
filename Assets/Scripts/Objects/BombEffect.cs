@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public class BombEffect : MonoBehaviour
 {
     [SerializeField] Animator _anim;
     public Animator Anim { get => _anim; private set => _anim = value; }
@@ -13,23 +13,14 @@ public class Bomb : MonoBehaviour
             Anim = GetComponent<Animator>();
     }
 
-    private void OnEnable()
+    public void OnFinishedAnimation()
     {
-        Anim.SetBool("isBomb", true);
+        gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        Anim.SetBool("isBomb", false);
-    }
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void EndOfAnimation()
-    {
-        Managers.Resource.Destroy(gameObject);
     }
 }

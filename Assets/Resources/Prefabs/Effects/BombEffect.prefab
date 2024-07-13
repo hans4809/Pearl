@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6495987203913296396}
   - component: {fileID: 7993301826995568544}
   - component: {fileID: 2688075211225056454}
-  - component: {fileID: 2250487124483508837}
   - component: {fileID: 8095325605159540998}
+  - component: {fileID: 5964718198991871707}
   m_Layer: 0
   m_Name: BombEffect
   m_TagString: Untagged
@@ -108,18 +108,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2250487124483508837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7983551521512550733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d14bda6795467b4e8236c58c57090cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8095325605159540998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,3 +121,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUsing: 0
+--- !u!114 &5964718198991871707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983551521512550733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5db4b113c1dda40a9a0a910ce04b0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 2688075211225056454}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public enum EGroundType
 {
@@ -62,6 +63,9 @@ public class CharacterMovement : MonoBehaviour
 
     [SerializeField] Coroutine _returnToIdleCoroutine;
     public Coroutine ReturnToIdleCoroutine { get => _returnToIdleCoroutine; private set => _returnToIdleCoroutine = value; }
+
+    [SerializeField] CharacterControllerEx _character;
+    public CharacterControllerEx Character { get => _character; private set => _character = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +78,8 @@ public class CharacterMovement : MonoBehaviour
         if (MaxHeightDisplacement == Vector2.zero)
             MaxHeightDisplacement = new Vector2(0.5f, 0.5f);
 
+        Character = gameObject.GetComponent<CharacterControllerEx>();
+
         //if (FollowCamera == null)
         //    FollowCamera = Camera.main;
     }
@@ -83,8 +89,7 @@ public class CharacterMovement : MonoBehaviour
         if (Managers.Game.GameState != EGameState.Playing)
             return;
 
-        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle
-           || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
+        if (Character.State== Define.State.Idle || Character.State == Define.State.Walk)
         {
             MoveAndRotate();
         }
@@ -96,13 +101,11 @@ public class CharacterMovement : MonoBehaviour
         if (Managers.Game.GameState != EGameState.Playing)
             return;
 
-        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle 
-            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
+        if (Character.State == Define.State.Idle || Character.State == Define.State.Walk)
         {
             ParabolicElapsedTime = 0f;
             float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
             float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
-            MoveInput = new Vector2(horizontalInput, verticalInput);
 
             DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
 
@@ -111,14 +114,13 @@ public class CharacterMovement : MonoBehaviour
                 ReturnToIdle();
             }
         }
-        MoveInput = Vector2.zero;
     }
 
     void MoveAndRotate()
     {
         if (DirVec2.magnitude > 0)
         {
-            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
+            Character.State = Define.State.Walk;
 
             Rb2D.velocity = DirVec2 * MoveSpeed;
             //Rb2D.MovePosition(Rb2D.position + DirVec2 * MoveSpeed * Time.fixedDeltaTime);
@@ -147,26 +149,11 @@ public class CharacterMovement : MonoBehaviour
 
     public void ReturnToIdle()
     {
-        gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
+        Character.State = Define.State.Idle;
         Rb2D.velocity = Vector2.zero;
         ParabolicStartPosition = Rb2D.position;
         ParabolicElapsedTime = 0f;
         Rb2D.gravityScale = 0f;
-    }
-
-    public void ParabolicAirborne()
-    {
-        ParabolicElapsedTime += Time.fixedDeltaTime;
-
-        float t = ParabolicElapsedTime;
-        if (t <= Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length)
-        {
-            float newX = ParabolicStartPosition.x + ParabolicInitialVelocity.x * t;
-            float newY = ParabolicStartPosition.y + ParabolicInitialVelocity.y * t - 0.5f * Mathf.Abs(Physics2D.gravity.y) * t * t;
-            Vector2 newPosition = new Vector2(newX, newY);
-
-            Rb2D.MovePosition(newPosition);
-        }
     }
 
     public void JumpForce()

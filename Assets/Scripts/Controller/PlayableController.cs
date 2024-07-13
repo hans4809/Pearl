@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayableController : BaseController
 {
-    [SerializeField]
-    public int Hp { get; protected set; } = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +41,6 @@ public class PlayableController : BaseController
     protected override void Died()
     {
         base.Died();
-        Managers.Game.Despawn(gameObject);
     }
     // Update is called once per frame
     void Update()
