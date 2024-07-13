@@ -12,8 +12,16 @@ public class BombSpawner : ItemSpawner
 
     public float distanceFromCenterBomb = 1f;
     private int numberOfPoints = 3; //2~4
-    
 
+    private void Start()
+    {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+    }
 
     private void Update()
     {
@@ -28,8 +36,8 @@ public class BombSpawner : ItemSpawner
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-        var gameScene = Managers.Scene.CurrentScene as GameScene;
-        if (gameScene != null && (60f - gameScene.GameTimer) > startSpawnBombTime)
+        
+        if (Scene != null && (60f - Scene.GameTimer) > startSpawnBombTime)
         {
             if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
             {

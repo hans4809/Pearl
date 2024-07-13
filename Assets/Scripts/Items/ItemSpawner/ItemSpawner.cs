@@ -36,11 +36,16 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private int _recommendedPlayerIndex = 0;
     public int RecommendedPlayerIndex { get => _recommendedPlayerIndex; set => _recommendedPlayerIndex = value; }
 
+    [SerializeField] private GameScene _scene;
+    public GameScene Scene { get => _scene; private set => _scene = value; }
+
     private void Start()
     {
-        // 생성 간격과 마지막 생성 시점 초기화
-        timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
-        lastSpawnTime = 0;
+    }
+
+    protected virtual void Init()
+    {
+        Scene = Managers.Scene.CurrentScene as GameScene;
     }
 
     private void Update()

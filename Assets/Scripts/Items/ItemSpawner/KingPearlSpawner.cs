@@ -11,7 +11,15 @@ public class KingPearlSpawner : ItemSpawner
     public float increaseSpawnKingPearlTime = 35f;
     //private Vector2[] spawnPositions;
     public GameObject item; // 생성할 아이템들
-    
+    private void Start()
+    {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+    }
     private void Update()
     {
         if (Managers.Game.GameState != EGameState.Playing)
@@ -28,8 +36,7 @@ public class KingPearlSpawner : ItemSpawner
             timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
             // 아이템 생성 실행
 
-            var gameScene = Managers.Scene.CurrentScene as GameScene;
-            if (gameScene != null && 60 - gameScene.GameTimer > startSpawnKingPearlTime)
+            if (Scene != null && 60 - Scene.GameTimer > startSpawnKingPearlTime)
                 Spawn();
             
         }
@@ -58,8 +65,7 @@ public class KingPearlSpawner : ItemSpawner
             GameObject kingPearl = Instantiate(selectedItem, kingPearlSpawnPoints[i].position, Quaternion.identity);
         }*/
 
-        var gameScene = Managers.Scene.CurrentScene as GameScene;
-        if (gameScene != null && 60 - gameScene.GameTimer < increaseSpawnKingPearlTime)
+        if (Scene != null && 60 - Scene.GameTimer < increaseSpawnKingPearlTime)
         {
             foreach (Transform spawnPoint in kingPearlSpawnPoints1)
             {
