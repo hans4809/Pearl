@@ -17,6 +17,9 @@ public class GameScene : BaseScene
     public Transform[] SpawnTransfroms { get => _spawnTransforms; private set => _spawnTransforms = value; }
 
     [SerializeField] CameraControllerEx _cameraController;
+
+    [SerializeField] Coroutine _cameraRotateCoroutine;
+    public Coroutine CameraRotateCoroutine { get => _cameraRotateCoroutine; private set => _cameraRotateCoroutine = value; }
     public int StartTimer 
     { 
         get => _startTimer;
@@ -51,7 +54,16 @@ public class GameScene : BaseScene
                 if (_gameTimer <= TimeLimit)
                 {
                     if(_gameTimer == TimeLimit)
-                        StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectFirst((SceneUI as UI_GameScene).GameTimerText));
+                    {
+                        StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectText((SceneUI as UI_GameScene).GameTimerText));
+                        if(CameraRotateCoroutine != null)
+                        {
+                            StopCoroutine(CameraRotateCoroutine);
+                            CameraRotateCoroutine = null;
+                            Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                        }
+                        CameraRotateCoroutine = StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectCameraIteration());
+                    }
                     StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectIteration((SceneUI as UI_GameScene).GameTimerText));
 
                     if (_gameTimer == 3)

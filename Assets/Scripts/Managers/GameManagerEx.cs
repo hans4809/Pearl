@@ -14,6 +14,7 @@ public enum EGameState
     Playing,
     End,
 }
+
 public class GameManagerEx
 {
     [SerializeField] GameObject[] _players = new GameObject[2];
@@ -34,7 +35,12 @@ public class GameManagerEx
             _player1Score = value;
             var gameScene = Managers.Scene.CurrentScene as GameScene;
             if (gameScene != null)
-                (gameScene.SceneUI as UI_GameScene).Player1_ItemText.text = $"{_player1Score}";
+            {
+                var sceneUi = gameScene.SceneUI as UI_GameScene;
+                if(sceneUi != null)
+                    sceneUi.Player1_ItemText.text = $"{_player1Score}";
+            }
+                
             if(_player1Score >= _player2Score)
                 BestPlayerIndex = 1;
         } 
@@ -49,7 +55,12 @@ public class GameManagerEx
             _player2Score = value;
             var gameScene = Managers.Scene.CurrentScene as GameScene;
             if (gameScene != null)
-                (gameScene.SceneUI as UI_GameScene).Player2_ItemText.text = $"{_player2Score}";
+            {
+                var sceneUi = gameScene.SceneUI as UI_GameScene;
+                if (sceneUi != null)
+                    sceneUi.Player2_ItemText.text = $"{_player2Score}";
+            }
+
             if (_player2Score >= _player1Score)
                 BestPlayerIndex = 2;
         }
@@ -65,7 +76,11 @@ public class GameManagerEx
             if (_bestPlayerIndex != value && 1 <= value && value <= 2)
             {
                 if (gameScene != null)
-                    (gameScene.SceneUI as UI_GameScene).UpdatePlayerScore(_bestPlayerIndex -1, value -1);
+                {
+                    var sceneUi = gameScene.SceneUI as UI_GameScene;
+                    if(sceneUi != null)
+                        sceneUi.UpdatePlayerScore(_bestPlayerIndex - 1, value - 1);
+                }
                 _bestPlayerIndex = value;
             }
         }
@@ -152,12 +167,16 @@ public class GameManagerEx
             if(gameScene.SceneUI is  UI_GameOverScene)
                 (gameScene.SceneUI as UI_GameOverScene).WinnerIMG.sprite = winnerSprite;
         }
-            
+
+        Player1Score = 0;
+        Player2Score = 0;
+        BestPlayerIndex = 0;
     }
 
     public void GameStart()
     {
         GameState = EGameState.Start;
+
         if (Managers.Scene.CurrentScene is GameScene)
         {
             for (int i = 0; i < 2; i++)
