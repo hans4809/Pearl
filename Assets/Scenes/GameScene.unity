@@ -711,6 +711,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8301819105453211870, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
+      propertyPath: numOfPearls
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301819105453211870, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
+      propertyPath: startPearl3
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301819105453211870, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
+      propertyPath: timeBetSpawnMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301819105453211870, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
+      propertyPath: timeBetSpawnMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301819105453211870, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
+      propertyPath: distanceFromCenterPearl
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -18,6 +18,9 @@ public class BugMove : MonoBehaviour
         {
             transform.position = new Vector2(maxX*moveDirection, transform.position.y);
             moveDirection = -moveDirection;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
     }
 
