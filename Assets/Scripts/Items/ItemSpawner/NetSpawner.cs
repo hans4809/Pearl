@@ -8,6 +8,15 @@ public class NetSpawner : ItemSpawner
     public float maxDistance = 5f; // 플레이어 위치로부터 아이템이 배치될 최대 반경
     public GameObject item; // 생성할 아이템
     public int gapBetPlayerScore = 10;
+    private void Start()
+    {
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+    }
     private void Update()
     {
         if (Managers.Game.GameState != EGameState.Playing)
@@ -18,8 +27,7 @@ public class NetSpawner : ItemSpawner
                 Spawn();
             else
             {
-                var gameScene = Managers.Scene.CurrentScene as GameScene;
-                if (gameScene != null && (60f - gameScene.GameTimer) > Managers.Item.netSpawnedTime)
+                if (Scene != null && (60f - Scene.GameTimer) > Managers.Item.netSpawnedTime)
                     Spawn();
             }
         }
@@ -47,8 +55,7 @@ public class NetSpawner : ItemSpawner
         GameObject net = Managers.Resource.Instantiate("Item/Net/net", spawnPosition, Quaternion.identity);
 
         Managers.Item.netHasBeenSpawned = true;
-        var gameScene = Managers.Scene.CurrentScene as GameScene;
-        Managers.Item.netSpawnedTime = 60f - gameScene.GameTimer;
+        Managers.Item.netSpawnedTime = 60f - Scene.GameTimer;
 
     }
 }

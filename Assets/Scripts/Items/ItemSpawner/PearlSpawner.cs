@@ -13,7 +13,15 @@ public class PearlSpawner : ItemSpawner
 
     public float fastSpawnTime = 1f;
 
+    private void Start()
+    {
+        Init();
+    }
 
+    protected override void Init()
+    {
+        base.Init();
+    }
     private void Update()
     {
         if (Managers.Game.GameState != EGameState.Playing)
@@ -32,8 +40,8 @@ public class PearlSpawner : ItemSpawner
 
     protected override void Spawn()
     {
-        var gameScene = Managers.Scene.CurrentScene as GameScene;
-        if (gameScene != null && gameScene.GameTimer < 59)
+       
+        if (Scene != null && Scene.GameTimer < 59)
         {
             if (!started)
             {
@@ -54,7 +62,7 @@ public class PearlSpawner : ItemSpawner
             }
         }
 
-        if (gameScene != null && gameScene.GameTimer < 59)
+        if (Scene != null && Scene.GameTimer < 59)
         {
             int randomChoice = Random.Range(0, 2);
             Vector2 center = GetRandomPointInBox();
@@ -94,7 +102,7 @@ public class PearlSpawner : ItemSpawner
             Managers.Resource.Instantiate("Item/Pearl/Pearl", pos4, Quaternion.identity);
         }
 
-        if (gameScene != null && gameScene.GameTimer < 39)
+        if (Scene != null && Scene.GameTimer < 39)
         {
             Vector2 center = GetRandomPointInBox();
             Vector2 pos1 = new Vector2(center.x, center.y);
@@ -124,7 +132,7 @@ public class PearlSpawner : ItemSpawner
             Managers.Resource.Instantiate("Item/Pearl/Pearl", pos8, Quaternion.identity);
         }
 
-        if (gameScene != null && gameScene.GameTimer < 19)
+        if (Scene != null && Scene.GameTimer < 19)
         {
             timeBetSpawnMax -= fastSpawnTime;
             timeBetSpawnMax -= fastSpawnTime;

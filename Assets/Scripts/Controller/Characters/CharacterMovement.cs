@@ -71,6 +71,9 @@ public class CharacterMovement : MonoBehaviour
         if (SR == null)
             SR = GetComponent<SpriteRenderer>();
 
+        if (MaxHeightDisplacement == Vector2.zero)
+            MaxHeightDisplacement = new Vector2(0.5f, 0.5f);
+
         //if (FollowCamera == null)
         //    FollowCamera = Camera.main;
     }
@@ -84,10 +87,6 @@ public class CharacterMovement : MonoBehaviour
            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
             MoveAndRotate();
-        }
-        else if(gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Airborne)
-        {
-            //ParabolicAirborne();
         }
     }
 
