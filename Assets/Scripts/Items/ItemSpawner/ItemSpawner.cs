@@ -28,8 +28,8 @@ public class ItemSpawner : MonoBehaviour
     public Vector3 baseVertex3;
     public Vector3 baseVertex4;
     */
-    public float baseX1 = -9;
-    public float baseX2 = 9;
+    public float baseX1 = -8;
+    public float baseX2 = 8;
     public float baseY1 = -5;
     public float baseY2 = 5;
 

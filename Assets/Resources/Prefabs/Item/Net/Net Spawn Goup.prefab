@@ -45,15 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 6
+  timeBetSpawnMin: 4
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
-  maxDistance: 5
+  baseX1: -8
+  baseX2: 8
+  baseY1: -5
+  baseY2: 5
+  _recommendedPlayerIndex: 0
+  maxDistance: 4
   item: {fileID: 1633008219865383780, guid: 66abf30b64eec164797383f3b5aa86f9, type: 3}
   gapBetPlayerScore: 10
 --- !u!1 &8821640808917803688

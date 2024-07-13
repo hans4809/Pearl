@@ -78,15 +78,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 6
+  timeBetSpawnMin: 4
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
-  startSpawnBrokenPearlTime: 0
+  _recommendedPlayerIndex: 0
+  startSpawnBrokenPearlTime: 15
   maxDistance: 5
   item: {fileID: 5337271337358712600, guid: 28309c1d5f3ddf747b8349b6be781d17, type: 3}
 --- !u!1 &2590963603479624984
@@ -134,14 +135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 6
+  timeBetSpawnMin: 4
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
-  startSpawnBrokenPearlTime: 0
-  maxDistance: 5
+  _recommendedPlayerIndex: 1
+  startSpawnBrokenPearlTime: 15
+  maxDistance: 4
   item: {fileID: 5337271337358712600, guid: 28309c1d5f3ddf747b8349b6be781d17, type: 3}

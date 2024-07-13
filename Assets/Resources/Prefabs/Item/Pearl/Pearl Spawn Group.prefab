@@ -80,14 +80,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 4
+  timeBetSpawnMin: 6
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
+  _recommendedPlayerIndex: 0
   initialPearlSpawnPoints:
   - {fileID: 3191263179396672741}
   - {fileID: 2141605514864265800}
@@ -97,7 +98,7 @@ MonoBehaviour:
   started: 0
   gap: 1
   distanceFromCenterPearl: 1
-  fastSpawnTime: 1
+  fastSpawnTime: 0.5
 --- !u!1 &3985459218981359755
 GameObject:
   m_ObjectHideFlags: 0

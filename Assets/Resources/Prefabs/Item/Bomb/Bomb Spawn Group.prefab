@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8150199930138776602}
   - component: {fileID: 8453170566915980416}
   m_Layer: 0
-  m_Name: Bomb Spawner_player1
+  m_Name: Bomb Spawner_player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,16 +78,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 6
+  timeBetSpawnMin: 4
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
-  startSpawnBombTime: 0
-  maxDistance: 5
+  _recommendedPlayerIndex: 1
+  startSpawnBombTime: 30
+  maxDistance: 3
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
   distanceFromCenterBomb: 0.5
 --- !u!1 &6425147870063129672
@@ -135,15 +136,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
-  timeBetSpawnMin: 2
+  timeBetSpawnMax: 6
+  timeBetSpawnMin: 4
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
-  startSpawnBombTime: 0
-  maxDistance: 5
+  _recommendedPlayerIndex: 0
+  startSpawnBombTime: 30
+  maxDistance: 3
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
   distanceFromCenterBomb: 0.5

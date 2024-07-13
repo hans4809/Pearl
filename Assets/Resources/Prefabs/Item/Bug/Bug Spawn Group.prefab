@@ -49,11 +49,12 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: -9
-  baseX2: 9
+  baseX1: -8
+  baseX2: 8
   baseY1: -5
   baseY2: 5
-  startSpawnBugTime: 0
+  _recommendedPlayerIndex: 0
+  startSpawnBugTime: 25
   item: {fileID: 9184261549228378454, guid: 11b5a9c6990f57e4ab7d047ae409d7d2, type: 3}
 --- !u!1 &5419169451171168385
 GameObject:
@@ -108,7 +109,8 @@ MonoBehaviour:
   baseX2: 9
   baseY1: -5
   baseY2: 5
-  startSpawnBugTime: 0
+  _recommendedPlayerIndex: 0
+  startSpawnBugTime: 25
   item: {fileID: 9184261549228378454, guid: 11b5a9c6990f57e4ab7d047ae409d7d2, type: 3}
 --- !u!1 &5624471065622358362
 GameObject:
