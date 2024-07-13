@@ -96,6 +96,7 @@ public class GameManagerEx
                 Spawn(Define.WorldObject.Player, $"PC/Character{i + 1}");
                 Players[i].transform.position = (Managers.Scene.CurrentScene as GameScene).SpawnTransfroms[i].position;
             }
+            Managers.Sound.Play("BGM/BGM", Define.Sound.BGM);
         }
     }
 }

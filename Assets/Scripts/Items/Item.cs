@@ -24,27 +24,34 @@ public class Item : MonoBehaviour, IFieldObject
         {
             case ItemEnum.PEARL:
                 Managers.Score.player1Score += pearlAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.KING_PEARL:
                 Managers.Score.player1Score += kingPearlAmount;
                 Managers.Item.KingPearl -= 1;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.BUG:
                 Managers.Score.player1Score += bugAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.NET:
                 Managers.Score.player1Score += netAmount;
                 Managers.Score.player2Score -= netAmount;
                 Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
+                Managers.Sound.Play("SFX/net");
                 break;
             case ItemEnum.TIME_PLUS:
                 Managers.Time.counter += timerPlusAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.TIME_MINUS:
                 Managers.Time.counter += timerMinusAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.BOMB:
                 Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
+                Managers.Sound.Play("SFX/boom");
                 break;
 
         }
@@ -59,27 +66,34 @@ public class Item : MonoBehaviour, IFieldObject
         {
             case ItemEnum.PEARL:
                 Managers.Score.player2Score += pearlAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.KING_PEARL:
                 Managers.Score.player2Score += kingPearlAmount;
                 Managers.Item.KingPearl -= 1;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.BUG:
                 Managers.Score.player2Score += bugAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.NET:
                 Managers.Score.player2Score += netAmount;
                 Managers.Score.player1Score -= netAmount;
                 Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Damaged;
+                Managers.Sound.Play("SFX/net");
                 break;
             case ItemEnum.TIME_PLUS:
                 Managers.Time.counter += timerPlusAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.TIME_MINUS:
                 Managers.Time.counter += timerMinusAmount;
+                Managers.Sound.Play("SFX/getitem");
                 break;
             case ItemEnum.BOMB:
                 Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
+                Managers.Sound.Play("SFX/boom");
                 break;
 
         }
