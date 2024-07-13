@@ -7,6 +7,7 @@ public class PearlSpawner3 : ItemSpawner
     public float startPearl3 = 40f;
     public int numOfPearls = 16;
     public float distanceFromCenterPearl = 1f;
+    private  bool showOnce = false;
 
     public GameObject item; // 생성할 아이템들
     private void Start()
@@ -30,7 +31,7 @@ public class PearlSpawner3 : ItemSpawner
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
 
-        if (Scene != null && (60f - Scene.GameTimer) > startPearl3)
+        if (Scene != null && (60f - Scene.GameTimer) > startPearl3 && !showOnce)
         {
             if (Time.time >= lastSpawnTime + timeBetSpawn/*&& playerTransform != null*/)
             {
@@ -48,8 +49,8 @@ public class PearlSpawner3 : ItemSpawner
     {
         //if ()
 
-        Vector2 center = GetRandomPointInBox();
-        //Vector2 center = Vector2.zero;
+        //Vector2 center = GetRandomPointInBox();
+        Vector2 center = Vector2.zero;
 
         float angleIncrement = 360f / numOfPearls;
 
@@ -66,6 +67,7 @@ public class PearlSpawner3 : ItemSpawner
 
             //GameObject bomb = Instantiate(item, newPoint, Quaternion.identity);
             GameObject bomb = Managers.Resource.InstantiateItem("Item/Pearl/Pearl", newPoint, Quaternion.identity);
+            showOnce = true;
         }
     }
 }

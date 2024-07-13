@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 9
-  timeBetSpawnMin: 7
+  timeBetSpawnMax: 4
+  timeBetSpawnMin: 3
   timeBetSpawn: 0
   lastSpawnTime: 0
   baseX1: -6.7
@@ -55,9 +55,9 @@ MonoBehaviour:
   baseY2: 3.8
   _recommendedPlayerIndex: 0
   _scene: {fileID: 0}
-  startPearl3: 40
-  numOfPearls: 16
-  distanceFromCenterPearl: 1
+  startPearl3: 53
+  numOfPearls: 20
+  distanceFromCenterPearl: 1.6
   item: {fileID: 3155846853467999355, guid: 9dc518f7b77bb8d43ae3e212cdaf7608, type: 3}
 --- !u!1 &591865408084396514
 GameObject:
@@ -253,7 +253,7 @@ MonoBehaviour:
   _recommendedPlayerIndex: 0
   _scene: {fileID: 0}
   startPearl2: 0
-  endPearl2: 50
+  endPearl2: 30
   item: {fileID: 3155846853467999355, guid: 9dc518f7b77bb8d43ae3e212cdaf7608, type: 3}
 --- !u!1 &4914358182062055827
 GameObject:
