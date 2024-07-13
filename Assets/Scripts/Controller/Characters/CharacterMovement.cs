@@ -46,10 +46,18 @@ public class CharacterMovement : MonoBehaviour
     public Vector2 DirVec2 { get => _dirVec2; private set => _dirVec2 = value; }
 
     [Header("ParabolicVariable")]
-    [SerializeField] private Vector2 _initialVelocity;
-    public Vector2 InitialVelocity { get => _initialVelocity; private set => _initialVelocity = value; }
+    [SerializeField] private Vector2 _parabolicInitialVelocity;
+    public Vector2 ParabolicInitialVelocity { get => _parabolicInitialVelocity; private set => _parabolicInitialVelocity = value; }
     [SerializeField] private Vector2 _parabolicStartPosition;
     public Vector2 ParabolicStartPosition { get => _parabolicStartPosition; private set => _parabolicStartPosition = value; }
+    [SerializeField] private float _parabolicElapsedTime;
+    public float ParabolicElapsedTime { get => _parabolicElapsedTime; private set => _parabolicElapsedTime = value; }
+    [SerializeField] private float _parabolicGravity;
+    public float ParabolicGravity { get => _parabolicGravity; private set => _parabolicGravity = value; }
+    [SerializeField] Vector2 _maxHeightDisplacement;
+    public Vector2 MaxHeightDisplacement { get => _maxHeightDisplacement; private set => _maxHeightDisplacement = value; }
+    [SerializeField] Coroutine _returnToIdleCoroutine;
+    public Coroutine ReturnToIdleCoroutine { get => _returnToIdleCoroutine; private set => _returnToIdleCoroutine = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +73,15 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveAndRotate();
+        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle
+           || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
+        {
+            MoveAndRotate();
+        }
+        else if(gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Airborne)
+        {
+            //ParabolicAirborne();
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +90,7 @@ public class CharacterMovement : MonoBehaviour
         if(gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle 
             || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
         {
+            ParabolicElapsedTime = 0f;
             float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
             float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
             MoveInput = new Vector2(horizontalInput, verticalInput);
@@ -85,35 +102,32 @@ public class CharacterMovement : MonoBehaviour
                 ReturnToIdle();
             }
         }
+        MoveInput = Vector2.zero;
     }
 
     void MoveAndRotate()
     {
-        if (gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Idle
-            || gameObject.GetComponent<CharacterControllerEx>().State == Define.State.Walk)
+        if (DirVec2.magnitude > 0)
         {
-            if (DirVec2.magnitude > 0)
+            gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
+
+            Rb2D.velocity = DirVec2 * MoveSpeed;
+            //Rb2D.MovePosition(Rb2D.position + DirVec2 * MoveSpeed * Time.fixedDeltaTime);
+
+            if (DirVec2.x > 0)
             {
-                gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Walk;
-
-                Rb2D.velocity = DirVec2 * MoveSpeed;
-                //Rb2D.MovePosition(Rb2D.position + DirVec2 * MoveSpeed * Time.fixedDeltaTime);
-
-                if (DirVec2.x > 0)
-                {
-                    SR.flipX = true;
-                    //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                }
-                else
-                {
-                    SR.flipX = false;
-                    //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                }
+                SR.flipX = true;
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
             else
             {
-                ReturnToIdle();
+                SR.flipX = false;
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
+        }
+        else
+        {
+            ReturnToIdle();
         }
     }
 
@@ -126,5 +140,50 @@ public class CharacterMovement : MonoBehaviour
     {
         gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
         Rb2D.velocity = Vector2.zero;
+        ParabolicStartPosition = Rb2D.position;
+        ParabolicElapsedTime = 0f;
+        Rb2D.gravityScale = 0f;
+    }
+
+    public void ParabolicAirborne()
+    {
+        ParabolicElapsedTime += Time.fixedDeltaTime;
+
+        float t = ParabolicElapsedTime;
+        if (t <= Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length)
+        {
+            float newX = ParabolicStartPosition.x + ParabolicInitialVelocity.x * t;
+            float newY = ParabolicStartPosition.y + ParabolicInitialVelocity.y * t - 0.5f * Mathf.Abs(Physics2D.gravity.y) * t * t;
+            Vector2 newPosition = new Vector2(newX, newY);
+
+            Rb2D.MovePosition(newPosition);
+        }
+    }
+
+    public void JumpForce()
+    {
+        if(ReturnToIdleCoroutine != null)
+        {
+            StopCoroutine(ReturnToIdleCoroutine);
+            ReturnToIdleCoroutine = null;
+        }
+
+        Rb2D.gravityScale = 1.0f;
+        // m*k*g*h = m*v^2/2 (단, k == gravityScale) <= 역학적 에너지 보존 법칙 적용
+        float v_y = Mathf.Sqrt(2 * Rb2D.gravityScale * -Physics2D.gravity.y * MaxHeightDisplacement.y);
+        // 포물선 운동 법칙 적용
+        float v_x = MaxHeightDisplacement.x * v_y / (2 * MaxHeightDisplacement.y)/*Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length*/;
+
+        Vector2 force = Rb2D.mass * (new Vector2(v_x, v_y) - Rb2D.velocity);
+        Rb2D.AddForce(force, ForceMode2D.Impulse);
+
+        float timer = (4 * MaxHeightDisplacement.y) / v_y;
+        ReturnToIdleCoroutine = StartCoroutine(RetrunToIdleCor(timer));
+    }
+
+    IEnumerator RetrunToIdleCor(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        ReturnToIdle();
     }
 }
