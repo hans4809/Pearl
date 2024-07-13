@@ -6,10 +6,12 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class GameManagerEx
 {
-    GameObject[] _players;
+    [SerializeField] GameObject[] _players = new GameObject[2];
+    public GameObject[] Players { get => _players; private set => _players = value; }
     public GameObject[] GetPlayers() { return _players; }
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
     HashSet<GameObject> _items = new HashSet<GameObject>();
@@ -26,6 +28,7 @@ public class GameManagerEx
                     OnSpawnEvent.Invoke(1);
                 break;
             case Define.WorldObject.Player:
+                Players[go.GetComponent<CharacterMovement>().PlayerIndex - 1] = go;
                 break;
         }
 
@@ -82,5 +85,17 @@ public class GameManagerEx
     public void GameEnd()
     {
         Managers.UI.ShowSceneUI<UI_GameOverScene>();
+    }
+
+    public void GameStart()
+    {
+        if (Managers.Scene.CurrentScene is GameScene)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                Spawn(Define.WorldObject.Player, $"PC/Character{i + 1}");
+                Players[i].transform.position = (Managers.Scene.CurrentScene as GameScene).SpawnTransfroms[i].position;
+            }
+        }
     }
 }
