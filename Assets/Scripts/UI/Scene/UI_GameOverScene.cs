@@ -19,4 +19,9 @@ public class UI_GameOverScene : UI_Scene
         if(Input.GetMouseButtonUp(0)) 
             Managers.Scene.LoadScene(Define.Scene.MainScene);
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }

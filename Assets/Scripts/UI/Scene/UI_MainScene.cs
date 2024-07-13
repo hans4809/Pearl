@@ -26,7 +26,9 @@ public class UI_MainScene : UI_Scene
     {
         if(Input.GetMouseButtonUp(0))
         {
-            Managers.Scene.LoadScene(Define.Scene.ExplainScene);
+            //Managers.Scene.LoadScene(Define.Scene.ExplainScene);
+            Managers.Scene.Clear();
+            Managers.Scene.CurrentScene.SceneUI = Managers.UI.ShowSceneUI<UI_ExplainScene>();
         }
     }
     public void OnClickStart()
@@ -36,5 +38,9 @@ public class UI_MainScene : UI_Scene
     public void OnClickExit()
     {
         Application.Quit();
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

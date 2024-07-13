@@ -11,7 +11,7 @@ public class UI_ExplainScene : UI_Scene
     public override void Init()
     {
         base.Init();
-        if (StartButton = null)
+        if (StartButton == null)
             StartButton = GetComponentInChildren<Button>();
         StartButton.gameObject.AddUIEvent(OnClickStartButton);
     }

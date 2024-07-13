@@ -228,4 +228,9 @@ public class UI_GameScene : UI_Scene
     private void Start()
     {
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 }

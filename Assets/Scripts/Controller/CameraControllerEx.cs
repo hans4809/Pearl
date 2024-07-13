@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraControllerEx : MonoBehaviour
 {
-    [SerializeField] Camera _mainCamera;
-    public Camera MainCamera { get { return _mainCamera; } private set => _mainCamera = value; }
-
     [SerializeField] float _maxCameraSize = 13f;
     public float MaxCameraSize { get => _maxCameraSize; private set => _maxCameraSize = value; }
 
@@ -15,24 +12,17 @@ public class CameraControllerEx : MonoBehaviour
     public IEnumerator CameraZoomIn(float ZoomTimer)
     {
         float elapsedTime = 0f;
-        MainCamera.orthographicSize = MaxCameraSize;
+        Camera.main.orthographicSize = MaxCameraSize;
 
-        while (MainCamera.orthographicSize > MinCameraSize)
+        while (Camera.main.orthographicSize > MinCameraSize)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / ZoomTimer);
             float cameraSize = Mathf.Lerp(MaxCameraSize, MinCameraSize, alpha);
-            MainCamera.orthographicSize = cameraSize;
+            Camera.main.orthographicSize = cameraSize;
             yield return null;
         }
 
-        MainCamera.orthographicSize = MinCameraSize;
-    }
-
-    private void Start()
-    {
-        if(MainCamera == null)
-        MainCamera = Camera.main;
-        StartCoroutine(CameraZoomIn(3f));
+        Camera.main.orthographicSize = MinCameraSize;
     }
 }
