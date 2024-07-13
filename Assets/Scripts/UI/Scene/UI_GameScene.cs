@@ -236,10 +236,14 @@ public class UI_GameScene : UI_Scene
     public IEnumerator TimeLimitEffectIteration(TMP_Text text)
     {
         // 첫 번째 코루틴: -TextRotation에서 TextRotation으로 회전
-        yield return StartCoroutine(RotateText(text, -TextRotation, TextRotation, TimeLimitEffectTime/2));
+        yield return StartCoroutine(RotateText(text, 0, TextRotation, TimeLimitEffectTime / 4));
 
         // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
-        yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime/2));
+        yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime / 4));
+
+        yield return StartCoroutine(RotateText(text, 0, -TextRotation, TimeLimitEffectTime / 4));
+
+        yield return StartCoroutine(RotateText(text, -TextRotation, 0, TimeLimitEffectTime / 4));
 
         text.transform.parent.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }

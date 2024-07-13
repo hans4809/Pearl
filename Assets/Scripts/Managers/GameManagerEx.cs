@@ -156,17 +156,8 @@ public class GameManagerEx
     public void GameEnd()
     {
         GameState = EGameState.End;
-        var gameScene = Managers.Scene.CurrentScene;
-        gameScene.Clear();
-
-        Sprite winnerSprite = Managers.Resource.Load<Sprite>($"Sprites/UI/Player{BestPlayerIndex}Winner");
-        gameScene.SceneUI = Managers.UI.ShowSceneUI<UI_GameOverScene>();
-
-        if (winnerSprite != null)
-        {
-            if(gameScene.SceneUI is  UI_GameOverScene)
-                (gameScene.SceneUI as UI_GameOverScene).WinnerIMG.sprite = winnerSprite;
-        }
+        //var gameScene = Managers.Scene.CurrentScene;
+        //gameScene.Clear();
 
         Player1Score = 0;
         Player2Score = 0;

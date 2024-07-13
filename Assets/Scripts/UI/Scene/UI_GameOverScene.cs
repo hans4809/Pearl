@@ -14,16 +14,29 @@ public class UI_GameOverScene : UI_Scene
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Sound.Play("Sounds/SFX/GameEnding.mp3");
+        Managers.Sound.Play("Sounds/SFX/GameEnding");
         WinnerIMG.SetNativeSize();
-        StartCoroutine(Managers.UI.BlinkText(GameOverSceneText));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonUp(0)) 
-            Managers.Scene.LoadScene(Define.Scene.MainScene);
+        if (Input.GetMouseButton(0))
+        {
+            //Managers.Scene.LoadScene(Define.Scene.MainScene);
+            var asyncOper = Managers.Scene.AsyncLoadSceneOper;
+            if (asyncOper != null)
+            {
+                if (asyncOper.progress >= 0.9f)
+                    asyncOper.allowSceneActivation = true;
+            }
+        }
+        
+    }
+
+    public void Blink()
+    {
+        StartCoroutine(Managers.UI.BlinkText(GameOverSceneText, GameOverSceneText.text));
     }
 
     private void OnDestroy()

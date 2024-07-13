@@ -50,12 +50,12 @@ public class GameScene : BaseScene
             if (value > 0)
             {
                 _gameTimer = value;
-                (SceneUI as UI_GameScene).GameTimerText.color = Color.white;
-                (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
-                (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
+                
                 if (_gameTimer <= TimeLimit)
                 {
-                    if(_gameTimer == TimeLimit)
+                    (SceneUI as UI_GameScene).GameTimerText.color = Color.red;
+                    (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
+                    if (_gameTimer == TimeLimit)
                     {
                         StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectText((SceneUI as UI_GameScene).GameTimerText));
                         if(CameraRotateCoroutine != null)
@@ -80,10 +80,20 @@ public class GameScene : BaseScene
                     }
 
                 }
+                else
+                {
+                    (SceneUI as UI_GameScene).GameTimerText.color = Color.white;
+                    (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
+                }
+                (SceneUI as UI_GameScene).GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
+                (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
             }
             else
             {
                 _gameTimer = 0;
+                (SceneUI as UI_GameScene).GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
+                (SceneUI as UI_GameScene).GameTimerText.color = Color.red;
+                (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
                 (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
                 StartCoroutine(Ending());
             }
@@ -183,6 +193,8 @@ public class GameScene : BaseScene
             (SceneUI as UI_GameScene).GameEndingText.gameObject.SetActive(true);
         Coroutine cor = StartCoroutine((SceneUI as UI_GameScene).TimeEndEffect((SceneUI as UI_GameScene).GameEndingText));
         yield return cor;
+        StartCoroutine(Managers.Scene.LoadSceneAsync<UI_GameOverScene>(Define.Scene.MainScene));
         Managers.Game.GameEnd();
+        
     }
 }

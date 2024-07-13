@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.AllocatorManager;
 
 public class SceneManagerEx
 {
@@ -47,17 +48,29 @@ public class SceneManagerEx
         Managers.Clear();
 
         LoadingScene = Managers.UI.ShowSceneUI<T>();
+        Managers.Scene.CurrentScene.SceneUI = LoadingScene;
         AsyncLoadSceneOper = SceneManager.LoadSceneAsync(GetSceneName(type));
         AsyncLoadSceneOper.allowSceneActivation = false; // Scene 로드 끝나도 화면 활성화 안 함
 
         while(!AsyncLoadSceneOper.isDone)
         {
-            if((LoadingScene as UI_LoadingScene).LoadingBarIMG != null)
-                (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = AsyncLoadSceneOper.progress;
+            if(LoadingScene is UI_LoadingScene)
+            {
+                if((LoadingScene as UI_LoadingScene).LoadingBarIMG != null)
+                {
+                    (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = AsyncLoadSceneOper.progress;
+                }
+            }
 
-            if((LoadingScene) as UI_ExplainScene)
+            if(LoadingScene is UI_ExplainScene)
             {
 
+            }
+
+            if(LoadingScene is UI_GameOverScene)
+            {
+                Sprite winnerSprite = Managers.Resource.Load<Sprite>($"Sprites/UI/Player{Managers.Game.BestPlayerIndex}Winner");
+                (LoadingScene as UI_GameOverScene).WinnerIMG.sprite = winnerSprite;
             }
 
             if (AsyncLoadSceneOper.progress >= 0.9f)
@@ -66,7 +79,23 @@ public class SceneManagerEx
             yield return null;
         }
 
-        if ((LoadingScene as UI_LoadingScene).LoadingBarIMG != null)
-            (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = 1;
+        if((LoadingScene is UI_LoadingScene))
+        {
+            if ((LoadingScene as UI_LoadingScene).LoadingBarIMG != null)
+                (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = 1;
+        }
+
+        if(LoadingScene is UI_GameOverScene)
+        {
+            if ((LoadingScene as UI_GameOverScene).GameOverSceneText.gameObject.activeInHierarchy == false)
+                (LoadingScene as UI_GameOverScene).GameOverSceneText.gameObject.SetActive(true);
+            (LoadingScene as UI_GameOverScene).Blink();
+        }
+
+        if (LoadingScene is UI_ExplainScene)
+        {
+            if((LoadingScene as UI_ExplainScene).StartButton != null)
+                (LoadingScene as UI_ExplainScene).StartButton.gameObject.SetActive(true);
+        }
     }
 }
