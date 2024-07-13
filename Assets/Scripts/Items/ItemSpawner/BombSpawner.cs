@@ -58,7 +58,8 @@ public class BombSpawner : ItemSpawner
         Vector2 spawnPosition =
             GetRandomPointInRange(playerTransform.position, maxDistance);
 
-        numberOfPoints = Mathf.Clamp(numberOfPoints, 2, 4);
+        //numberOfPoints = Mathf.Clamp(numberOfPoints, 2, 4);
+        numberOfPoints = Random.Range(1, 4);
         float angleIncrement = 360f / numberOfPoints;
 
         for (int i = 0; i < numberOfPoints; i++)

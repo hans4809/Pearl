@@ -188,11 +188,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7420365902910138460, guid: c59b938bab5fa0c4085b3381ac24a6f3, type: 3}
       propertyPath: startSpawnKingPearlTime
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7420365902910138460, guid: c59b938bab5fa0c4085b3381ac24a6f3, type: 3}
       propertyPath: increaseSpawnKingPearlTime
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -679,7 +679,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88a6af09150d7bf47a4841682610ab72, type: 3}
---- !u!1001 &1343926399
+--- !u!1001 &1479539780
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -690,10 +690,6 @@ PrefabInstance:
     - target: {fileID: 3985459218981359755, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
       propertyPath: m_Name
       value: Pearl Spawn Group
-      objectReference: {fileID: 0}
-    - target: {fileID: 3985459218981359755, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5611022269162433544, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -734,18 +730,6 @@ PrefabInstance:
     - target: {fileID: 5611022269162433544, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8939867171077005573, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
-      propertyPath: fastSpawnTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8939867171077005573, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
-      propertyPath: timeBetSpawnMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8939867171077005573, guid: 87d68a31e5b2ed548ae297972a32dc38, type: 3}
-      propertyPath: timeBetSpawnMin
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -805,7 +789,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1868156219
+--- !u!1001 &1830038627
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -816,30 +800,6 @@ PrefabInstance:
     - target: {fileID: 53630488696871286, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
       propertyPath: m_Name
       value: Bomb Spawn Group
-      objectReference: {fileID: 0}
-    - target: {fileID: 53630488696871286, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: maxDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: timeBetSpawnMax
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: timeBetSpawnMin
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: startSpawnBombTime
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: distanceFromCenterBomb
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7462631848664234835, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
       propertyPath: m_LocalPosition.x
@@ -880,14 +840,6 @@ PrefabInstance:
     - target: {fileID: 7462631848664234835, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453170566915980416, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: startSpawnBombTime
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453170566915980416, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
-      propertyPath: _recommendedPlayerIndex
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1049,11 +1001,11 @@ SceneRoots:
   - {fileID: 986521054}
   - {fileID: 73819678}
   - {fileID: 22456347}
-  - {fileID: 1343926399}
   - {fileID: 675570097}
   - {fileID: 452407653}
-  - {fileID: 1868156219}
   - {fileID: 1110392546}
   - {fileID: 2136621116}
   - {fileID: 963906760}
   - {fileID: 8185354404611890001}
+  - {fileID: 1830038627}
+  - {fileID: 1479539780}

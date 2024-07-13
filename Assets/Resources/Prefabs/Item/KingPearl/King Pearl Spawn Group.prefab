@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 7
+  timeBetSpawnMax: 6
   timeBetSpawnMin: 5
   timeBetSpawn: 0
   lastSpawnTime: 0
@@ -509,8 +509,8 @@ MonoBehaviour:
   - {fileID: 1059699146913795630}
   - {fileID: 8402123768808149518}
   - {fileID: 7319992776402572667}
-  startSpawnKingPearlTime: 10
-  increaseSpawnKingPearlTime: 35
+  startSpawnKingPearlTime: 12
+  increaseSpawnKingPearlTime: 38
   item: {fileID: 4071336032437372181, guid: 744816b852801f54e95fcd711c89df96, type: 3}
 --- !u!1 &7691643948925527068
 GameObject:

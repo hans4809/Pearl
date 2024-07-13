@@ -87,7 +87,8 @@ MonoBehaviour:
   baseY1: -5
   baseY2: 5
   _recommendedPlayerIndex: 1
-  startSpawnBombTime: 30
+  _scene: {fileID: 0}
+  startSpawnBombTime: 15
   maxDistance: 3
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
   distanceFromCenterBomb: 0.5
@@ -145,7 +146,8 @@ MonoBehaviour:
   baseY1: -5
   baseY2: 5
   _recommendedPlayerIndex: 0
-  startSpawnBombTime: 30
+  _scene: {fileID: 0}
+  startSpawnBombTime: 15
   maxDistance: 3
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
   distanceFromCenterBomb: 0.5
