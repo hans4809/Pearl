@@ -8,10 +8,6 @@ using UnityEngine.UI;
 
 public class CharacterControllerEx : PlayableController
 {
-    [SerializeField] private int _score;
-    public int Score { get => _score; set => _score = value; }
-    [SerializeField] private float _airbornePower;
-    public float AirbornePower { get => _airbornePower; private set => _airbornePower = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +16,10 @@ public class CharacterControllerEx : PlayableController
     public override void Init()
     {
         WorldObjectType = Define.WorldObject.Player;
+        if(BombEffect == null)
+            BombEffect = GetComponentInChildren<BombEffect>().gameObject;
+
+        BombEffect.gameObject.SetActive(false);
     }
     protected override void UpdateIdle()
     {
@@ -54,21 +54,21 @@ public class CharacterControllerEx : PlayableController
     // Update is called once per frame
     void Update()
     {
-        switch (State)
-        {
-            case Define.State.Idle:
-                UpdateIdle();
-                break;
-            case Define.State.Walk:
-                UpdateWalk();
-                break;
-            case Define.State.Damaged:
-                Damaged();
-                break;
-            case Define.State.Airborne:
-                UpdateAirborne();
-                break;
-        }
+        //switch (State)
+        //{
+        //    case Define.State.Idle:
+        //        UpdateIdle();
+        //        break;
+        //    case Define.State.Walk:
+        //        UpdateWalk();
+        //        break;
+        //    case Define.State.Damaged:
+        //        Damaged();
+        //        break;
+        //    case Define.State.Airborne:
+        //        UpdateAirborne();
+        //        break;
+        //}
     }
     private void FixedUpdate()
     {
