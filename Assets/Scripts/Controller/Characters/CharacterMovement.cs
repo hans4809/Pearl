@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EGroundType
+{
+    Cliff,
+    Field,
+    Grass,
+    Gravel,
+}
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
@@ -20,6 +27,8 @@ public class CharacterMovement : MonoBehaviour
     public SpriteRenderer SR { get => _sR; private set => _sR = value; }
 
     [SerializeField] private int _playerIndex = 1;
+
+    [SerializeField] 
     public int PlayerIndex { 
         get => _playerIndex;
         set 
@@ -95,5 +104,10 @@ public class CharacterMovement : MonoBehaviour
             gameObject.GetComponent<CharacterControllerEx>().State = Define.State.Idle;
             Rb2D.velocity = Vector2.zero;
         }
+    }
+
+    public void PlayWalkSound()
+    {
+        Managers.Sound.Play("SFX/Grass_Walk");
     }
 }
