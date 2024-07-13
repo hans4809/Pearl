@@ -165,14 +165,16 @@ public class Item : MonoBehaviour, IFieldObject
         
     }
     */
+    
     /*
     private void Awake()
     {
         itemLocation = gameObject.transform.position;
-        if (itemLocation.x > 3.8 || itemLocation.x < -3.8 || itemLocation.y > 6.7 || itemLocation.y < 6.7)
+        if (itemLocation.x > 3.8 || itemLocation.x < -3.8 || itemLocation.y > 6.7 || itemLocation.y < -6.7)
         {
             Destroy(gameObject);
         }
     }
     */
+    
 }
