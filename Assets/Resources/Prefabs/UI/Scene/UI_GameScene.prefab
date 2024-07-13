@@ -138,7 +138,7 @@ MonoBehaviour:
   - {fileID: 1867862871805443881}
   _changedScale: 1
   _changedRotation: 10
-  _changeEffectTime: 0.8
+  _changeEffectTime: 1
   _startTimerText: {fileID: 3134336366747737921}
   _endTimerText: {fileID: 2226757811750046541}
   _gameTimerText: {fileID: 7483262881864732900}

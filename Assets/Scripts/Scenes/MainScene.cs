@@ -6,7 +6,7 @@ public class MainScene : BaseScene
 {
     public override void Clear()
     {
-        Destroy(SceneUI.gameObject);
+        //Destroy(SceneUI.gameObject);
     }
     protected override void Init()
     {

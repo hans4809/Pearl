@@ -130,12 +130,11 @@ public class UI_Manager
         _sceneUI = null;
     }
 
-    public IEnumerator BlinkText(TextMeshProUGUI textMesh)
+    public IEnumerator BlinkText(TextMeshProUGUI textMesh, string text)
     {
         while (true)
         {
-            textMesh.text = "눌러서 플레이 !";
-            //MainSceneText.gameObject.SetActive(!MainSceneText.gameObject.activeSelf);
+            textMesh.text = text;
             yield return new WaitForSeconds(.5f);
             textMesh.text = "";
             yield return new WaitForSeconds(.5f);

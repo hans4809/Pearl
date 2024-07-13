@@ -236,10 +236,14 @@ public class UI_GameScene : UI_Scene
     public IEnumerator TimeLimitEffectIteration(TMP_Text text)
     {
         // 첫 번째 코루틴: -TextRotation에서 TextRotation으로 회전
-        yield return StartCoroutine(RotateText(text, -TextRotation, TextRotation, TimeLimitEffectTime/2));
+        yield return StartCoroutine(RotateText(text, 0, TextRotation, TimeLimitEffectTime / 4));
 
         // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
-        yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime/2));
+        yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime / 4));
+
+        yield return StartCoroutine(RotateText(text, 0, -TextRotation, TimeLimitEffectTime / 4));
+
+        yield return StartCoroutine(RotateText(text, -TextRotation, 0, TimeLimitEffectTime / 4));
 
         text.transform.parent.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
@@ -278,8 +282,10 @@ public class UI_GameScene : UI_Scene
     {
         if(ChangeCoroutine != null)
         {
-            StopCoroutine(ChangeCoroutine);
+            StopCoroutine(ChangeCoroutine); 
             ChangeCoroutine = null;
+            for (int i = 0; i < 2; i++)
+                PlayerScoreIMGs[i].transform.localScale = new Vector3(1, 1, PlayerScoreIMGs[i].transform.localScale.z);
         }
 
         ChangeCoroutine = StartCoroutine(OnChangedBestPlayerIteration(orginBestPlayerIndex, changedBestPlayerIndex));
@@ -288,12 +294,13 @@ public class UI_GameScene : UI_Scene
 
     public IEnumerator OnChangedBestPlayerIteration(int orginBestPlayerIndex, int changedBestPlayerIndex)
     {
-        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, 1, ChangedScale/2, -ChangedRotation, ChangedRotation, ChangeEffectTime / 2));
+        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, 0.8f, (0.8f + (ChangedScale - 0.8f)/3), -ChangedRotation, 0, ChangeEffectTime / 3));
 
+        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, (0.8f + (ChangedScale - 0.8f) / 3), (0.8f + 2 * (ChangedScale - 0.8f) / 3), 0, ChangedRotation, ChangeEffectTime / 3));
         // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
-        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, ChangedScale/2, ChangedScale, ChangedRotation, 0, ChangeEffectTime / 2));
+        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, (0.8f + 2 * (ChangedScale - 0.8f) / 3), ChangedScale, ChangedRotation, 0, ChangeEffectTime / 3));
        
-        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(1, 1, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1);
         PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
@@ -307,10 +314,13 @@ public class UI_GameScene : UI_Scene
         else
         {
             PlayerScoreIMGs[orginBestPlayerIndex].sprite = Managers.Resource.Load<Sprite>($"Sprites/UI/NormalScore{orginBestPlayerIndex + 1}");
+            PlayerScoreIMGs[orginBestPlayerIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1);
             PlayerScoreIMGs[changedBestPlayerIndex].sprite = Managers.Resource.Load<Sprite>($"Sprites/UI/BestScore{changedBestPlayerIndex + 1}");
         }
 
         PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, fromRotation));
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(fromScale, fromScale, 1);
+
         while(PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < toScale)
         {
             elapsedTime += Time.deltaTime;
@@ -318,12 +328,11 @@ public class UI_GameScene : UI_Scene
             float targetScale = Mathf.Lerp(fromScale, toScale, alpha);
             float targetRotation = Mathf.Lerp(fromRotation, toRotation, alpha);
             PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
-            PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+            PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, 1);
             yield return null;
         }
-
-        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(toScale, toScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
         PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, toRotation));
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(toScale, toScale, 1);
     }
 
     //public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
