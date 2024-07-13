@@ -30,8 +30,8 @@ public class ResourceManager
     public GameObject Instantiate(string path, Vector3 position, Quaternion rotation, Transform parent = null)
     {
         GameObject go = Instantiate(path, parent);
-        go.transform.position = position;
-        go.transform.rotation = rotation;
+        go.transform.localPosition = position;
+        go.transform.localRotation = rotation;
         return go;
     }
     public GameObject Instantiate(string path, Transform parent = null)
