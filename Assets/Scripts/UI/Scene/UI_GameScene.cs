@@ -51,11 +51,10 @@ public class UI_GameScene : UI_Scene
     [SerializeField] float _endEffectTime = 1;
     public float EndEffectTime { get => _endEffectTime; private set => _endEffectTime = value; }
     [Header("PlayerScoreVariable")]
-    [SerializeField] Image _player1ScoreIMG;
-    public Image Player1ScoreIMG { get => _player1ScoreIMG; private set => _player1ScoreIMG = value; }
-
-    [SerializeField] Image _player2ScoreIMG;
-    public Image Player2ScoreIMG { get => _player2ScoreIMG; private set => _player2ScoreIMG = value; }
+    [SerializeField] Image[] _playerScoreIMGs = new Image[2];
+    public Image[] PlayerScoreIMGs { get => _playerScoreIMGs; private set => _playerScoreIMGs = value; }
+    [SerializeField] Coroutine _changeCoroutine;
+    public Coroutine ChangeCoroutine { get => _changeCoroutine; private set => _changeCoroutine = value; }
 
     [SerializeField] float _changedScale;
     public float ChangedScale { get => _changedScale; private set => _changedScale = value; }
@@ -179,41 +178,54 @@ public class UI_GameScene : UI_Scene
         text.fontSize = MaxEndTextFontSize;
     }
 
-    public void UpdatePlayerScore()
+    public void UpdatePlayerScore(int orginBestPlayerIndex, int changedBestPlayerIndex)
     {
+        if(ChangeCoroutine != null)
+        {
+            StopCoroutine(ChangeCoroutine);
+            ChangeCoroutine = null;
+        }
 
+        ChangeCoroutine = StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex));
     }
 
-    public IEnumerator OnChangedBestPlayer(Image originBestPlayerIMG, Image changedBestPlayerIMG)
+    public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
     {
         float elapsedTime = 0f;
-        changedBestPlayerIMG.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
-        while(changedBestPlayerIMG.transform.localScale.x < ChangedScale && changedBestPlayerIMG.transform.rotation.z < ChangedRotation)
+        if (orginBestPlayerIndex == -1)
+        {
+            PlayerScoreIMGs[changedBestPlayerIndex].color = Color.red;
+        }
+        else
+        {
+            //var tempSprite = PlayerScoreIMGs[orginBestPlayerIndex].sprite;
+            //PlayerScoreIMGs[orginBestPlayerIndex].sprite = PlayerScoreIMGs[changedBestPlayerIndex].sprite;
+            //PlayerScoreIMGs[changedBestPlayerIndex].sprite = tempSprite;
+
+            var tempColor = PlayerScoreIMGs[orginBestPlayerIndex].color;
+            PlayerScoreIMGs[orginBestPlayerIndex].color = PlayerScoreIMGs[changedBestPlayerIndex].color;
+            PlayerScoreIMGs[changedBestPlayerIndex].color = tempColor;
+        }
+
+
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
+        while (PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < ChangedScale && PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation.z < ChangedRotation)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsedTime/ChangeEffectTime);
+            float alpha = Mathf.Clamp01(elapsedTime / ChangeEffectTime);
             float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
             float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
-            changedBestPlayerIMG.transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
-            changedBestPlayerIMG.transform.localScale = new Vector3(targetScale, targetScale, changedBestPlayerIMG.transform.localScale.z);
+            PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
+            PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
             yield return null;
         }
 
-        changedBestPlayerIMG.transform.localScale = Vector3.one;
-        changedBestPlayerIMG.transform.rotation = Quaternion.Euler(Vector3.zero);
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = Vector3.one;
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(Vector3.zero);
+
     }
 
     private void Start()
     {
-        StartCoroutine(Test());
-    }
-
-    IEnumerator Test()
-    {
-        while(true)
-        {
-            yield return StartCoroutine(OnChangedBestPlayer(Player2ScoreIMG, Player1ScoreIMG));
-            yield return new WaitForSecondsRealtime(5f); // 반복 실행 전에 대기
-        }
     }
 }

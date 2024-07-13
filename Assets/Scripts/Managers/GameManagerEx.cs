@@ -16,6 +16,54 @@ public class GameManagerEx
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
     HashSet<GameObject> _items = new HashSet<GameObject>();
     public Action<int> OnSpawnEvent;
+
+    private int _player1Score;
+    public int Player1Score 
+    { 
+        get => _player1Score; 
+        set 
+        {
+            _player1Score = value;
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (gameScene != null)
+                (gameScene.SceneUI as UI_GameScene).Player1_ItemText.text = $"{_player1Score}";
+            if(_player1Score >= _player2Score)
+                BestPlayerIndex = 1;
+        } 
+    }
+
+    private int _player2Score;
+    public int Player2Score 
+    { 
+        get => _player2Score; 
+        set 
+        { 
+            _player2Score = value;
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (gameScene != null)
+                (gameScene.SceneUI as UI_GameScene).Player2_ItemText.text = $"{_player2Score}";
+            if (_player2Score >= _player1Score)
+                BestPlayerIndex = 2;
+        }
+    }
+
+    private int _bestPlayerIndex;
+    public int BestPlayerIndex 
+    { 
+        get => _bestPlayerIndex; 
+        set 
+        {
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (_bestPlayerIndex != value && 1 <= value && value <= 2)
+            {
+                if (gameScene != null)
+                    (gameScene.SceneUI as UI_GameScene).UpdatePlayerScore(_bestPlayerIndex -1, value -1);
+                _bestPlayerIndex = value;
+            }
+        }
+    }
+
+
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);

@@ -133,8 +133,9 @@ MonoBehaviour:
   _maxEndTextFontSize: 175
   _minEndTextFontSize: 150
   _endEffectTime: 1
-  _player1ScoreIMG: {fileID: 4587072994976854126}
-  _player2ScoreIMG: {fileID: 1867862871805443881}
+  _playerScoreIMGs:
+  - {fileID: 4587072994976854126}
+  - {fileID: 1867862871805443881}
   _changedScale: 1.5
   _changedRotation: 10
   _changeEffectTime: 1
