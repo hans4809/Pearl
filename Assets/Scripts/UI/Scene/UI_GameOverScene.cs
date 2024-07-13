@@ -14,6 +14,7 @@ public class UI_GameOverScene : UI_Scene
     // Start is called before the first frame update
     void Start()
     {
+        Managers.Sound.Play("Sounds/SFX/GameEnding.mp3");
         WinnerIMG.SetNativeSize();
         StartCoroutine(Managers.UI.BlinkText(GameOverSceneText));
     }

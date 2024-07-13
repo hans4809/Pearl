@@ -51,6 +51,7 @@ public class SoundManager
         else
         {
             AudioSource audioSource = _audioSources[(int)Define.Sound.SFX];
+            audioSource.volume = 0.5f;
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(audioClip);
         }

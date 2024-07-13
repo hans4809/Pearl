@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 780373295674047615}
   - component: {fileID: 4480278427292306256}
   - component: {fileID: 5831240619443117524}
-  - component: {fileID: 7993187110406346709}
   - component: {fileID: 8541739617978940181}
+  - component: {fileID: 7993187110406346709}
   - component: {fileID: 3451447192778789945}
   - component: {fileID: 5395371956873279279}
   m_Layer: 0
@@ -118,6 +118,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8541739617978940181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6055739948692754737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b4b917b4c2f444bc95daf7b393947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 5
+  _rotationSpeed: 0
+  _anim: {fileID: 0}
+  _moveInput: {x: 0, y: 0}
+  _sR: {fileID: 0}
+  _playerIndex: 2
+  _rb2D: {fileID: 0}
+  _dirVec2: {x: 0, y: 0}
+  _parabolicInitialVelocity: {x: 0, y: 0}
+  _parabolicStartPosition: {x: 0, y: 0}
+  _parabolicElapsedTime: 0
+  _parabolicGravity: 0
+  _maxHeightDisplacement: {x: 0, y: 0}
+  _stunTimer: 1
+  _character: {fileID: 0}
 --- !u!70 &7993187110406346709
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,33 +180,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.017637014, y: -1.9091866}
   m_Size: {x: 3.3748164, y: 4.941629}
   m_Direction: 0
---- !u!114 &8541739617978940181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055739948692754737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0b4b917b4c2f444bc95daf7b393947, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _rotationSpeed: 0
-  _anim: {fileID: 0}
-  _moveInput: {x: 0, y: 0}
-  _sR: {fileID: 0}
-  _playerIndex: 2
-  _rb2D: {fileID: 0}
-  _dirVec2: {x: 0, y: 0}
-  _parabolicInitialVelocity: {x: 0, y: 0}
-  _parabolicStartPosition: {x: 0, y: 0}
-  _parabolicElapsedTime: 0
-  _parabolicGravity: 0
-  _maxHeightDisplacement: {x: 0, y: 0}
-  _stunTimer: 1
-  _character: {fileID: 0}
 --- !u!114 &3451447192778789945
 MonoBehaviour:
   m_ObjectHideFlags: 0

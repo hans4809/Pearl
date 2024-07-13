@@ -50,6 +50,8 @@ public class GameScene : BaseScene
             if (value > 0)
             {
                 _gameTimer = value;
+                (SceneUI as UI_GameScene).GameTimerText.color = Color.white;
+                (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
                 (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
                 if (_gameTimer <= TimeLimit)
                 {
@@ -82,6 +84,8 @@ public class GameScene : BaseScene
             else
             {
                 _gameTimer = 0;
+                (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
+                StartCoroutine(Ending());
             }
         }
     }
@@ -103,8 +107,8 @@ public class GameScene : BaseScene
             else
             {
                 _endTimer = 0;
+                (SceneUI as UI_GameScene).EndTimerText.text = $"{_endTimer}";
                 (SceneUI as UI_GameScene).EndTimerText.gameObject.SetActive(false);
-                StartCoroutine(Ending());
             }
         }
     }

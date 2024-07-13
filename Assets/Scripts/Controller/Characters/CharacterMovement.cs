@@ -92,24 +92,25 @@ public class CharacterMovement : MonoBehaviour
         if (Character.State== Define.State.Idle || Character.State == Define.State.Walk)
         {
             MoveAndRotate();
+            DirVec2 = Vector2.zero;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        DirVec2 = Vector2.zero;
         if (Managers.Game.GameState != EGameState.Playing)
             return;
-
+         
         if (Character.State == Define.State.Idle || Character.State == Define.State.Walk)
         {
-            ParabolicElapsedTime = 0f;
             float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
             float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
 
             DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
 
-            if (DirVec2.magnitude <= 0)
+            if (DirVec2.magnitude <= 0.1f)
             {
                 ReturnToIdle();
             }
@@ -118,7 +119,7 @@ public class CharacterMovement : MonoBehaviour
 
     void MoveAndRotate()
     {
-        if (DirVec2.magnitude > 0)
+        if (DirVec2.magnitude > 0.1f)
         {
             Character.State = Define.State.Walk;
 
