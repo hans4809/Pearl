@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class KingPearlSpawner : ItemSpawner
 {
-    public Transform[] kingPearlSpawnPoints;
-    public float startSpawnKingPearlTime;
+    public Transform[] kingPearlSpawnPoints1;
+    public Transform[] kingPearlSpawnPoints2;
+    public float startSpawnKingPearlTime = 10f;
+    public float increaseSpawnKingPearlTime = 35f;
     //private Vector2[] spawnPositions;
     public GameObject item; // 생성할 아이템들
     
@@ -23,8 +25,11 @@ public class KingPearlSpawner : ItemSpawner
             // 생성 주기를 랜덤으로 변경
             timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
             // 아이템 생성 실행
-            Spawn();
-            Managers.Item.KingPearl = kingPearlSpawnPoints.Length;
+
+            var gameScene = Managers.Scene.CurrentScene as GameScene;
+            if (gameScene != null && 60 - gameScene.GameTimer > startSpawnKingPearlTime)
+                Spawn();
+            
         }
     }
 
@@ -43,17 +48,32 @@ public class KingPearlSpawner : ItemSpawner
 
         // 아이템 중 하나를 무작위로 골라 랜덤 위치에 생성
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
-        
+
         /*
         for (int i = 0; i < kingPearlSpawnPoints.Length; i++)
         {
             Debug.Log(kingPearlSpawnPoints[i]);
             GameObject kingPearl = Instantiate(selectedItem, kingPearlSpawnPoints[i].position, Quaternion.identity);
         }*/
-        foreach (Transform spawnPoint in kingPearlSpawnPoints)
+
+        var gameScene = Managers.Scene.CurrentScene as GameScene;
+        if (gameScene != null && 60 - gameScene.GameTimer < increaseSpawnKingPearlTime)
         {
-            Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+            foreach (Transform spawnPoint in kingPearlSpawnPoints1)
+            {
+                Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+            }
+            Managers.Item.KingPearl = kingPearlSpawnPoints1.Length;
         }
+        else
+        {
+            foreach (Transform spawnPoint in kingPearlSpawnPoints2)
+            {
+                Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+            }
+            Managers.Item.KingPearl = kingPearlSpawnPoints2.Length;
+        }
+        
 
     }
 }

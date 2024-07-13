@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneUI: {fileID: 0}
-  _timelimit: 10
+  _timeLimit: 10
   _startTimer: 3
   _gameTimer: 60
   _endTimer: 3
@@ -803,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2891418310945797291, guid: c59b938bab5fa0c4085b3381ac24a6f3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3442884849095192378, guid: c59b938bab5fa0c4085b3381ac24a6f3, type: 3}
       propertyPath: m_LocalPosition.x
