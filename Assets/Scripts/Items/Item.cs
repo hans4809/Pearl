@@ -65,7 +65,8 @@ public class Item : MonoBehaviour, IFieldObject
                 break;
 
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        Managers.Resource.Destroy(gameObject);
         Debug.Log("Player1:   "+Managers.Score.player1Score);
     }
 
@@ -116,7 +117,8 @@ public class Item : MonoBehaviour, IFieldObject
                 break;
 
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        Managers.Resource.Destroy(gameObject);
         Debug.Log("Player2:   " + Managers.Score.player2Score);
     }
 

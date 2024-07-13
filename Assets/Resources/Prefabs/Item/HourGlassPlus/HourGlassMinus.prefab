@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5971565178596114026}
   - component: {fileID: 6508319351550832099}
   - component: {fileID: 1268977545569214317}
+  - component: {fileID: 1367731684465426570}
   m_Layer: 0
   m_Name: HourGlassMinus
   m_TagString: Item
@@ -151,3 +152,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.79, y: 5.03}
   m_EdgeRadius: 0
+--- !u!114 &1367731684465426570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652978150793036889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678183368c8674449a32c109b33b6f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsUsing: 0

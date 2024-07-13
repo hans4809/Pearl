@@ -43,10 +43,18 @@ public class HourGlassSpawner : ItemSpawner
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
         GameObject selectedItem;
         int choice = Random.Range(0, 2);
-        if (choice == 0) selectedItem = items[0];
-        else selectedItem = items[1];
+        if (choice == 0)
+        {
+            selectedItem = items[0];
+            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassMinus", spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            selectedItem = items[1];
+            Managers.Resource.Instantiate("Item/HourGlassPlus/HourGlassPlus", spawnPosition, Quaternion.identity);
+        }
 
-        GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
+        //GameObject hourGlass = Instantiate(selectedItem, spawnPosition, Quaternion.identity);
 
     }
 }

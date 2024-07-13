@@ -43,7 +43,7 @@ public class BrokenPearlSpawner : ItemSpawner
 
 
 
-        GameObject brokenSpawner = Instantiate(item, spawnPosition, Quaternion.identity);
-
+        //GameObject brokenSpawner = Instantiate(item, spawnPosition, Quaternion.identity);
+        GameObject brokenSpawner = Managers.Resource.Instantiate("Item/BrokenPearl/BrookenPearl", spawnPosition, Quaternion.identity);
     }
 }

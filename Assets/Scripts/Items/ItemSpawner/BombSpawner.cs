@@ -56,7 +56,8 @@ public class BombSpawner : ItemSpawner
                 spawnPosition.y + distanceFromCenterBomb * Mathf.Sin(angleInRadians)
             );
 
-            GameObject bomb = Instantiate(item, newPoint, Quaternion.identity);
+            //GameObject bomb = Instantiate(item, newPoint, Quaternion.identity);
+            GameObject bomb = Managers.Resource.Instantiate("Item/Bomb/Bomb", newPoint, Quaternion.identity);
             // 여기에 왼/오 날라오는 기능
             
         }

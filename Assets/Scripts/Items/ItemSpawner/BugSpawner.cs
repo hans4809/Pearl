@@ -44,7 +44,8 @@ public class BugSpawner : ItemSpawner
         //GameObject selectedItem = items[Random.Range(0, items.Length)];
 
 
-        GameObject bug = Instantiate(item, spawnPosition, Quaternion.identity);
+        //GameObject bug = Instantiate(item, spawnPosition, Quaternion.identity);
+        GameObject bug = Managers.Resource.Instantiate("Item/Bug/Bug", spawnPosition, Quaternion.identity);
         Debug.Log("¹Ù¤Ã¤©·¹¹ú·¹");
 
     }
