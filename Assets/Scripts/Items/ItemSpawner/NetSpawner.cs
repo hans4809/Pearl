@@ -8,6 +8,7 @@ public class NetSpawner : ItemSpawner
     public float maxDistance = 5f; // 플레이어 위치로부터 아이템이 배치될 최대 반경
     public GameObject item; // 생성할 아이템
     public int gapBetPlayerScore = 10;
+    public int timeBetNetSpawn = 10;
     private void Start()
     {
         Init();
@@ -27,7 +28,7 @@ public class NetSpawner : ItemSpawner
                 Spawn();
             else
             {
-                if (Scene != null && (60f - Scene.GameTimer) > Managers.Item.netSpawnedTime)
+                if (Scene != null && (60f - Scene.GameTimer) > Managers.Item.netSpawnedTime + timeBetNetSpawn)
                     Spawn();
             }
         }

@@ -7,7 +7,6 @@ public class PearlSpawner : ItemSpawner
 {
     public Transform[] initialPearlSpawnPoints;
     public GameObject item;
-    public bool started = false;
     public float gap = 1f;
     public float distanceFromCenterPearl = 1f;
 
@@ -21,6 +20,12 @@ public class PearlSpawner : ItemSpawner
     protected override void Init()
     {
         base.Init();
+
+        foreach (Transform spawnPoint in initialPearlSpawnPoints)
+        {
+            //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+            Managers.Resource.Instantiate("Item/Pearl/Pearl", spawnPoint.position, spawnPoint.rotation);
+        }
     }
     private void Update()
     {
@@ -43,23 +48,12 @@ public class PearlSpawner : ItemSpawner
        
         if (Scene != null && Scene.GameTimer < 59)
         {
-            if (!started)
+            foreach (Transform spawnPoint in initialPearlSpawnPoints)
             {
-                foreach (Transform spawnPoint in initialPearlSpawnPoints)
-                {
-                    //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
-                    Managers.Resource.Instantiate("Item/Pearl/Pearl", spawnPoint.position, spawnPoint.rotation);
-                }
+                //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
+                Managers.Resource.Instantiate("Item/Pearl/Pearl", spawnPoint.position, spawnPoint.rotation);
             }
-            else
-            {
-                // ??? ±âÈ¹ ÀÌÇØ ¾ÈµÊ
-                foreach (Transform spawnPoint in initialPearlSpawnPoints)
-                {
-                    //Instantiate(item, spawnPoint.position, spawnPoint.rotation);
-                    Managers.Resource.Instantiate("Item/Pearl/Pearl", spawnPoint.position, spawnPoint.rotation);
-                }
-            }
+            
         }
 
         if (Scene != null && Scene.GameTimer < 59)
