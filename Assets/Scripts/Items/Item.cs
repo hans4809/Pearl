@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class Item : MonoBehaviour, IFieldObject
@@ -169,8 +167,8 @@ public class Item : MonoBehaviour, IFieldObject
     
     private void Awake()
     {
-        itemLocation = gameObject.transform.position;
-        if (itemLocation.x > 6.3 || itemLocation.x < -6.3|| itemLocation.y > 3 || itemLocation.y < - 3)
+        //itemLocation = ;
+        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3|| gameObject.transform.position.y > 3 || gameObject.transform.position.y < - 3)
         {
             Managers.Resource.Destroy(gameObject);
         }
@@ -178,16 +176,16 @@ public class Item : MonoBehaviour, IFieldObject
 
     private void OnEnable()
     {
-        itemLocation = gameObject.transform.position;
-        if (itemLocation.x > 6.3 || itemLocation.x < -6.3 || itemLocation.y > 3 || itemLocation.y < -3)
+        //itemLocation = gameObject.transform.position;
+        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3 || gameObject.transform.position.y > 3 || gameObject.transform.position.y < -3)
         {
             Managers.Resource.Destroy(gameObject);
         }
     }
     private void Start()
     {
-        itemLocation = gameObject.transform.position;
-        if (itemLocation.x > 6.3 || itemLocation.x < -6.3 || itemLocation.y > 3 || itemLocation.y < -3)
+        //itemLocation = gameObject.transform.position;
+        if (gameObject.transform.position.x > 6.3 || gameObject.transform.position.x < -6.3 || gameObject.transform.position.y > 3 || gameObject.transform.position.y < -3)
         {
             Managers.Resource.Destroy(gameObject);
         }

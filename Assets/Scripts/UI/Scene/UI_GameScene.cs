@@ -126,40 +126,170 @@ public class UI_GameScene : UI_Scene
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
     }
 
-    public IEnumerator TimeLimitEffectFirst(TMP_Text text)
+    public IEnumerator TimeLimitFirstEffectCameraIteration()
+    {
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 1초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, -CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(-CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 2초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 3초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, -CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(-CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ///// 4초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+        
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        /////////////////////////////
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 1초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, -CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(-CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 2초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ////// 3초
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, -CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
+
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(-CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ///// 4초
+        
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(0, CameraRotateAngle, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, CameraRotateAngle));
+        
+        yield return StartCoroutine(TimeLimitFirstEffectCamera(CameraRotateAngle, 0, 0.05f));
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        /////////////////////////////
+    }
+
+    public IEnumerator TimeLimitFirstEffectText(TMP_Text text/*, float fromFontSize, float toFontSize, float duration*/)
     {
         float elapsedTime = 0f;
+
         text.fontSize = MinGameTimerFontSize;
         text.color = TimeLimitTimerColor;
-        var mainCamera = Camera.main;
-        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
-        while(text.fontSize < MaxGameTimerFontSize)
+        while (text.fontSize < MaxGameTimerFontSize)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
             float fontSize = Mathf.Lerp(MinGameTimerFontSize, MaxGameTimerFontSize, alpha);
-            float cameraRotation = Mathf.Lerp(-CameraRotateAngle, CameraRotateAngle, alpha);
-            mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation));
             text.fontSize = fontSize;
 
             yield return null;
         }
-        text.fontSize = MinGameTimerFontSize;
-        mainCamera.transform.rotation = Quaternion.Euler(Vector3.zero);
+        text.fontSize = MaxGameTimerFontSize;
     }
-
-    public IEnumerator TimeLimitEffectIteration(TMP_Text text)
+    public IEnumerator TimeLimitFirstEffectCamera(float fromRotation, float toRotation, float duration)
     {
         float elapsedTime = 0f;
-        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
-        while(text.rectTransform.rotation.z < TextRotation)
+        var mainCamera = Camera.main;
+        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, fromRotation));
+
+        while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
-            float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            float cameraRotation = Mathf.Lerp(fromRotation, toRotation, alpha);
+            mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation));
+
+            yield return null;
+        }
+        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, toRotation));
+    }
+    //public IEnumerator TimeLimitEffectFirst(TMP_Text text)
+    //{
+    //    float elapsedTime = 0f;
+    //    text.fontSize = MinGameTimerFontSize;
+    //    text.color = TimeLimitTimerColor;
+    //    var mainCamera = Camera.main;
+    //    mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -CameraRotateAngle));
+    //    while(text.fontSize < MaxGameTimerFontSize)
+    //    {
+    //        elapsedTime += Time.deltaTime;
+    //        float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
+    //        float fontSize = Mathf.Lerp(MinGameTimerFontSize, MaxGameTimerFontSize, alpha);
+    //        float cameraRotation = Mathf.Lerp(-CameraRotateAngle, CameraRotateAngle, alpha);
+    //        mainCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation));
+    //        text.fontSize = fontSize;
+
+    //        yield return null;
+    //    }
+    //    text.fontSize = MinGameTimerFontSize;
+    //    mainCamera.transform.rotation = Quaternion.Euler(Vector3.zero);
+    //}
+
+    //public IEnumerator TimeLimitEffectIteration(TMP_Text text)
+    //{
+    //    float elapsedTime = 0f;
+    //    text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, -TextRotation));
+    //    while(text.rectTransform.rotation.z < TextRotation)
+    //    {
+    //        elapsedTime += Time.deltaTime;
+    //        float alpha = Mathf.Clamp01(elapsedTime / TimeLimitEffectTime);
+    //        float textRotation = Mathf.Lerp(-TextRotation, TextRotation, alpha);
+    //        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
+    //        yield return null;
+    //    }
+    //}
+    public IEnumerator TimeLimitEffectIteration(TMP_Text text)
+    {
+        // 첫 번째 코루틴: -TextRotation에서 TextRotation으로 회전
+        yield return StartCoroutine(RotateText(text, -TextRotation, TextRotation, TimeLimitEffectTime/2));
+
+        // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
+        yield return StartCoroutine(RotateText(text, TextRotation, 0, TimeLimitEffectTime/2));
+
+        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
+    private IEnumerator RotateText(TMP_Text text, float from, float to, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            float textRotation = Mathf.Lerp(from, to, alpha);
             text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
             yield return null;
         }
+        text.rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, to));
     }
 
     public IEnumerator TimeEndEffect(TMP_Text text)
@@ -186,44 +316,85 @@ public class UI_GameScene : UI_Scene
             ChangeCoroutine = null;
         }
 
-        ChangeCoroutine = StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex));
+        ChangeCoroutine = StartCoroutine(OnChangedBestPlayerIteration(orginBestPlayerIndex, changedBestPlayerIndex));
     }
 
-    public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
+
+    public IEnumerator OnChangedBestPlayerIteration(int orginBestPlayerIndex, int changedBestPlayerIndex)
+    {
+        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, 1, ChangedScale/2, -ChangedRotation, ChangedRotation, ChangeEffectTime / 2));
+
+        // 두 번째 코루틴: 현재 각도에서 (0,0,0)으로 회전
+        yield return StartCoroutine(OnChangedBestPlayer(orginBestPlayerIndex, changedBestPlayerIndex, ChangedScale/2, ChangedScale, ChangedRotation, 0, ChangeEffectTime / 2));
+       
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(1, 1, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
+    public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex, float fromScale, float toScale, float fromRotation, float toRotation, float duration)
     {
         float elapsedTime = 0f;
         if (orginBestPlayerIndex == -1)
         {
-            PlayerScoreIMGs[changedBestPlayerIndex].color = Color.red;
+            PlayerScoreIMGs[changedBestPlayerIndex].sprite = Managers.Resource.Load<Sprite>($"Sprites/UI/BestScore{changedBestPlayerIndex + 1}");
         }
         else
         {
-            //var tempSprite = PlayerScoreIMGs[orginBestPlayerIndex].sprite;
-            //PlayerScoreIMGs[orginBestPlayerIndex].sprite = PlayerScoreIMGs[changedBestPlayerIndex].sprite;
-            //PlayerScoreIMGs[changedBestPlayerIndex].sprite = tempSprite;
-
-            var tempColor = PlayerScoreIMGs[orginBestPlayerIndex].color;
-            PlayerScoreIMGs[orginBestPlayerIndex].color = PlayerScoreIMGs[changedBestPlayerIndex].color;
-            PlayerScoreIMGs[changedBestPlayerIndex].color = tempColor;
+            PlayerScoreIMGs[orginBestPlayerIndex].sprite = Managers.Resource.Load<Sprite>($"Sprites/UI/NormalScore{orginBestPlayerIndex + 1}");
+            PlayerScoreIMGs[changedBestPlayerIndex].sprite = Managers.Resource.Load<Sprite>($"Sprites/UI/BestScore{changedBestPlayerIndex + 1}");
         }
 
-
-        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
-        while (PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < ChangedScale && PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation.z < ChangedRotation)
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, fromRotation));
+        while(PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < toScale)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsedTime / ChangeEffectTime);
-            float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
-            float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            float targetScale = Mathf.Lerp(fromScale, toScale, alpha);
+            float targetRotation = Mathf.Lerp(fromRotation, toRotation, alpha);
             PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
             PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
             yield return null;
         }
 
-        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = Vector3.one;
-        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(Vector3.zero);
-
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(toScale, toScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, toRotation));
     }
+
+    //public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
+    //{
+    //    float elapsedTime = 0f;
+    //    if (orginBestPlayerIndex == -1)
+    //    {
+    //        PlayerScoreIMGs[changedBestPlayerIndex].color = Color.red;
+    //    }
+    //    else
+    //    {
+    //        //var tempSprite = PlayerScoreIMGs[orginBestPlayerIndex].sprite;
+    //        //PlayerScoreIMGs[orginBestPlayerIndex].sprite = PlayerScoreIMGs[changedBestPlayerIndex].sprite;
+    //        //PlayerScoreIMGs[changedBestPlayerIndex].sprite = tempSprite;
+
+    //        var tempColor = PlayerScoreIMGs[orginBestPlayerIndex].color;
+    //        PlayerScoreIMGs[orginBestPlayerIndex].color = PlayerScoreIMGs[changedBestPlayerIndex].color;
+    //        PlayerScoreIMGs[changedBestPlayerIndex].color = tempColor;
+    //    }
+
+
+    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
+    //    while (PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < ChangedScale && PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation.z < ChangedRotation)
+    //    {
+    //        elapsedTime += Time.deltaTime;
+    //        float alpha = Mathf.Clamp01(elapsedTime / ChangeEffectTime);
+    //        float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
+    //        float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
+    //        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
+    //        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+    //        yield return null;
+    //    }
+
+    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = Vector3.one;
+    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(Vector3.zero);
+
+    //}
 
     private void Start()
     {

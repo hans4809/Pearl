@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneUI: {fileID: 0}
-  _timeLimit: 10
+  _timeLimit: 55
   _startTimer: 3
   _spawnTransforms:
   - {fileID: 986521054}
@@ -771,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 1687383398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5193179, y: 0.5884702, z: -0.024618205}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
