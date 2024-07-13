@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class PearlSpawner2 : ItemSpawner
+public class PearlSpawner3 : ItemSpawner
 {
-    public float startPearl2 = 0f;
-    public float endPearl2 = 50f;
+    public float startPearl3 = 40f;
+    public int numOfPearls = 16;
+    public float distanceFromCenterPearl = 1f;
+    private  bool showOnce = false;
 
     public GameObject item; // 생성할 아이템들
     private void Start()
@@ -30,7 +31,7 @@ public class PearlSpawner2 : ItemSpawner
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
 
-        if (Scene != null && (60f - Scene.GameTimer) > startPearl2 && (60f - Scene.GameTimer) < endPearl2)
+        if (Scene != null && (60f - Scene.GameTimer) > startPearl3 && !showOnce)
         {
             if (Time.time >= lastSpawnTime + timeBetSpawn/*&& playerTransform != null*/)
             {
@@ -48,17 +49,25 @@ public class PearlSpawner2 : ItemSpawner
     {
         //if ()
 
-        Vector2 spawnPosition = GetRandomPointInBox();
+        //Vector2 center = GetRandomPointInBox();
+        Vector2 center = Vector2.zero;
 
-        // 바닥에서 0.5만큼 위로 올리기
-        // spawnPosition += Vector3.up * 0.5f;
+        float angleIncrement = 360f / numOfPearls;
 
-        // 아이템 중 하나를 무작위로 골라 랜덤 위치에 생성
-        //GameObject selectedItem = items[Random.Range(0, items.Length)];
+        for (int i = 0; i < numOfPearls; i++)
+        {
+            // 각도를 라디안으로 변환
+            float angleInRadians = (i * angleIncrement) * Mathf.Deg2Rad;
 
+            // 새로운 좌표 계산
+            Vector2 newPoint = new Vector2(
+                center.x + distanceFromCenterPearl * Mathf.Cos(angleInRadians),
+                center.y + distanceFromCenterPearl * Mathf.Sin(angleInRadians)
+            );
 
-        //GameObject bug = Instantiate(item, spawnPosition, Quaternion.identity);
-        Managers.Resource.InstantiateItem("Item/Pearl/Pearl", spawnPosition, Quaternion.identity);
-        Debug.Log("2");
+            //GameObject bomb = Instantiate(item, newPoint, Quaternion.identity);
+            GameObject bomb = Managers.Resource.InstantiateItem("Item/Pearl/Pearl", newPoint, Quaternion.identity);
+            showOnce = true;
+        }
     }
 }

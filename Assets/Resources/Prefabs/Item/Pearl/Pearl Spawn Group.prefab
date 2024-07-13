@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &443655108649563035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68837525306415639}
+  - component: {fileID: 8301819105453211870}
+  m_Layer: 0
+  m_Name: Pearl Spwaner3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68837525306415639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443655108649563035}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.61092913, y: -4.1132965, z: -0.13819005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5611022269162433544}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8301819105453211870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443655108649563035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edad70b66de2d5b4e89e585c7604af1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  timeBetSpawnMax: 4
+  timeBetSpawnMin: 3
+  timeBetSpawn: 0
+  lastSpawnTime: 0
+  baseX1: -6.7
+  baseX2: 6.7
+  baseY1: -3.8
+  baseY2: 3.8
+  _recommendedPlayerIndex: 0
+  _scene: {fileID: 0}
+  startPearl3: 53
+  numOfPearls: 20
+  distanceFromCenterPearl: 1.6
+  item: {fileID: 3155846853467999355, guid: 9dc518f7b77bb8d43ae3e212cdaf7608, type: 3}
 --- !u!1 &591865408084396514
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +194,7 @@ Transform:
   - {fileID: 1230145799539187896}
   - {fileID: 4581587437883470230}
   - {fileID: 430294767904676122}
+  - {fileID: 68837525306415639}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4142460670250547976
@@ -146,6 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 430294767904676122}
+  - component: {fileID: 2065974238081076378}
   m_Layer: 0
   m_Name: Pearl Spwaner2
   m_TagString: Untagged
@@ -168,6 +229,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5611022269162433544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2065974238081076378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142460670250547976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a740d820d2b664f9ab7539f65b6f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  timeBetSpawnMax: 5
+  timeBetSpawnMin: 2
+  timeBetSpawn: 0
+  lastSpawnTime: 0
+  baseX1: -6.7
+  baseX2: 6.7
+  baseY1: -3.8
+  baseY2: 3.8
+  _recommendedPlayerIndex: 0
+  _scene: {fileID: 0}
+  startPearl2: 0
+  endPearl2: 30
+  item: {fileID: 3155846853467999355, guid: 9dc518f7b77bb8d43ae3e212cdaf7608, type: 3}
 --- !u!1 &4914358182062055827
 GameObject:
   m_ObjectHideFlags: 0
