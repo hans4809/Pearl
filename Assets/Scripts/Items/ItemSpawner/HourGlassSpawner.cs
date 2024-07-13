@@ -8,6 +8,10 @@ public class HourGlassSpawner : ItemSpawner
     public float minDistance = 2f; // 플레이어 위치로부터 아이템이 배치될 최소 반경
     public GameObject[] items; // 생성할 아이템들
     public float lastTimeSpawn = 7f;
+
+    public Transform playerTransform1;
+    public Transform playerTransform2;
+
     private void Start()
     {
         Init();
@@ -21,17 +25,20 @@ public class HourGlassSpawner : ItemSpawner
     {
         if (Managers.Game.GameState != EGameState.Playing)
             return;
-
-        if (playerTransform == null)
-            playerTransform = Managers.Game.Players[RecommendedPlayerIndex].transform;
+        
+        if (playerTransform1 == null)
+            playerTransform1 = Managers.Game.Players[0].transform;
+        if (playerTransform2 == null)
+            playerTransform2 = Managers.Game.Players[1].transform;
+        
         // 현재 시점이 마지막 생성 시점에서 생성 주기 이상 지남
         // && 플레이어 캐릭터가 존재함
         // if (타이머의 시간이 해당 제한 시간보다 지났을 떄)
         // startSpawnHourGlassTime
-
+       
         if (Scene != null && (60f - Scene.GameTimer) > startSpawnHourGlassTime && Scene.GameTimer > lastTimeSpawn)
         {
-            if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform != null)
+            if (Time.time >= lastSpawnTime + timeBetSpawn && playerTransform1 != null && playerTransform2 != null)
             {
                 // 마지막 생성 시간 갱신
                 lastSpawnTime = Time.time;
@@ -45,11 +52,9 @@ public class HourGlassSpawner : ItemSpawner
 
     protected override void Spawn()
     {
-        //if ()
-        
-        Vector2 spawnPosition =
-            GetRandomPointOutRange(playerTransform.position, minDistance);
 
+        Vector2 midPosition = new Vector2((playerTransform1.position.x + playerTransform2.position.x) / 2, (playerTransform1.position.y + playerTransform2.position.y) / 2);
+        Vector2 spawnPosition = GetRandomPointOutRange(midPosition, minDistance);
         // 바닥에서 0.5만큼 위로 올리기
         // spawnPosition += Vector3.up * 0.5f;
 

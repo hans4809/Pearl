@@ -99,14 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71e6e97d94ac58488ad2aafa32e02d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemLocation: {x: 0, y: 0}
   itemType: 5
   pearlAmount: 1
   kingPearlAmount: 10
   bugAmount: -5
   netAmount: 5
-  timerPlusAmount: 10
-  timerMinusAmount: -10
+  timerPlusAmount: 1
+  timerMinusAmount: -1
   delayTimeToCheckInBox: 0.1
 --- !u!61 &1268977545569214317
 BoxCollider2D:

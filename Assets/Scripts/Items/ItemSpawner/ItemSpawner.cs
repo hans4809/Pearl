@@ -91,7 +91,9 @@ public class ItemSpawner : MonoBehaviour
 
             float x = center.x + Mathf.Cos(randomAngle) * distance;
             float y = center.y + Mathf.Sin(randomAngle) * distance;
-            Vector3 randomVectorPos = new Vector3(x, y);
+
+            randomVectorPos = new Vector2(x, y);
+
         } while (IsInsideBase(randomVectorPos));
         Vector2 vectorPos = randomVectorPos;
         // 찾은 점 반환
@@ -109,9 +111,8 @@ public class ItemSpawner : MonoBehaviour
 
             float x = center.x + Mathf.Cos(randomAngle) * distance;
             float y = center.y + Mathf.Sin(randomAngle) * distance;
-            randomVectorPos = new Vector3(x, y);
 
-            // randomVectorPos = Random.insideUnitSphere * distance + center;
+            randomVectorPos = new Vector2(x, y);
 
         } while (IsInsideBase(randomVectorPos));
         Vector2 vectorPos = randomVectorPos;

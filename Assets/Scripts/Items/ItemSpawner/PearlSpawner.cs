@@ -100,8 +100,8 @@ public class PearlSpawner : ItemSpawner
 
         if (Scene != null && Scene.GameTimer < 39)
         {
-            timeBetSpawnMax -= fastSpawnTime;
-            timeBetSpawnMax -= fastSpawnTime;
+            //timeBetSpawnMax -= fastSpawnTime;
+            //timeBetSpawnMax -= fastSpawnTime;
             Vector2 center = GetRandomPointInBox();
             //Vector2 center = GetRandomPointInBoxForPearl();
             Vector2 pos1 = new Vector2(center.x, center.y);
@@ -133,7 +133,6 @@ public class PearlSpawner : ItemSpawner
         /*
         if (Scene != null && Scene.GameTimer < 19)
         {
-            //item.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             int numberOfPoints = 8;
             float angleIncrement = 360f / numberOfPoints;
 
@@ -151,6 +150,7 @@ public class PearlSpawner : ItemSpawner
             }
         }
         */
+        
     }
 }
 

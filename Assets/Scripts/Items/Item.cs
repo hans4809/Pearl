@@ -13,8 +13,8 @@ public class Item : MonoBehaviour
     public int kingPearlAmount = 10;
     public int bugAmount = -5;
     public int netAmount = 5;
-    public int timerPlusAmount = 10;
-    public int timerMinusAmount = -10;
+    public int timerPlusAmount = 1;
+    public int timerMinusAmount = -1;
 
     public float delayTimeToCheckInBox = 0.1f;
 
@@ -70,7 +70,7 @@ public class Item : MonoBehaviour
         }
         //Destroy(gameObject);
         Managers.Resource.Destroy(gameObject);
-        Debug.Log("Player1:   "+Managers.Score.player1Score);
+        //Debug.Log("Player1:   "+Managers.Score.player1Score);
     }
 
     public void UseItemPlayer2() // 분명 더 좋은 방법이 있는데......포인터 못 써서 이렇게 따로 만든다...
@@ -125,7 +125,7 @@ public class Item : MonoBehaviour
         }
         //Destroy(gameObject);
         Managers.Resource.Destroy(gameObject);
-        Debug.Log("Player2:   " + Managers.Score.player2Score);
+        //Debug.Log("Player2:   " + Managers.Score.player2Score);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
