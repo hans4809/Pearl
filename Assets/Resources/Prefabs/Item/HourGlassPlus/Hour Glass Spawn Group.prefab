@@ -49,10 +49,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnHourGlassTime: 0
   minDistance: 2
   items:
@@ -140,10 +140,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnHourGlassTime: 0
   minDistance: 2
   items:

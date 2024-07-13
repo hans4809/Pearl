@@ -171,6 +171,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &84561091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+  m_PrefabInstance: {fileID: 1350753799}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &249838094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,8 +185,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.84
+      value: -4.03
       objectReference: {fileID: 0}
     - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -221,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6055739948692754737, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_Name
-      value: CharacterA
+      value: CharacterA-1
       objectReference: {fileID: 0}
     - target: {fileID: 6055739948692754737, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_TagString
@@ -232,6 +245,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+--- !u!4 &322802597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+  m_PrefabInstance: {fileID: 249838094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1103584000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,6 +380,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb Spawn Group
       objectReference: {fileID: 0}
+    - target: {fileID: 3502721832282684378, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
+      propertyPath: m_Name
+      value: Bomb Spawner_player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989588541476401804, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322802597}
     - target: {fileID: 7462631848664234835, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -402,6 +428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8453170566915980416, guid: db94abd8effd70f43a592cf02c662a04, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 84561091}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -416,8 +446,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.4
+      value: 3.58
       objectReference: {fileID: 0}
     - target: {fileID: 780373295674047615, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -457,11 +495,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6055739948692754737, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_Name
-      value: CharacterA (1)
+      value: CharacterA-2
       objectReference: {fileID: 0}
     - target: {fileID: 6055739948692754737, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
       propertyPath: m_TagString
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8541739617978940181, guid: e5c01d04aa2cf9541afeaf51b4947e5b, type: 3}
+      propertyPath: _playerIndex
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -542,6 +584,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 968146539833824814, guid: 88a6af09150d7bf47a4841682610ab72, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 84561091}
     - target: {fileID: 1738817685634260859, guid: 88a6af09150d7bf47a4841682610ab72, type: 3}
       propertyPath: m_Name
       value: Broken Pearl Spawn Group
@@ -586,6 +632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7797945266946607347, guid: 88a6af09150d7bf47a4841682610ab72, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322802597}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -639,10 +689,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1240638590901735293, guid: a4dea78b27b68f94eaa9c38da2cc1a0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 84561091}
     - target: {fileID: 2134955642662585276, guid: a4dea78b27b68f94eaa9c38da2cc1a0e, type: 3}
       propertyPath: m_Name
       value: Hour Glass Spawn Group
       objectReference: {fileID: 0}
+    - target: {fileID: 3527348481009410697, guid: a4dea78b27b68f94eaa9c38da2cc1a0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322802597}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

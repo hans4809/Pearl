@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  timeBetSpawnMax: 2
-  timeBetSpawnMin: 1
+  timeBetSpawnMax: 7
+  timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
   baseX1: -9

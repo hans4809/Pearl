@@ -45,21 +45,51 @@ public class Item : MonoBehaviour, IFieldObject
                 Managers.Time.counter += timerMinusAmount;
                 break;
             case ItemEnum.BOMB:
-
+                // BOMB
                 break;
 
-
-
         }
+        Destroy(gameObject);
+        Debug.Log("Player1:"+Managers.Score.player1Score);
+
     }
 
     public void UseItemPlayer2() // 분명 더 좋은 방법이 있는데......포인터 못 써서 이렇게 따로 만든다...
     {
+        itemType = gameObject.GetComponent<Item>().itemType;
 
+        switch (itemType)
+        {
+            case ItemEnum.PEARL:
+                Managers.Score.player2Score += pearlAmount;
+                break;
+            case ItemEnum.KING_PEARL:
+                Managers.Score.player2Score += kingPearlAmount;
+                Managers.Item.KingPearl -= 1;
+                break;
+            case ItemEnum.BUG:
+                Managers.Score.player2Score += bugAmount;
+                break;
+            case ItemEnum.NET:
+                Managers.Score.player2Score += netAmount;
+                Managers.Score.player1Score -= netAmount;
+                break;
+            case ItemEnum.TIME_PLUS:
+                Managers.Time.counter += timerPlusAmount;
+                break;
+            case ItemEnum.TIME_MINUS:
+                Managers.Time.counter += timerMinusAmount;
+                break;
+            case ItemEnum.BOMB:
+                // BOMB
+                break;
+
+        }
+        Destroy(gameObject);
+        Debug.Log("Player2" + Managers.Score.player2Score);
     }
 
-
-    private void OnTriggerEnter(Collider other) // 3D collider
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player1"))
         {
@@ -81,7 +111,7 @@ public class Item : MonoBehaviour, IFieldObject
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Item") || collider.CompareTag("PLayer1") || collider.CompareTag("PLayer2") || !collider.CompareTag("Base"))
+            if (collider.CompareTag("Item") || collider.CompareTag("Player1") || collider.CompareTag("Player2") /*|| !collider.CompareTag("Base")*/)
             {
                 overlap = true;
                 break;

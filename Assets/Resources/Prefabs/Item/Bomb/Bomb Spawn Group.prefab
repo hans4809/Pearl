@@ -82,10 +82,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnBombTime: 0
   maxDistance: 5
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
@@ -139,10 +139,10 @@ MonoBehaviour:
   timeBetSpawnMin: 2
   timeBetSpawn: 0
   lastSpawnTime: 0
-  baseX1: 0
-  baseX2: 0
-  baseY1: 0
-  baseY2: 0
+  baseX1: -9
+  baseX2: 9
+  baseY1: -5
+  baseY2: 5
   startSpawnBombTime: 0
   maxDistance: 5
   item: {fileID: 570254261550446854, guid: 9d72598fbf95f1442969d224af8b42fb, type: 3}
