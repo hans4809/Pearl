@@ -80,7 +80,7 @@ public class Item : MonoBehaviour
                 Managers.Sound.Play("SFX/boom", 0.75f);
                 break;
             case ItemEnum.BROKEN_PEARL:
-                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Bad;
+                Managers.Game.Players[0].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
                 Managers.Game.Player1Score -= 1;
                 break;
         }
@@ -146,7 +146,7 @@ public class Item : MonoBehaviour
                 Managers.Sound.Play("SFX/boom");
                 break;
             case ItemEnum.BROKEN_PEARL:
-                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Bad;
+                Managers.Game.Players[1].GetComponent<CharacterControllerEx>().State = Define.State.Airborne;
                 Managers.Game.Player1Score -= 1;
                 break;
 

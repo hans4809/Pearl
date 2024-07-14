@@ -11,11 +11,6 @@ public class CharacterControllerEx : PlayableController
     void Start()
     {
         Init();
-
-        //if(Managers.Input.KeyActions.ContainsKey(KeyCode.Escape))
-        //    Managers.Input.KeyActions.Remove(KeyCode.Escape);
-
-        //Managers.Input.KeyActions.Add(KeyCode.Escape, OnKeyEscape);
     }
 
     public void OnKeyEscape()
@@ -73,21 +68,15 @@ public class CharacterControllerEx : PlayableController
     // Update is called once per frame
     void Update()
     {
-        //switch (State)
-        //{
-        //    case Define.State.Idle:
-        //        UpdateIdle();
-        //        break;
-        //    case Define.State.Walk:
-        //        UpdateWalk();
-        //        break;
-        //    case Define.State.Damaged:
-        //        Damaged();
-        //        break;
-        //    case Define.State.Airborne:
-        //        UpdateAirborne();
-        //        break;
-        //}
+        if (Time.timeScale == 0)
+            return;
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            //Managers.Game.GameState = EGameState.Pause;
+            Managers.UI.ShowPopUpUI<UI_Setting>();
+        }
     }
     private void FixedUpdate()
     {

@@ -12,6 +12,7 @@ public enum EGameState
 {
     Start,
     Playing,
+    Pause,
     End,
 }
 
