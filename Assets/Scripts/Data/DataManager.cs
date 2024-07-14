@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     public static DataManager singleTon;
     public JsonManager jsonManager;
     public GameObject _gameObject;
+    
     // Start is called before the first frame update
 
 

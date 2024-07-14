@@ -4,12 +4,28 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+public class VolumeData
+{
+    public float _masterVolume;
+    public float _bgmVolume;
+    public float _sfxVolume;
+
+    public VolumeData()
+    {
+        _masterVolume = 1.0f;
+        _bgmVolume = 1.0f;
+        _sfxVolume = 1.0f;
+    }
+}
 public class SoundManager
 {
     public AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
     public AudioMixer audioMixer;
     public AudioMixerGroup[] audioMixerGroups;
+
+    private VolumeData _volumeData;
+    public VolumeData VolumeData { get { return _volumeData; } set { _volumeData = value; } }
 
     public void Init()
     {
@@ -28,6 +44,7 @@ public class SoundManager
                 _audioSources[i].outputAudioMixerGroup = audioMixer.FindMatchingGroups($"{soundNames[i]}")[0];
                 go.transform.parent = root.transform;
             }
+            VolumeData = new VolumeData();
         }
     }
     public void Play(AudioClip audioClip, float volume = 1, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)

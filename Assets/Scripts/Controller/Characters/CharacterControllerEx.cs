@@ -6,10 +6,31 @@ using UnityEngine.UI;
 
 public class CharacterControllerEx : PlayableController
 {
+
     // Start is called before the first frame update
     void Start()
     {
         Init();
+
+        if(Managers.Input.KeyActions.ContainsKey(KeyCode.Escape))
+            Managers.Input.KeyActions.Remove(KeyCode.Escape);
+
+        Managers.Input.KeyActions.Add(KeyCode.Escape, OnKeyEscape);
+    }
+
+    public void OnKeyEscape()
+    {
+        if(Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+            Managers.UI.ShowPopUpUI<UI_Setting>();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Managers.UI.ClosePopUpUI();
+        }
+
     }
     public override void Init()
     {
