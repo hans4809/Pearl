@@ -85,13 +85,6 @@ public class SceneManagerEx
                 (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = 1;
         }
 
-        if(LoadingScene is UI_GameOverScene)
-        {
-            if ((LoadingScene as UI_GameOverScene).GameOverSceneText.gameObject.activeInHierarchy == false)
-                (LoadingScene as UI_GameOverScene).GameOverSceneText.gameObject.SetActive(true);
-            (LoadingScene as UI_GameOverScene).Blink();
-        }
-
         if (LoadingScene is UI_ExplainScene)
         {
             if((LoadingScene as UI_ExplainScene).StartButton != null)

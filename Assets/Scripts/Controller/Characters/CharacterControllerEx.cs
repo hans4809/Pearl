@@ -12,10 +12,10 @@ public class CharacterControllerEx : PlayableController
     {
         Init();
 
-        if(Managers.Input.KeyActions.ContainsKey(KeyCode.Escape))
-            Managers.Input.KeyActions.Remove(KeyCode.Escape);
+        //if(Managers.Input.KeyActions.ContainsKey(KeyCode.Escape))
+        //    Managers.Input.KeyActions.Remove(KeyCode.Escape);
 
-        Managers.Input.KeyActions.Add(KeyCode.Escape, OnKeyEscape);
+        //Managers.Input.KeyActions.Add(KeyCode.Escape, OnKeyEscape);
     }
 
     public void OnKeyEscape()

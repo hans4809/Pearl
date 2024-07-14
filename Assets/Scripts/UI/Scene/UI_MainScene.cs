@@ -10,6 +10,8 @@ public class UI_MainScene : UI_Scene
 
     [SerializeField] Coroutine _cor;
     public Coroutine Cor { get => _cor; private set => _cor = value; }
+    [SerializeField] UI_CutScene _cutScene;
+    public UI_CutScene CutScene { get => _cutScene;  private set => _cutScene = value; }
     public override void Init()
     {
         base.Init();
@@ -27,15 +29,15 @@ public class UI_MainScene : UI_Scene
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && CutScene == null)
         {
             //Managers.Scene.LoadScene(Define.Scene.ExplainScene);
             //Managers.Scene.Clear();
             //Managers.Scene.CurrentScene.SceneUI = Managers.UI.ShowSceneUI<UI_ExplainScene>();
-            if(Cor == null)
-            {
-                Cor = StartCoroutine(Managers.Scene.LoadSceneAsync<UI_ExplainScene>(Define.Scene.GameScene));
-            }
+            //if(Cor == null)
+            //    Cor = StartCoroutine(Managers.Scene.LoadSceneAsync<UI_ExplainScene>(Define.Scene.GameScene));
+            CutScene = Managers.UI.ShowPopUpUI<UI_CutScene>();
+            gameObject.SetActive(false);
         }
     }
     public void OnClickStart()

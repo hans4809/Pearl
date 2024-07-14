@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainScene : BaseScene
 {
+    [SerializeField] bool _bIsNext = false;
+    public bool IsNext { get => _bIsNext; set => _bIsNext = value; }
     public override void Clear()
     {
         //Destroy(SceneUI.gameObject);
@@ -13,6 +15,7 @@ public class MainScene : BaseScene
         base.Init();
         SceneType = Define.Scene.MainScene;
         SceneUI = Managers.UI.ShowSceneUI<UI_MainScene>();
+        Managers.Sound.Play("Sounds/BGM/cuttomainBGM", 1, Define.Sound.BGM);
     }
     void Awake()
     {

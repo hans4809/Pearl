@@ -25,13 +25,8 @@ public class UI_ExplainScene : UI_Scene
 
     public void OnClickedButton()
     {
-        Managers.Sound.Play("Sounds/SFX/UI_Button", 1f);
-        var asyncOper = Managers.Scene.AsyncLoadSceneOper;
-        if (asyncOper != null)
-        {
-            if (asyncOper.progress >= 0.9f)
-                asyncOper.allowSceneActivation = true;
-        }
+        Managers.Sound.Play("Sounds/SFX/UI_Button");
+        Managers.Scene.LoadScene(Define.Scene.GameScene);
     }
     // Start is called before the first frame update
     void Start()
