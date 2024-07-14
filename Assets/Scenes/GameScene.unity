@@ -1064,11 +1064,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3089447122699079807, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.x
-      value: 0.16
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 3089447122699079807, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.y
-      value: 0.16
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 3089447122699079807, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Sprite
@@ -1080,11 +1080,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3521303021150483063, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.x
-      value: 0.16
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 3521303021150483063, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.y
-      value: 0.16
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 3521303021150483063, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Sprite
@@ -1096,11 +1096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5054731428842110569, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.x
-      value: 0.16
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 5054731428842110569, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.y
-      value: 0.16
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 5054731428842110569, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Sprite
@@ -1196,15 +1196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6456046415695806145, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.05
+      value: 10.52
       objectReference: {fileID: 0}
     - target: {fileID: 7071135866939437352, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.x
-      value: 0.16
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 7071135866939437352, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Size.y
-      value: 0.16
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 7071135866939437352, guid: 5f519361f68a4614ab118180a4111b69, type: 3}
       propertyPath: m_Sprite
