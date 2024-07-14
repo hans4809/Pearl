@@ -84,6 +84,9 @@ public class UI_GameScene : UI_Scene
     [SerializeField] TMP_Text _gameEndingText;
     public TMP_Text GameEndingText { get => _gameEndingText;  set => _gameEndingText = value; }
 
+    [SerializeField] TMP_Text _changedTimeText;
+    public TMP_Text ChangedTimeText { get => _changedTimeText; set => _changedTimeText = value; }
+
     public IEnumerator StartTimerEffect_FadeIn(TMP_Text text, float opacity = 1)
     {
         text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
@@ -335,43 +338,84 @@ public class UI_GameScene : UI_Scene
         PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(toScale, toScale, 1);
     }
 
-    //public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
-    //{
-    //    float elapsedTime = 0f;
-    //    if (orginBestPlayerIndex == -1)
-    //    {
-    //        PlayerScoreIMGs[changedBestPlayerIndex].color = Color.red;
-    //    }
-    //    else
-    //    {
-    //        //var tempSprite = PlayerScoreIMGs[orginBestPlayerIndex].sprite;
-    //        //PlayerScoreIMGs[orginBestPlayerIndex].sprite = PlayerScoreIMGs[changedBestPlayerIndex].sprite;
-    //        //PlayerScoreIMGs[changedBestPlayerIndex].sprite = tempSprite;
+    public IEnumerator OnChangedTimer(int timer)
+    {
+        ChangedTimeText.gameObject.SetActive(true);
+        if (timer > 0) ChangedTimeText.text = "+ 10";
+        else ChangedTimeText.text = "- 10";
+        yield return FadeInChangedTimeText(ChangedTimeText);
+        yield return new WaitForSeconds(1f);
+        yield return FadeOutChangedTimeText(ChangedTimeText);
+        ChangedTimeText.gameObject.SetActive(false);
+    }
 
-    //        var tempColor = PlayerScoreIMGs[orginBestPlayerIndex].color;
-    //        PlayerScoreIMGs[orginBestPlayerIndex].color = PlayerScoreIMGs[changedBestPlayerIndex].color;
-    //        PlayerScoreIMGs[changedBestPlayerIndex].color = tempColor;
-    //    }
+    public IEnumerator FadeInChangedTimeText(TMP_Text text)
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+        float elapsedTime = 0f;
+        while (text.color.a < 1)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / 0.5f);
+            float a = Mathf.Lerp(0, 1, alpha);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, a);
+            yield return null;
+        }
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+    }
+    public IEnumerator FadeOutChangedTimeText(TMP_Text text)
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+        float elapsedTime = 0f;
+        while (text.color.a > 0)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / 0.5f);
+            float a = Mathf.Lerp(1, 0, alpha);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, a);
+            yield return null;
+        }
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+    }
 
 
-    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
-    //    while (PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < ChangedScale && PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation.z < ChangedRotation)
-    //    {
-    //        elapsedTime += Time.deltaTime;
-    //        float alpha = Mathf.Clamp01(elapsedTime / ChangeEffectTime);
-    //        float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
-    //        float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
-    //        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
-    //        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
-    //        yield return null;
-    //    }
+//public IEnumerator OnChangedBestPlayer(int orginBestPlayerIndex, int changedBestPlayerIndex)
+//{
+//    float elapsedTime = 0f;
+//    if (orginBestPlayerIndex == -1)
+//    {
+//        PlayerScoreIMGs[changedBestPlayerIndex].color = Color.red;
+//    }
+//    else
+//    {
+//        //var tempSprite = PlayerScoreIMGs[orginBestPlayerIndex].sprite;
+//        //PlayerScoreIMGs[orginBestPlayerIndex].sprite = PlayerScoreIMGs[changedBestPlayerIndex].sprite;
+//        //PlayerScoreIMGs[changedBestPlayerIndex].sprite = tempSprite;
 
-    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = Vector3.one;
-    //    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(Vector3.zero);
+//        var tempColor = PlayerScoreIMGs[orginBestPlayerIndex].color;
+//        PlayerScoreIMGs[orginBestPlayerIndex].color = PlayerScoreIMGs[changedBestPlayerIndex].color;
+//        PlayerScoreIMGs[changedBestPlayerIndex].color = tempColor;
+//    }
 
-    //}
 
-    private void Start()
+//    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ChangedRotation));
+//    while (PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.x < ChangedScale && PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation.z < ChangedRotation)
+//    {
+//        elapsedTime += Time.deltaTime;
+//        float alpha = Mathf.Clamp01(elapsedTime / ChangeEffectTime);
+//        float targetScale = Mathf.Lerp(1, ChangedScale, alpha);
+//        float targetRotation = Mathf.Lerp(-ChangedRotation, ChangedRotation, alpha);
+//        PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
+//        PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = new Vector3(targetScale, targetScale, PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale.z);
+//        yield return null;
+//    }
+
+//    PlayerScoreIMGs[changedBestPlayerIndex].transform.localScale = Vector3.one;
+//    PlayerScoreIMGs[changedBestPlayerIndex].transform.rotation = Quaternion.Euler(Vector3.zero);
+
+//}
+
+private void Start()
     {
     }
 

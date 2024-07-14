@@ -31,28 +31,40 @@ public abstract class BaseController : MonoBehaviour
                     anim.SetBool("isWalk", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", false);
+                    anim.SetBool("isBad", false);
                     break;
                 case Define.State.Walk:
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", false);
                     anim.SetBool("isWalk", true);
+                    anim.SetBool("isBad", false);
                     break;
                 case Define.State.Damaged:
                     anim.SetBool("isWalk", false);
                     anim.SetBool("isAirborne", false);
                     anim.SetBool("isDamaged", true);
+                    anim.SetBool("isBad", false);
                     gameObject.GetComponent<CharacterMovement>().OnDamaged();
                     break;
                 case Define.State.Airborne:
                     anim.SetBool("isWalk", false);
                     anim.SetBool("isDamaged", false);
                     anim.SetBool("isAirborne", true);
-                    if(BombEffect != null)
+                    anim.SetBool("isBad", false);
+                    if (BombEffect != null)
                         BombEffect.SetActive(true);
                     //Managers.Resource.Instantiate("Effects/BombEffect", new Vector3(-0.3f, -3.40f, 0f), Quaternion.identity, this.transform);
                     gameObject.GetComponent<CharacterMovement>().JumpForce();
                     //gameObject.GetComponent<CharacterMovement>().ParabolicAirborne();
                     break;
+                case Define.State.Bad:
+                    anim.SetBool("isWalk", false);
+                    anim.SetBool("isDamaged", false);
+                    anim.SetBool("isAirborne", false);
+                    anim.SetBool("isBad", true);
+                    gameObject.GetComponent<CharacterMovement>().OnBad();
+                    break;
+
             }
         }
     }

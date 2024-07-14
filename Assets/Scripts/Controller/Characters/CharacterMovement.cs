@@ -194,4 +194,15 @@ public class CharacterMovement : MonoBehaviour
         Rb2D.velocity = Vector3.zero;
         ReturnToIdleCoroutine = StartCoroutine(RetrunToIdleCor(StunTimer));
     }
+
+    public void OnBad()
+    {
+        if (ReturnToIdleCoroutine != null)
+        {
+            StopCoroutine(ReturnToIdleCoroutine);
+            ReturnToIdleCoroutine = null;
+        }
+        Rb2D.velocity = Vector3.zero;
+        ReturnToIdleCoroutine = StartCoroutine(RetrunToIdleCor(0.1f));
+    }
 }

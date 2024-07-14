@@ -19,6 +19,7 @@ public class Define
         Walk,
         Damaged,
         Airborne,
+        Bad,
     }
     public enum UIEvent
     {

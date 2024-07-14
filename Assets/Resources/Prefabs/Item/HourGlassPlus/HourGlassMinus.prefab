@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c9846077a9f912418ae38c967f5d3f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6555eed04ec94454690354e89e15cece, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,9 +104,11 @@ MonoBehaviour:
   kingPearlAmount: 10
   bugAmount: -5
   netAmount: 5
-  timerPlusAmount: 1
+  timerPlusAmount: 10
   timerMinusAmount: -1
   delayTimeToCheckInBox: 0.1
+  _gameScene: {fileID: 0}
+  uI_GameScene: {fileID: 0}
 --- !u!61 &1268977545569214317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +145,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.79, y: 5.03}
+    oldSize: {x: 5.24, y: 6.68}
     newSize: {x: 3.79, y: 5.03}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

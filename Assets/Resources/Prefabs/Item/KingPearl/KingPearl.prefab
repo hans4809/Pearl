@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5153008667363838481}
   - component: {fileID: 748140678123123272}
   - component: {fileID: -3188676291234941998}
+  - component: {fileID: 3252634422485238637}
   m_Layer: 0
   m_Name: KingPearl
   m_TagString: Item
@@ -144,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71e6e97d94ac58488ad2aafa32e02d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemLocation: {x: 0, y: 0}
   itemType: 1
   pearlAmount: 1
   kingPearlAmount: 10
@@ -166,3 +166,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUsing: 0
+--- !u!95 &3252634422485238637
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071336032437372181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3764bee85b422ac42ad64f714be1f43b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -30,7 +30,7 @@ public class SoundManager
             }
         }
     }
-    public void Play(AudioClip audioClip, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
+    public void Play(AudioClip audioClip, float volume = 1, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
     {
         if (audioClip == null)
         {
@@ -45,14 +45,15 @@ public class SoundManager
             }
             audioSource.pitch = pitch;
             audioSource.clip = audioClip;
+            audioSource.volume = volume;
             audioSource.loop = true;
             audioSource.Play();
         }
         else
         {
             AudioSource audioSource = _audioSources[(int)Define.Sound.SFX];
-            audioSource.volume = 0.5f;
             audioSource.pitch = pitch;
+            audioSource.volume = volume;
             audioSource.PlayOneShot(audioClip);
         }
     }
@@ -81,10 +82,10 @@ public class SoundManager
             audioSource.PlayOneShot(audioClip);
         }
     }
-    public void Play(string path, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
+    public void Play(string path, float volume = 1, Define.Sound type = Define.Sound.SFX, float pitch = 1.0f)
     {
         AudioClip audioClip = GetOrAddAudioClip(path, type);
-        Play(audioClip, type, pitch);
+        Play(audioClip, volume, type, pitch);
     }
     public void PlayDelayed(string path, float delay, Define.Sound type = Define.Sound.BGM, float pitch = 1.0f)
     {

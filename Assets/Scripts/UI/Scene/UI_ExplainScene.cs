@@ -25,7 +25,7 @@ public class UI_ExplainScene : UI_Scene
 
     public void OnClickedButton()
     {
-        Managers.Sound.Play("Sounds/SFX/UI_Button");
+        Managers.Sound.Play("Sounds/SFX/UI_Button", 1f);
         var asyncOper = Managers.Scene.AsyncLoadSceneOper;
         if (asyncOper != null)
         {
