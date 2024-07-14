@@ -9,8 +9,6 @@ public class PearlSpawner : ItemSpawner
     public float gap = 1f;
     public float distanceFromCenterPearl = 1f;
 
-    public float fastSpawnTime = 1f;
-
     private void Start()
     {
         Init();

@@ -59,6 +59,5 @@ public class PearlSpawner2 : ItemSpawner
 
         //GameObject bug = Instantiate(item, spawnPosition, Quaternion.identity);
         Managers.Resource.InstantiateItem("Item/Pearl/Pearl", spawnPosition, Quaternion.identity);
-        Debug.Log("2");
     }
 }
