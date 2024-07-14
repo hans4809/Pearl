@@ -87,11 +87,11 @@ MonoBehaviour:
   baseY2: 3.8
   _recommendedPlayerIndex: 0
   _scene: {fileID: 0}
-  startSpawnHourGlassTime: 40
+  startSpawnHourGlassTime: 30
   minDistance: 3
   items:
   - {fileID: 7652978150793036889, guid: f4376f63bc00ce449a20bce2283686a9, type: 3}
   - {fileID: 5849946071487656266, guid: 34d86e677144f8044a41b9b0711134f9, type: 3}
-  lastTimeSpawn: 7
+  lastTimeSpawn: 14
   playerTransform1: {fileID: 0}
   playerTransform2: {fileID: 0}
