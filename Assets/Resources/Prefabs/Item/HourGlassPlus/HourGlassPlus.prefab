@@ -149,7 +149,7 @@ MonoBehaviour:
   kingPearlAmount: 10
   bugAmount: -5
   netAmount: 5
-  timerPlusAmount: 1
+  timerPlusAmount: 10
   timerMinusAmount: -10
   delayTimeToCheckInBox: 0.1
   _gameScene: {fileID: 0}

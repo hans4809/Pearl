@@ -105,7 +105,7 @@ MonoBehaviour:
   bugAmount: -5
   netAmount: 5
   timerPlusAmount: 10
-  timerMinusAmount: -1
+  timerMinusAmount: -10
   delayTimeToCheckInBox: 0.1
   _gameScene: {fileID: 0}
   uI_GameScene: {fileID: 0}
