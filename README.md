@@ -2,6 +2,8 @@
 <img width="700" src="https://github.com/user-attachments/assets/011a1e6d-f814-4586-a700-9cf226ff86f5">
 
 # PealRush
+![시작화면](https://github.com/user-attachments/assets/763f880f-50f7-441f-a4b4-46745e078c2e)
+
 
 
 ### 게임개요 🔎
@@ -10,18 +12,8 @@
 <div markdown="1">
 
 #### 시스템 테마
-
-
-#### 조작
-#### 게임 설명
-
-
-#### 아이템 설명
-
-
-#### 재난 기믹
-
-
+#### 게임 설명 및 아이템 설명
+![게임설명](https://github.com/user-attachments/assets/9c84453c-ce95-4f0c-8546-e80733d357b4)
 </div>
 </details>
 
