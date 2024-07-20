@@ -15,8 +15,10 @@ public class UI_MainScene : UI_Scene
     public override void Init()
     {
         base.Init();
+
         if (MainSceneText == null)
             MainSceneText = GetComponentInChildren<TextMeshProUGUI>();
+
         StartCoroutine(Managers.UI.BlinkText(MainSceneText, MainSceneText.text));
     }
 
@@ -34,7 +36,7 @@ public class UI_MainScene : UI_Scene
             //Managers.Scene.LoadScene(Define.Scene.ExplainScene);
             //Managers.Scene.Clear();
             //Managers.Scene.CurrentScene.SceneUI = Managers.UI.ShowSceneUI<UI_ExplainScene>();
-            //if(Cor == null)
+            //if (Cor == null)
             //    Cor = StartCoroutine(Managers.Scene.LoadSceneAsync<UI_ExplainScene>(Define.Scene.GameScene));
             CutScene = Managers.UI.ShowPopUpUI<UI_CutScene>();
             gameObject.SetActive(false);

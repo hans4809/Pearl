@@ -102,4 +102,114 @@ public abstract class UI_Base : MonoBehaviour
         }
 
     }
+
+    public IEnumerator FadeImage(Image image, float fadeDuration, float opacity = 1, bool isFadeIn = true)
+    {
+        if (isFadeIn)
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+        else
+            image.color = new Color(image.color.r, image.color.g, image.color.b, opacity);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha;
+            if (isFadeIn)
+                alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
+            else
+                alpha = Mathf.Clamp01(1.0f - elapsedTime / fadeDuration);
+            float a = Mathf.Lerp(0, opacity, alpha);
+            image.color = new Color(image.color.r, image.color.g, image.color.b, a);
+            yield return null;
+        }
+
+        if (isFadeIn)
+            image.color = new Color(image.color.r, image.color.g, image.color.b, opacity);
+        else
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+    }
+
+    public IEnumerator FadeText(TMP_Text text, float fadeDuration, float opacity = 1, bool isFadeIn = true)
+    {
+        if (isFadeIn)
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+        else
+            text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha;
+            if (isFadeIn)
+                alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
+            else
+                alpha = Mathf.Clamp01(1.0f - elapsedTime / fadeDuration);
+
+            float a = Mathf.Lerp(0, opacity, alpha);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, a);
+
+            yield return null;
+        }
+
+        if (isFadeIn)
+            text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
+        else
+            text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+    }
+
+    public IEnumerator BlinkText(TextMeshProUGUI textMesh, float blinkDuration)
+    {
+        while (true)
+        {
+            textMesh.gameObject.SetActive(true);
+            yield return new WaitForSeconds(blinkDuration);
+            textMesh.gameObject.SetActive(false);
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
+    public IEnumerator RotateObject(Transform recTransform, float rotationDegree, float rotateDuration, int iteration = 1)
+    {
+        for (int i = 0; i < iteration; i++)
+        {
+            yield return StartCoroutine(RotateObject(recTransform, 0, rotationDegree, rotateDuration / (iteration * 4)));
+            yield return StartCoroutine(RotateObject(recTransform, rotationDegree, 0, rotateDuration / (iteration * 4)));
+            yield return StartCoroutine(RotateObject(recTransform, 0, -rotationDegree, rotateDuration / (iteration * 4)));
+            yield return StartCoroutine(RotateObject(recTransform, -rotationDegree, 0, rotateDuration / (iteration * 4)));
+        }
+
+        recTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
+    private IEnumerator RotateObject(Transform recTransform, float from, float to, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            float textRotation = Mathf.Lerp(from, to, alpha);
+            recTransform.rotation = Quaternion.Euler(new Vector3(0, 0, textRotation));
+            yield return null;
+        }
+        recTransform.rotation = Quaternion.Euler(new Vector3(0, 0, to));
+    }
+
+    public IEnumerator TextSizeUp(TMP_Text text, float fromSize, float toSize, float duration)
+    {
+        text.fontSize = fromSize;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            float fontSize = Mathf.Lerp(fromSize, toSize, alpha);
+            text.fontSize = fontSize;
+            yield return null;
+        }
+
+        text.fontSize = toSize;
+    }
 }

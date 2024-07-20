@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
@@ -20,6 +21,13 @@ public class GameScene : BaseScene
 
     [SerializeField] Coroutine _cameraRotateCoroutine;
     public Coroutine CameraRotateCoroutine { get => _cameraRotateCoroutine; private set => _cameraRotateCoroutine = value; }
+
+    public delegate void TextEffectDelegate(TMP_Text text);
+    public delegate void ImageEffectDelegate(TMP_Text text);
+
+    public TextEffectDelegate StartTextDelegate { get; set; }
+    public TextEffectDelegate EndTextDelegate { get; set; }
+    public TextEffectDelegate TimeLimitDelegate { get; set; }
     public int StartTimer 
     { 
         get => _startTimer;
@@ -29,7 +37,8 @@ public class GameScene : BaseScene
             {
                 _startTimer = value;
                 (SceneUI as UI_GameScene).StartTimerText.text = $"{_startTimer}";
-                StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).StartTimerText));
+                StartTextDelegate.Invoke((SceneUI as UI_GameScene).StartTimerText);
+                //StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).StartTimerText));
             }
             else
             {
@@ -47,26 +56,28 @@ public class GameScene : BaseScene
         get => _gameTimer;
         set
         {
+            var sceneUI = SceneUI as UI_GameScene;
             if (value > 0)
             {
                 _gameTimer = value;
                 
                 if (_gameTimer <= TimeLimit)
                 {
-                    (SceneUI as UI_GameScene).GameTimerText.color = Color.red;
-                    (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
+                    sceneUI.GameTimerText.color = Color.red;
+                    sceneUI.GameTimerText.fontSize = 40f;
                     if (_gameTimer == TimeLimit)
                     {
-                        StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectText((SceneUI as UI_GameScene).GameTimerText));
+                        //StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectText((SceneUI as UI_GameScene).GameTimerText));
                         if(CameraRotateCoroutine != null)
                         {
                             StopCoroutine(CameraRotateCoroutine);
                             CameraRotateCoroutine = null;
                             Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                         }
-                        CameraRotateCoroutine = StartCoroutine((SceneUI as UI_GameScene).TimeLimitFirstEffectCameraIteration());
+                        CameraRotateCoroutine = StartCoroutine(sceneUI.RotateObject(Camera.main.transform, sceneUI.CameraRotateAngle, 1, 5));
                     }
-                    StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectIteration((SceneUI as UI_GameScene).GameTimerText));
+                    TimeLimitDelegate.Invoke(sceneUI.GameTimerText);
+                    //StartCoroutine((SceneUI as UI_GameScene).TimeLimitEffectIteration((SceneUI as UI_GameScene).GameTimerText));
 
                     if (_gameTimer == 3)
                     {
@@ -82,19 +93,19 @@ public class GameScene : BaseScene
                 }
                 else
                 {
-                    (SceneUI as UI_GameScene).GameTimerText.color = Color.white;
-                    (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
+                    sceneUI.GameTimerText.color = Color.white;
+                    sceneUI.GameTimerText.fontSize = 40f;
                 }
-                (SceneUI as UI_GameScene).GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
-                (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
+                sceneUI.GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
+                sceneUI.GameTimerText.text = $"{_gameTimer}";
             }
             else
             {
                 _gameTimer = 0;
-                (SceneUI as UI_GameScene).GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
-                (SceneUI as UI_GameScene).GameTimerText.color = Color.red;
-                (SceneUI as UI_GameScene).GameTimerText.fontSize = 40f;
-                (SceneUI as UI_GameScene).GameTimerText.text = $"{_gameTimer}";
+                sceneUI.GameTimerText.transform.rotation = Quaternion.Euler(Vector3.zero);
+                sceneUI.GameTimerText.color = Color.red;
+                sceneUI.GameTimerText.fontSize = 40f;
+                sceneUI.GameTimerText.text = $"{_gameTimer}";
                 StartCoroutine(Ending());
             }
         }
@@ -112,7 +123,8 @@ public class GameScene : BaseScene
                 if(!(SceneUI as UI_GameScene).EndTimerText.gameObject.activeInHierarchy)
                     (SceneUI as UI_GameScene).EndTimerText.gameObject.SetActive(true);
                 (SceneUI as UI_GameScene).EndTimerText.text = $"{_endTimer}";
-                StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).EndTimerText, (SceneUI as UI_GameScene).EndTimerColor.a));
+                EndTextDelegate.Invoke((SceneUI as UI_GameScene).EndTimerText);
+                //StartCoroutine((SceneUI as UI_GameScene).StartTimerEffect_FadeIn((SceneUI as UI_GameScene).EndTimerText, (SceneUI as UI_GameScene).EndTimerColor.a));
             }
             else
             {
@@ -134,6 +146,11 @@ public class GameScene : BaseScene
         base.Init();
         SceneType = Define.Scene.GameScene;
         SceneUI = Managers.UI.ShowSceneUI<UI_GameScene>();
+
+        StartTextDelegate += (SceneUI as UI_GameScene).StartTimerEffect;
+        TimeLimitDelegate += (SceneUI as UI_GameScene).TimeLimitEffect;
+        EndTextDelegate += (SceneUI as UI_GameScene).EndTimerEffect;
+
         StartCoroutine(_cameraController.CameraZoomIn(StartTimer));
     }
 
