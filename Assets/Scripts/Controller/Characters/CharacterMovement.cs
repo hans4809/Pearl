@@ -105,8 +105,8 @@ public class CharacterMovement : MonoBehaviour
          
         if (Character.State == Define.State.Idle || Character.State == Define.State.Walk)
         {
-            float horizontalInput = Input.GetAxis($"Horizontal{PlayerIndex}");
-            float verticalInput = Input.GetAxis($"Vertical{PlayerIndex}");
+            float horizontalInput = Input.GetAxisRaw($"Horizontal{PlayerIndex}");
+            float verticalInput = Input.GetAxisRaw($"Vertical{PlayerIndex}");
 
             DirVec2 = new Vector2(horizontalInput, verticalInput).normalized;
 
