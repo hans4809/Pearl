@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,7 +35,6 @@ public class UI_CutScene : UI_Popup
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public IEnumerator MoveToExplain()
@@ -46,43 +46,18 @@ public class UI_CutScene : UI_Popup
     private IEnumerator FadeImages()
     {
         int index = 0;
-        while(index < _sprites.Length)
+        while (index < _sprites.Length)
         {
             CutScene.sprite = _sprites[index];
-            yield return StartCoroutine(FadeIn(CutScene));
-            yield return new WaitForSeconds(FadeDuration);
-            yield return StartCoroutine(FadeOut(CutScene));
+            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0)));
+            yield return StartCoroutine(WaitForSecondsWithSkip(FadeDuration, () => Input.GetMouseButtonDown(0)));
+            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0), false));
             index++;
         }
     }
 
-    private IEnumerator FadeIn(Image image)
+    private void OnDestroy()
     {
-        float elapsedTime = 0f;
-        Color color = image.color;
-        while (elapsedTime < FadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Clamp01(elapsedTime / FadeDuration);
-            image.color = color;
-            yield return null;
-        }
-        color.a = 1f;
-        image.color = color;
-    }
-
-    private IEnumerator FadeOut(Image image)
-    {
-        float elapsedTime = 0f;
-        Color color = image.color;
-        while (elapsedTime < FadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = 1f - Mathf.Clamp01(elapsedTime / FadeDuration);
-            image.color = color;
-            yield return null;
-        }
-        color.a = 0f;
-        image.color = color;
+        StopAllCoroutines();
     }
 }

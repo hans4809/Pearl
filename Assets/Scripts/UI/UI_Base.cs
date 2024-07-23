@@ -103,7 +103,7 @@ public abstract class UI_Base : MonoBehaviour
 
     }
 
-    public IEnumerator FadeImage(Image image, float fadeDuration, float opacity = 1, bool isFadeIn = true)
+    public IEnumerator FadeImage(Image image, float fadeDuration, Func<bool> shouldSkip, bool isFadeIn = true, float opacity = 1)
     {
         if (isFadeIn)
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
@@ -113,6 +113,11 @@ public abstract class UI_Base : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
+            if(shouldSkip())
+            {
+                break;
+            }
+
             elapsedTime += Time.deltaTime;
             float alpha;
             if (isFadeIn)
@@ -211,5 +216,21 @@ public abstract class UI_Base : MonoBehaviour
         }
 
         text.fontSize = toSize;
+    }
+
+    protected IEnumerator WaitForSecondsWithSkip(float duration, Func<bool> shouldSkip)
+    {
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            if (shouldSkip())
+            {
+                break;
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
