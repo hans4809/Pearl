@@ -22,7 +22,13 @@ public class UI_GameOverScene : UI_Scene
 
     public void OnClickMainButton(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(Define.Scene.MainScene);
+        if (Managers.Scene.AsyncLoadSceneOper != null)
+        {
+            if (Managers.Scene.AsyncLoadSceneOper.isDone || Managers.Scene.AsyncLoadSceneOper.progress >= 0.9f)
+            {
+                Managers.Scene.AsyncLoadSceneOper.allowSceneActivation = true;
+            }
+        }
     }
 
     public void OnClickReturnButton(PointerEventData eventData)

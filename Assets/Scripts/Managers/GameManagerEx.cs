@@ -67,7 +67,7 @@ public class GameManagerEx
         }
     }
 
-    private int _bestPlayerIndex;
+    private int _bestPlayerIndex = 1;
     public int BestPlayerIndex 
     { 
         get => _bestPlayerIndex; 
@@ -162,7 +162,7 @@ public class GameManagerEx
 
         Player1Score = 0;
         Player2Score = 0;
-        BestPlayerIndex = 0;
+        BestPlayerIndex = 1;
     }
 
     public void GameStart()

@@ -64,7 +64,8 @@ public class SceneManagerEx
 
             if(LoadingScene is UI_ExplainScene)
             {
-
+                if ((LoadingScene as UI_ExplainScene).StartButton != null)
+                    (LoadingScene as UI_ExplainScene).StartButton.interactable = AsyncLoadSceneOper.progress >= 0.9f;
             }
 
             if(LoadingScene is UI_GameOverScene)
@@ -88,7 +89,7 @@ public class SceneManagerEx
         if (LoadingScene is UI_ExplainScene)
         {
             if((LoadingScene as UI_ExplainScene).StartButton != null)
-                (LoadingScene as UI_ExplainScene).StartButton.gameObject.SetActive(true);
+                (LoadingScene as UI_ExplainScene).StartButton.interactable = AsyncLoadSceneOper.progress >= 0.9f;
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,18 +6,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UI_LoadingScene;
 
-public class UI_CutScene : UI_Popup
+public class UI_CutScene : UI_Scene
 {
     [SerializeField] Sprite[] _sprites;
-    public Sprite[] Sprites { get => _sprites; set => _sprites = value; }// ÆäÀÌµåÇÒ ÀÌ¹ÌÁö ¹è¿­
-    [SerializeField] float _fadeDuration = 1f; // ÆäÀÌµå ÀÎ/¾Æ¿ô Áö¼Ó ½Ã°£
+    public Sprite[] Sprites { get => _sprites; set => _sprites = value; }// íŽ˜ì´ë“œí•  ì´ë¯¸ì§€ ë°°ì—´
+    [SerializeField] float _fadeDuration = 1f; // íŽ˜ì´ë“œ ì¸/ì•„ì›ƒ ì§€ì† ì‹œê°„
     public float FadeDuration { get => _fadeDuration; set => _fadeDuration = value; }
-    [SerializeField] float _displayDuration = 5f; // °¢ ÀÌ¹ÌÁö°¡ Ç¥½ÃµÇ´Â ½Ã°£
+    [SerializeField] float _displayDuration = 5f; // ê° ì´ë¯¸ì§€ê°€ í‘œì‹œë˜ëŠ” ì‹œê°„
     public float DisplayDuration { get => _displayDuration; set => _displayDuration = value; }
     [SerializeField] Image _cutScene;
     public Image CutScene { get => _cutScene; set => _cutScene = value; }
-    [SerializeField] Coroutine _cor;
-    Coroutine Cor { get => _cor; set => _cor = value; }
 
     public override void Init()
     {
@@ -40,7 +38,8 @@ public class UI_CutScene : UI_Popup
     public IEnumerator MoveToExplain()
     {
         yield return StartCoroutine(FadeImages());
-        Managers.Scene.LoadScene(Define.Scene.ExplainScene);
+        //Managers.Scene.LoadScene(Define.Scene.ExplainScene);
+        StartCoroutine(Managers.Scene.LoadSceneAsync<UI_ExplainScene>(Define.Scene.GameScene));
     }
     
     private IEnumerator FadeImages()
@@ -49,9 +48,9 @@ public class UI_CutScene : UI_Popup
         while (index < _sprites.Length)
         {
             CutScene.sprite = _sprites[index];
-            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0)));
-            yield return StartCoroutine(WaitForSecondsWithSkip(FadeDuration, () => Input.GetMouseButtonDown(0)));
-            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0), false));
+            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0) && false));
+            yield return StartCoroutine(WaitForSecondsWithSkip(DisplayDuration, () => Input.GetMouseButtonDown(0)));
+            yield return StartCoroutine(FadeImage(CutScene, FadeDuration, () => Input.GetMouseButtonDown(0) && false, false));
             index++;
         }
     }

@@ -18,7 +18,6 @@ public class UI_Setting : UI_Popup
         base.Init();
         MainButton.gameObject.AddUIEvent(OnClickMainButton);
         ReturnButton.gameObject.AddUIEvent(OnClickReturnButton);
-        
     }
     // Start is called before the first frame update
     void Start()
@@ -34,7 +33,7 @@ public class UI_Setting : UI_Popup
     public void OnClickReturnButton(PointerEventData eventData)
     {
         Time.timeScale = 1;
-        Managers.UI.CloseAllPopUPUI();
+        Managers.UI.ClosePopUpUI();
         Managers.Game.GameState = EGameState.Playing;
     }
 
@@ -43,7 +42,7 @@ public class UI_Setting : UI_Popup
         if(Input.GetKeyUp(KeyCode.Escape))
         {
             Time.timeScale = 1;
-            Managers.UI.CloseAllPopUPUI();
+            Managers.UI.ClosePopUpUI();
             Managers.Game.GameState = EGameState.Playing;
         }
     }

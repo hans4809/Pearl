@@ -106,7 +106,7 @@ public class UI_GameScene : UI_Scene
 
     public IEnumerator EndEffect(TMP_Text text) 
     {
-        StartCoroutine(FadeText(text, FadeTime));
+        StartCoroutine(FadeText(text, FadeTime, EndTimerColor.a));
         yield return StartCoroutine(TextSizeUp(text, MinEndTextFontSize, MaxStartTimerFontSize, FadeTime));
         StartCoroutine(FadeText(text, FadeTime, EndTimerColor.a, false));
     }
