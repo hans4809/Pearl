@@ -66,6 +66,8 @@ public class CharacterMovement : MonoBehaviour
 
     [SerializeField] CharacterControllerEx _character;
     public CharacterControllerEx Character { get => _character; private set => _character = value; }
+
+    private InterpolatedFunction f;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +84,8 @@ public class CharacterMovement : MonoBehaviour
 
         //if (FollowCamera == null)
         //    FollowCamera = Camera.main;
+
+        f = Algorithm.NewtonPolynomial(Vector2.zero, MaxHeightDisplacement, new Vector2(2 * MaxHeightDisplacement.x, 0f));
     }
 
     private void FixedUpdate()
@@ -167,15 +171,29 @@ public class CharacterMovement : MonoBehaviour
 
         Rb2D.gravityScale = 1.0f;
         // m*k*g*h = m*v^2/2 (단, k == gravityScale) <= 역학적 에너지 보존 법칙 적용
-        float v_y = Mathf.Sqrt(2 * Rb2D.gravityScale * -Physics2D.gravity.y * MaxHeightDisplacement.y);
+        float velocity_Y = Mathf.Sqrt(2 * Rb2D.gravityScale * -Physics2D.gravity.y * MaxHeightDisplacement.y);
         // 포물선 운동 법칙 적용
-        float v_x = MaxHeightDisplacement.x * v_y / (2 * MaxHeightDisplacement.y)/*Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length*/;
+        float velocity_X = MaxHeightDisplacement.x * velocity_Y / (2 * MaxHeightDisplacement.y);
 
-        Vector2 force = Rb2D.mass * (new Vector2(v_x, v_y) - Rb2D.velocity);
+        Vector2 force = Rb2D.mass * (new Vector2(velocity_X, velocity_Y) - Rb2D.velocity);
         Rb2D.AddForce(force, ForceMode2D.Impulse);
 
-        float timer = (4 * MaxHeightDisplacement.y) / v_y;
+        float timer = (4 * MaxHeightDisplacement.y) / velocity_Y;
         ReturnToIdleCoroutine = StartCoroutine(RetrunToIdleCor(timer));
+    }
+
+    public void DrawProjectileMotionLine()
+    {
+        float interval = 2 * MaxHeightDisplacement.x / 40;
+        Vector2 current = Vector2.zero;
+        for (int i = 0; i < 40; i++)
+        {
+            float next_x = current.x + interval;
+            Vector2 next = new Vector2(next_x, f(next_x));
+            Debug.DrawLine(current + Rb2D.position, next + Rb2D.position, Color.red, 3f);
+
+            current = next;
+        }
     }
 
     IEnumerator RetrunToIdleCor(float timer)

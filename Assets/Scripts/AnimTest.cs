@@ -6,8 +6,6 @@ public class AnimTest : MonoBehaviour
 {
     [SerializeField] CharacterControllerEx characterControllerEx;
     public CharacterControllerEx Character { get { return characterControllerEx; } }
-    [SerializeField] float _power;
-    public float Power { get { return _power; } }
     // Start is called before the first frame update
     void Start()
     {

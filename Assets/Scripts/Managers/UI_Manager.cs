@@ -31,6 +31,7 @@ public class UI_Manager
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
         CanvasScaler canvasScaler = Util.GetOrAddComponent<CanvasScaler>(go);
 
+#if UNITY_ANDROID
         if(canvas.renderMode != RenderMode.ScreenSpaceOverlay)
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         if(canvas.worldCamera == null)
@@ -44,6 +45,7 @@ public class UI_Manager
             canvasScaler.referenceResolution = new Vector2(1920f, 1080f);
         if(canvasScaler.screenMatchMode != CanvasScaler.ScreenMatchMode.Expand)
             canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+#endif
 
         if (sort)
         {

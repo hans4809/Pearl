@@ -54,6 +54,7 @@ public abstract class BaseController : MonoBehaviour
                     if (BombEffect != null)
                         BombEffect.SetActive(true);
                     //Managers.Resource.Instantiate("Effects/BombEffect", new Vector3(-0.3f, -3.40f, 0f), Quaternion.identity, this.transform);
+                    gameObject.GetComponent<CharacterMovement>().DrawProjectileMotionLine();
                     gameObject.GetComponent<CharacterMovement>().JumpForce();
                     //gameObject.GetComponent<CharacterMovement>().ParabolicAirborne();
                     break;

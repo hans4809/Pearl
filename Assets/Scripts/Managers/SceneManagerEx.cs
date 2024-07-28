@@ -54,18 +54,21 @@ public class SceneManagerEx
 
         while(!AsyncLoadSceneOper.isDone)
         {
-            if(LoadingScene is UI_LoadingScene)
-            {
-                if((LoadingScene as UI_LoadingScene).LoadingBarIMG != null)
-                {
-                    (LoadingScene as UI_LoadingScene).LoadingBarIMG.fillAmount = AsyncLoadSceneOper.progress;
-                }
-            }
-
             if(LoadingScene is UI_ExplainScene)
             {
                 if ((LoadingScene as UI_ExplainScene).StartButton != null)
+                {
                     (LoadingScene as UI_ExplainScene).StartButton.interactable = AsyncLoadSceneOper.progress >= 0.9f;
+                    (LoadingScene as UI_ExplainScene).StartButton.onClick.AddListener(() =>
+                    {
+                        Managers.Sound.Play("Sounds/SFX/UI_Button");
+                        if (AsyncLoadSceneOper.isDone || AsyncLoadSceneOper.progress >= 0.9f)
+                        {
+                            AsyncLoadSceneOper.allowSceneActivation = true;
+                        }
+                    });
+                }
+
             }
 
             if(LoadingScene is UI_GameOverScene)

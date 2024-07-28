@@ -12,27 +12,6 @@ public class UI_ExplainScene : UI_Scene
     {
         base.Init();
         GetComponent<Canvas>().sortingOrder += 1;
-        if (StartButton == null)
-            StartButton = GetComponentInChildren<Button>();
-        StartButton.gameObject.AddUIEvent(OnClickStartButton);
-    }
-
-    public void OnClickStartButton(PointerEventData eventData)
-    {
-        Managers.Sound.Play("Sounds/SFX/UI_Button");
-        if (Managers.Scene.AsyncLoadSceneOper != null)
-        {
-            if (Managers.Scene.AsyncLoadSceneOper.isDone || Managers.Scene.AsyncLoadSceneOper.progress >= 0.9f)
-            {
-                Managers.Scene.AsyncLoadSceneOper.allowSceneActivation = true;
-            }
-        }
-    }
-
-    public void OnClickedButton()
-    {
-        Managers.Sound.Play("Sounds/SFX/UI_Button");
-        Managers.Scene.LoadScene(Define.Scene.GameScene);
     }
     // Start is called before the first frame update
     void Start()
